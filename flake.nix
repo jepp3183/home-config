@@ -25,16 +25,17 @@
     in {
       homeConfigurations."jeppe" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
         extraSpecialArgs = {
           inherit inputs;
         };
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
         modules = [ ./home_envy.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+      };
+      homeConfigurations."jeppe_wsl" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+        modules = [ ./home_wsl.nix ];
       };
     };
 }
