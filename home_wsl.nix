@@ -3,7 +3,6 @@ let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
 in
 {
-
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = (_: true);
@@ -63,16 +62,6 @@ in
   # };
 
   fonts.fontconfig.enable = true;
-
-  xdg.mimeApps.enable = true;
-  xdg.mimeApps.defaultApplications = {
-    # "application/pdf" = "sioyek.desktop";
-    "application/pdf" = "org.pwmt.zathura.desktop";
-    "image/jpeg" = "qimgv.desktop";
-    "image/png" = "qimgv.desktop";
-    "image/gif" = "qimgv.desktop";
-  };
-
   programs.git = {
     enable = true;
     userName = "Jeppe Allerslev";
