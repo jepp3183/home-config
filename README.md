@@ -5,5 +5,6 @@ Uses flakes!
   
   `mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf`
 - Then run the command `nix run home-manager/master -- init --switch` to install home-manager
+- maybe remove default home config: `rm -r ~/.config/home-manager`
 - Clone this repo into .config/home-manager
 - `home-manager switch` 
