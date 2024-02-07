@@ -5,17 +5,22 @@ let
 in
 {
   programs.neovim = {
+    
+  extraPackages = with pkgs; [
+    nodePackages.pyright
+  ];
+
    enable = true;  
    defaultEditor = true;
    viAlias = true;
    vimAlias = true;
    vimdiffAlias = true;
    # withNodeJs = true;
-   coc = {
-    enable = true;
-    settings = builtins.readFile ./coc-settings.json; 
-    pluginConfig = builtins.readFile ./coc.vim;
-   };
+   # coc = {
+   #  enable = true;
+   #  settings = builtins.readFile ./coc-settings.json; 
+   #  pluginConfig = builtins.readFile ./coc.vim;
+   # };
    extraLuaConfig = ''
     vim.opt.number = true
     vim.opt.cursorline = true
@@ -40,12 +45,12 @@ in
     vim.o.timeout = true
     vim.o.timeoutlen = 300
 
+    ${builtins.readFile ./lsp_config.lua}
     ${builtins.readFile ./mappings.lua}
    '';
    
    plugins = with pkgs.vimPlugins; [
 
-    copilot-vim
     vim-nix
     vim-surround
     vim-repeat
@@ -54,8 +59,10 @@ in
     vim-signature
     plenary-nvim
     telescope-fzf-native-nvim 
-    telescope-coc-nvim
+    # telescope-coc-nvim
     typst-vim
+    coq_nvim
+    nvim-lspconfig
 
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
@@ -63,7 +70,6 @@ in
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
-
     {
       plugin = nvim-base16;
       config = with config.colorScheme.palette; toLua ''
@@ -169,7 +175,6 @@ in
           }
         }
         require('telescope').load_extension('fzf')
-        require('telescope').load_extension('coc')
       '';
     }
    ];

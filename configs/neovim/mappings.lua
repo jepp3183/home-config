@@ -26,17 +26,42 @@ vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<cr>')
 vim.keymap.set('n', '<Leader>fc', '<cmd>Telescope find_files cwd=/etc/nixos<cr>')
 
--- COC
-vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
-vim.keymap.set('n', '<Leader>lc', '<cmd>Telescope coc coc<cr>')
-vim.keymap.set('n', '<Leader>ls', '<cmd>Telescope coc document_symbols<cr>')
-vim.keymap.set('n', '<Leader>lS', '<cmd>Telescope coc workspace_symbols<cr>')
-vim.keymap.set('n', '<Leader>lr', '<cmd>Telescope coc references_used<cr>')
-vim.keymap.set('n', '<Leader>ld', '<cmd>Telescope coc workspace_diagnostics<cr>')
-vim.keymap.set('n', '<leader>lq', '<Plug>(coc-fix-current)')
-vim.keymap.set('n', '<leader>lR', '<Plug>(coc-rename)')
-vim.keymap.set('x', '<leader>la', '<Plug>(coc-codeaction-selected)')
-vim.keymap.set('n', '<leader>la', '<Plug>(coc-codeaction-selected)')
+-- COQ
+vim.cmd([[
+  ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
+  ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+  ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+  ino <silent><expr> <TAB>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+  ino <silent><expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  ino <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<BS>"
+]])
+
+-- LSP SHIT
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+-- Only when LSP is attached
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>lf', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+vim.keymap.set('n', '<Leader>ls', '<cmd>Telescope lsp_document_symbols<cr>')
+vim.keymap.set('n', '<Leader>lS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>')
+vim.keymap.set('n', '<Leader>lr', '<cmd>Telescope lsp_references<cr>')
+vim.keymap.set('n', '<Leader>ld', '<cmd>Telescope diagnostics<cr>')
 
 
 -- copilot
