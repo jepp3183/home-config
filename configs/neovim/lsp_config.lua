@@ -2,10 +2,12 @@ vim.g.coq_settings = {
     auto_start = true,
     keymap = {
         recommended = false;
-        jump_to_mark = 'null';
-        bigger_preview = 'null'
+        jump_to_mark = nil;
+        bigger_preview = nil
     }
 }
+
+vim.api.nvim_create_autocmd("BufEnter", {command = "TSBufEnable highlight"})
 
 vim.diagnostic.config({
     signs=false;
