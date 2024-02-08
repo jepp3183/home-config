@@ -1,8 +1,9 @@
 vim.g.coq_settings = { 
-    auto_start = true,
+    auto_start = "shut-up",
     keymap = {
+        pre_select = true;
         recommended = false;
-        jump_to_mark = nil;
+        jump_to_mark = "";
         bigger_preview = nil
     }
 }
