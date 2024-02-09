@@ -23,6 +23,7 @@ in
     insync
     parsec-bin
     obs-studio
+    okular
     
     # CMD UTILS
     wl-clipboard
