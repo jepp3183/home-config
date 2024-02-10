@@ -7,7 +7,6 @@ let
 
     hexToRGBString = inputs.nix-colors.lib.conversions.hexToRGBString;
     hexToRGBA = alpha: hex: "rgba(${hexToRGBString "," hex}, ${builtins.toString alpha})";
-
 in
 {
   programs.waybar = {
@@ -206,7 +205,7 @@ in
           font-weight: 700;
       }
 
-      #workspaces button.persistent {
+      #workspaces button.empty {
           background-color: transparent;
       }
 
