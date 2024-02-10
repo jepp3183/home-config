@@ -7,6 +7,9 @@ in
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = (_: true);
+    permittedInsecurePackages = with pkgs; [
+      "electron-25.9.0"
+    ];
   };
 
   home.username = "jeppe";
@@ -23,6 +26,15 @@ in
     insync
     parsec-bin
     obs-studio
+    okular
+
+    # Required for hypr and waybar to work well
+    networkmanagerapplet
+    dunst
+    libnotify
+    pavucontrol
+    brightnessctl
+    playerctl
     
     # CMD UTILS
     wl-clipboard
@@ -71,7 +83,7 @@ in
     ./configs/zathura.nix
     ./configs/lf.nix
     ./configs/waybar.nix
-     ./configs/sioyek.nix
+    ./configs/sioyek.nix
     ./configs/rofi.nix
     ./configs/neovim
     ./configs/vscode.nix
