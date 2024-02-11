@@ -20,13 +20,8 @@ in
     spotify
     obsidian
     discord
-    anydesk
     vlc
     qimgv
-    insync
-    parsec-bin
-    obs-studio
-    okular
 
     # Required for hypr and waybar to work well
     networkmanagerapplet
@@ -56,10 +51,6 @@ in
     atool
     unzip
     zip
-    android-tools
-    scrcpy
-    typst
-    typst-lsp
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
 
