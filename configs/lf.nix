@@ -51,6 +51,7 @@
       D = "trash";
       gu = "cd ~/GDrive/SkoleShit/UNI";
       gn = "cd /etc/nixos";
+      "g/" = "cd /";
       "<enter>" = "open";
       S = "!fish";
       e = "extract";
