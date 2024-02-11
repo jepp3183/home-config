@@ -103,12 +103,12 @@ with config.colorScheme.palette; {
         special_scale_factor=0.950000
       }
       exec=${pkgs.swaybg}/bin/swaybg -i "${wallpaper}"
+      exec=blueman-applet
       exec-once=waybar
       exec-once=nm-applet --indicator
       exec-once=dunst
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
-      exec-once=insync start --no-daemon
       monitor=eDP-1,1920x1080@60.033001,auto,1
       windowrule=opacity 0.85,(kitty)
 
