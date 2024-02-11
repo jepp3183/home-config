@@ -5,22 +5,11 @@ let
 in
 {
   programs.neovim = {
-    
-  extraPackages = with pkgs; [
-    nodePackages.pyright
-  ];
-
    enable = true;  
    defaultEditor = true;
    viAlias = true;
    vimAlias = true;
    vimdiffAlias = true;
-   # withNodeJs = true;
-   # coc = {
-   #  enable = true;
-   #  settings = builtins.readFile ./coc-settings.json; 
-   #  pluginConfig = builtins.readFile ./coc.vim;
-   # };
    extraLuaConfig = ''
     vim.opt.number = true
     vim.opt.cursorline = true
@@ -50,8 +39,6 @@ in
    '';
    
    plugins = with pkgs.vimPlugins; [
-
-    vim-nix
     vim-surround
     vim-repeat
     vim-unimpaired
@@ -59,10 +46,14 @@ in
     vim-signature
     plenary-nvim
     telescope-fzf-native-nvim 
-    # telescope-coc-nvim
-    typst-vim
-    coq_nvim
     nvim-lspconfig
+    cmp-nvim-lsp
+    nvim-cmp
+    luasnip
+    mason-nvim
+    mason-lspconfig-nvim
+    null-ls-nvim
+    dressing-nvim
 
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
