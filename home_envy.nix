@@ -74,7 +74,7 @@ in
     ./configs/zathura.nix
     ./configs/lf.nix
     ./configs/waybar.nix
-    ./configs/sioyek.nix
+    # ./configs/sioyek.nix
     ./configs/rofi.nix
     ./configs/neovim
     ./configs/vscode.nix
