@@ -58,7 +58,13 @@ require('mason-lspconfig').setup_handlers({
   end
 })
 
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
@@ -68,12 +74,28 @@ cmp.event:on(
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'luasnip' }
   },
   completion = {
     completeopt = 'menu,menuone,noinsert'
   },
   mapping = {
-    ['<TAB>'] = cmp.mapping.confirm({ select = false }),
+    -- ['<C-y>'] = cmp.mapping.confirm({ select = false }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        cmp.confirm({select = false})
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ['<ESC>'] = cmp.mapping.abort(),
     ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
     ['<C-j>'] = cmp.mapping.select_next_item({ behavior = 'select' }),

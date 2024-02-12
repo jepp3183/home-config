@@ -9,8 +9,6 @@ vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 vim.keymap.set('n', '<C-q>', ':bd<CR>')
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Move selection up/down in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

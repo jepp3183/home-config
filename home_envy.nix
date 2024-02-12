@@ -32,6 +32,7 @@ in
     playerctl
     
     # CMD UTILS
+    tmux
     wl-clipboard
     fd
     ripgrep
