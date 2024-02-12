@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
 vim.diagnostic.config({
   signs = false,
+  virtual_text = false,
 })
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -71,6 +72,24 @@ cmp.setup({
   completion = {
     completeopt = 'menu,menuone,noinsert'
   },
+  mapping = {
+    ['<TAB>'] = cmp.mapping.confirm({ select = false }),
+    ['<ESC>'] = cmp.mapping.abort(),
+    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
+    ['<C-p>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-n>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping(function()
+      if not cmp.visible() then
+        cmp.complete()
+      end
+    end),
+  },
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
   formatting = {
     format = function(entry, item)
       -- Define menu shorthand for different completion sources.
@@ -115,24 +134,6 @@ cmp.setup({
         item.abbr = content .. (" "):rep(max_content_width - #content)
       end
       return item
-    end,
-  },
-  mapping = {
-    ['<TAB>'] = cmp.mapping.confirm({ select = false }),
-    ['<ESC>'] = cmp.mapping.abort(),
-    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
-    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-    ['<C-p>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-n>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping(function()
-      if not cmp.visible() then
-        cmp.complete()
-      end
-    end),
-  },
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
     end,
   },
 })
