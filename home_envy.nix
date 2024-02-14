@@ -57,14 +57,17 @@ in
 
 
     # PYTHON
-    (python3.withPackages(ps: with ps; [ 
-      numpy 
-      matplotlib 
-      pandas
-      scipy
-      jupyter
-      notebook
-    ]))
+    # (python3.withPackages(ps: with ps; [ 
+    #   numpy 
+    #   matplotlib 
+    #   pandas
+    #   scipy
+    #   ipykernel
+    #   jupyter
+    #   notebook
+    #   pycryptodome
+    #   scikit-learn
+    # ]))
   ];
 
   imports = [
