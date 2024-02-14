@@ -84,8 +84,10 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      else
+      elseif has_words_before() then
         cmp.confirm({select = false})
+      else
+        fallback()
       end
     end, { "i", "s" }),
 
@@ -96,6 +98,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+
     ['<ESC>'] = cmp.mapping.abort(),
     ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
     ['<C-j>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
