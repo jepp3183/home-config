@@ -10,20 +10,20 @@ in
    viAlias = true;
    vimAlias = true;
    vimdiffAlias = true;
-   # withNodeJs = true;
-   coc = {
-    enable = true;
-    settings = builtins.readFile ./coc-settings.json; 
-    pluginConfig = builtins.readFile ./coc.vim;
-   };
    extraLuaConfig = ''
     vim.opt.number = true
     vim.opt.cursorline = true
     vim.opt.relativenumber = true
+
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
+    vim.opt.softtabstop = 4
     vim.opt.expandtab = true
     vim.opt.autoindent = true
+    vim.opt.smartindent = true
+
+
+    vim.opt.incsearch = true
     vim.opt.termguicolors = true
     vim.opt.hidden = true
     vim.opt.splitright = true
@@ -40,13 +40,11 @@ in
     vim.o.timeout = true
     vim.o.timeoutlen = 300
 
+    ${builtins.readFile ./lsp_config.lua}
     ${builtins.readFile ./mappings.lua}
    '';
    
    plugins = with pkgs.vimPlugins; [
-
-    copilot-vim
-    vim-nix
     vim-surround
     vim-repeat
     vim-unimpaired
@@ -54,16 +52,23 @@ in
     vim-signature
     plenary-nvim
     telescope-fzf-native-nvim 
-    telescope-coc-nvim
-    typst-vim
+    nvim-lspconfig
+    cmp-nvim-lsp
+    nvim-cmp
+    luasnip
+    cmp_luasnip
+    mason-nvim
+    mason-lspconfig-nvim
+    null-ls-nvim
+    dressing-nvim
 
+    { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
-
     {
       plugin = nvim-base16;
       config = with config.colorScheme.palette; toLua ''
@@ -134,7 +139,15 @@ in
         require'nvim-treesitter.configs'.setup {
           autotag = {
             enable = true,
-          }
+          },
+          highlight = {
+          enable = true,
+          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+          -- Using this option may slow down your editor, and you may see some duplicate highlights.
+          -- Instead of true it can also be a list of languages
+          additional_vim_regex_highlighting = false,
+        },
         }
       '';
     }
@@ -169,7 +182,6 @@ in
           }
         }
         require('telescope').load_extension('fzf')
-        require('telescope').load_extension('coc')
       '';
     }
    ];

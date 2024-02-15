@@ -20,13 +20,8 @@ in
     spotify
     obsidian
     discord
-    anydesk
     vlc
     qimgv
-    insync
-    parsec-bin
-    obs-studio
-    okular
 
     # Required for hypr and waybar to work well
     networkmanagerapplet
@@ -37,6 +32,7 @@ in
     playerctl
     
     # CMD UTILS
+    tmux
     wl-clipboard
     fd
     ripgrep
@@ -56,23 +52,22 @@ in
     atool
     unzip
     zip
-    android-tools
-    scrcpy
-    typst
-    typst-lsp
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
 
 
     # PYTHON
-    (python3.withPackages(ps: with ps; [ 
-      numpy 
-      matplotlib 
-      pandas
-      scipy
-      jupyter
-      notebook
-    ]))
+    # (python3.withPackages(ps: with ps; [ 
+    #   numpy 
+    #   matplotlib 
+    #   pandas
+    #   scipy
+    #   ipykernel
+    #   jupyter
+    #   notebook
+    #   pycryptodome
+    #   scikit-learn
+    # ]))
   ];
 
   imports = [
@@ -83,13 +78,13 @@ in
     ./configs/zathura.nix
     ./configs/lf.nix
     ./configs/waybar.nix
-    ./configs/sioyek.nix
+    # ./configs/sioyek.nix
     ./configs/rofi.nix
     ./configs/neovim
     ./configs/vscode.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
   #   path = ./walls/lake.jpeg;
   #   kind = "dark";

@@ -31,11 +31,13 @@ in
     atool
     unzip
     zip
+
+    gcc
+
     typst
     typst-lsp
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
-
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 

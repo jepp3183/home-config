@@ -1,5 +1,4 @@
 vim.g.mapleader = ' '
-
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
@@ -10,6 +9,15 @@ vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 vim.keymap.set('n', '<C-q>', ':bd<CR>')
+
+-- Move selection up/down in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- yank to system clipboard!
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
 
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = 'float' })
@@ -24,25 +32,40 @@ vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep<cr>')
 vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<cr>')
 vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<cr>')
-vim.keymap.set('n', '<Leader>fc', '<cmd>Telescope find_files cwd=/etc/nixos<cr>')
+vim.keymap.set('n', '<Leader>fc', '<cmd>Telescope find_files cwd=~/.config/home-manager<cr>')
+vim.keymap.set('n', '<Leader>fs', '<cmd>Telescope lsp_document_symbols<cr>')
+vim.keymap.set('n', '<Leader>fS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>')
+vim.keymap.set('n', '<Leader>fr', '<cmd>Telescope lsp_references<cr>')
+vim.keymap.set('n', '<Leader>fd', '<cmd>Telescope diagnostics<cr>')
 
--- COC
-vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
-vim.keymap.set('n', '<Leader>lc', '<cmd>Telescope coc coc<cr>')
-vim.keymap.set('n', '<Leader>ls', '<cmd>Telescope coc document_symbols<cr>')
-vim.keymap.set('n', '<Leader>lS', '<cmd>Telescope coc workspace_symbols<cr>')
-vim.keymap.set('n', '<Leader>lr', '<cmd>Telescope coc references_used<cr>')
-vim.keymap.set('n', '<Leader>ld', '<cmd>Telescope coc workspace_diagnostics<cr>')
-vim.keymap.set('n', '<leader>lq', '<Plug>(coc-fix-current)')
-vim.keymap.set('n', '<leader>lR', '<Plug>(coc-rename)')
-vim.keymap.set('x', '<leader>la', '<Plug>(coc-codeaction-selected)')
-vim.keymap.set('n', '<leader>la', '<Plug>(coc-codeaction-selected)')
+-- Diagnostics
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float)
 
+-- LSP Shit
+vim.keymap.set('n', '<Leader>lm', '<cmd>Mason<cr>')
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, opts)
+    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>ll', require('lsp_lines').toggle, opts)
+    vim.keymap.set('n', '<leader>lf', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
 
 -- copilot
 vim.keymap.set('i', '<C-L>', 'copilot#Accept("<CR>")', {expr=true, silent=true, replace_keycodes=false})
 vim.g.copilot_no_tab_map = true
-
 
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
