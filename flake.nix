@@ -37,5 +37,13 @@
         };
         modules = [ ./home_wsl.nix ];
       };
+
+      homeConfigurations."jelal" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+        modules = [ ./home_jelal.nix ];
+      };
     };
 }
