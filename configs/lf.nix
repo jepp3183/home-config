@@ -25,7 +25,7 @@
           esac
         }}
       '';
-      mkdir = "&mkdir $1";
+      mkdir = "&mkdir -p $1";
       touch = "&touch $1";
       trash = "&mv $fx ~/.trash";
       extract = "%${pkgs.atool}/bin/aunpack $f";
@@ -43,21 +43,38 @@
           lf -remote "send $id unselect"
         }}
       '';
+      z = ''
+        %{{
+          result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
+          lf -remote "send $id cd \"$result\""
+        }}
+      '';
+      zi = ''
+      ''${{
+        result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id cd \"$result\""
+      }}
+      '';
+      on-cd =  ''
+      &{{
+        zoxide add "$PWD"
+      }}
+      '';
 
     };
     keybindings = {
       # unmap clear, which removed yank/cut paths in buffer
-      c = "";
+      # c = "";
       D = "trash";
       gu = "cd ~/GDrive/SkoleShit/UNI";
-      gn = "cd /etc/nixos";
+      gp = "cd ~/proj";
       "g/" = "cd /";
       "<enter>" = "open";
       S = "!fish";
       e = "extract";
       f = "filter";
       H = "set hidden!";
-      # z = "zip";
+      zi = "zi";
     };
 
     extraConfig =

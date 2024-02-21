@@ -1,5 +1,12 @@
 {pkgs, ...}:
 {
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
+  };
   programs.fish = {
     enable = true;
     plugins = [
@@ -20,6 +27,10 @@
       bind \ck up-or-search
 
       function ns; nix-shell --run fish -p $argv; end
+
+      function lfd --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
+        cd "$(command lf -print-last-dir $argv)"
+      end
     '';
   };
 }
