@@ -37,7 +37,7 @@ in
     ./configs/neovim
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
 
   fonts.fontconfig.enable = true;
 
