@@ -29,7 +29,7 @@
       function ns; nix-shell --run fish -p $argv; end
 
       function lfd --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
-        cd "$(command lf -print-last-dir $argv)"
+        cd "(command lf -print-last-dir $argv)"
       end
     '';
   };
