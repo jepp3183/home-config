@@ -32,7 +32,6 @@ in
     playerctl
     
     # CMD UTILS
-    tmux
     wl-clipboard
     fd
     ripgrep
@@ -82,6 +81,7 @@ in
     ./configs/rofi.nix
     ./configs/neovim
     ./configs/vscode.nix
+    ./configs/zellij.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
