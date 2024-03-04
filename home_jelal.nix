@@ -35,9 +35,10 @@ in
     ./configs/fish.nix
     ./configs/lf.nix
     ./configs/neovim
+    ./configs/zellij.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
   fonts.fontconfig.enable = true;
 
