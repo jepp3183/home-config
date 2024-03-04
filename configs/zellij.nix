@@ -1,5 +1,5 @@
 
-{pkgs, ...}:
+{pkgs, configLines ? '''',...}:
 {
   programs.zellij = {
       enable = true;
@@ -7,7 +7,6 @@
 
   home.file.".config/zellij/config.kdl".text = ''
     pane_frames false
-
 
     keybinds {
       unbind "Ctrl q"
@@ -27,5 +26,5 @@
         bind "Alt x" { CloseFocus; }
       }
     }
-  '';
+  '' + configLines;
 }

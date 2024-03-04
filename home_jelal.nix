@@ -26,6 +26,8 @@ in
     atool
     unzip
     zip
+    jq
+    jid
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
   ];
@@ -35,7 +37,15 @@ in
     ./configs/fish.nix
     ./configs/lf.nix
     ./configs/neovim
-    ./configs/zellij.nix
+    ( 
+     import ./configs/zellij.nix
+     {
+       inherit pkgs;
+       configLines = ''
+       default_shell "/home/jelal/.nix-profile/bin/fish"
+       '';
+     }
+    )
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
