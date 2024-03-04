@@ -21,6 +21,7 @@
         ''${{
           case $(${pkgs.file}/bin/file -Lb --mime-type "$f") in
             text/*) $EDITOR $fx;;
+            application/yaml) $EDITOR $fx;;
             *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
           esac
         }}
