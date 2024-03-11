@@ -63,7 +63,7 @@ in
     dressing-nvim
     ansible-vim
 
-    { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
+    # { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
