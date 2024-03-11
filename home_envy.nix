@@ -81,7 +81,11 @@ in
     ./configs/rofi.nix
     ./configs/neovim
     ./configs/vscode.nix
-    ./configs/zellij.nix
+    # ./configs/zellij.nix
+    (import ./configs/zellij.nix {
+      inherit pkgs;
+      configLines = "";
+     })
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
