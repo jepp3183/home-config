@@ -88,7 +88,7 @@ in
      })
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.tokyodark;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
   #   path = ./walls/lake.jpeg;
   #   kind = "dark";
