@@ -19,6 +19,8 @@
       cat = "${pkgs.bat}/bin/bat";
       man = "${pkgs.bat-extras.batman}/bin/batman";
       ls = "${pkgs.eza}/bin/eza";
+      wgu = "wg-quick up";
+      wgd = "wg-quick down";
     };
     interactiveShellInit = ''
       set fish_greeting
