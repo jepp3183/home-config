@@ -11,6 +11,7 @@
     enable = true;
     plugins = [
       { name = "hydro-prompt"; src = pkgs.fishPlugins.hydro.src; }
+      { name = "plugin-git"; src = pkgs.fishPlugins.plugin-git.src; }
     ];
     shellAliases = {
       gs = "${pkgs.git }/bin/git status";
@@ -18,8 +19,6 @@
       cat = "${pkgs.bat}/bin/bat";
       man = "${pkgs.bat-extras.batman}/bin/batman";
       ls = "${pkgs.eza}/bin/eza";
-      s = "kitten ssh";
-      lg = "${pkgs.lazygit}/bin/lazygit";
     };
     interactiveShellInit = ''
       set fish_greeting
