@@ -21,9 +21,13 @@
       ls = "${pkgs.eza}/bin/eza";
       wgu = "wg-quick up";
       wgd = "wg-quick down";
+      dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
+      dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
     };
     interactiveShellInit = ''
       set fish_greeting
+
+      set -x ANSIBLE_STDOUT_CALLBACK yaml
 
       bind \ck up-or-search
 
