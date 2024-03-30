@@ -61,7 +61,7 @@ in
             };
         };
         clock = {
-        format = "{:${icon ""} %A,%e.%B ${icon "󰥔"} %R}";
+        format = "${icon ""} {:%A,%e.%B ${icon "󰥔"} %R}";
         tooltip-format = "<tt><small>{calendar}</small></tt>";
         calendar = {
             mode = "year";
