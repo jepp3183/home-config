@@ -63,13 +63,14 @@ in
     dressing-nvim
     ansible-vim
 
-    # { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
+    { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
+
     {
       plugin = nvim-base16;
       config = with config.colorScheme.palette; toLua ''

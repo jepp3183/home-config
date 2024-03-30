@@ -45,6 +45,21 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float)
 
 -- LSP Shit
+local lsp_lines = false
+local _lsp_lines_toggle = function()
+  lsp_lines = not lsp_lines
+  if lsp_lines then
+    vim.diagnostic.config({
+      virtual_text = false,
+      virtual_lines = true,
+    })
+  else
+    vim.diagnostic.config({
+      virtual_text = true,
+      virtual_lines = false,
+    })
+  end
+end
 vim.keymap.set('n', '<Leader>lm', '<cmd>Mason<cr>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -56,7 +71,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, opts)
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
-    -- vim.keymap.set('n', '<leader>ll', require('lsp_lines').toggle, opts)
+    vim.keymap.set('n', '<leader>ll', _lsp_lines_toggle, opts)
     vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
     end, opts)
@@ -64,8 +79,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- copilot
-vim.keymap.set('i', '<C-L>', 'copilot#Accept("<CR>")', {expr=true, silent=true, replace_keycodes=false})
-vim.g.copilot_no_tab_map = true
+-- vim.keymap.set('i', '<C-L>', 'copilot#Accept("<CR>")', {expr=true, silent=true, replace_keycodes=false})
+-- vim.g.copilot_no_tab_map = true
 
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
