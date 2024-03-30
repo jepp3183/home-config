@@ -51,6 +51,8 @@ in
     atool
     unzip
     zip
+    jq
+    jid
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
 
