@@ -28,7 +28,7 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {no
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
-vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope layout_strategy=vertical live_grep<cr>')
+vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep layout_strategy=vertical<cr>')
 vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<cr>')
 vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<cr>')
