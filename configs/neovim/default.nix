@@ -14,6 +14,7 @@ in
     vim.opt.number = true
     vim.opt.cursorline = true
     vim.opt.relativenumber = true
+    vim.opt.signcolumn = "yes"
 
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
@@ -48,6 +49,7 @@ in
     vim-surround
     vim-repeat
     vim-unimpaired
+    vim-fugitive
     nvim-web-devicons
     vim-signature
     plenary-nvim
@@ -70,6 +72,7 @@ in
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
+    { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
 
     {
       plugin = nvim-base16;
@@ -180,7 +183,6 @@ in
               override_generic_sorter = true,  -- override the generic sorter
               override_file_sorter = true,     -- override the file sorter
               case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                               -- the default case_mode is "smart_case"
             }
           }
         }

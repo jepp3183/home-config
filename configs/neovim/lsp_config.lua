@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
 vim.diagnostic.config({
-  signs = false,
+  signs = true,
   virtual_text = true,
   virtual_lines = false
 })

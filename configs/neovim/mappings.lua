@@ -2,7 +2,7 @@ vim.g.mapleader = ' '
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
-vim.keymap.set('n', '<Leader>e', ':Neotree toggle<CR>')
+vim.keymap.set('n', '<Leader>e', ':Neotree source=last toggle<CR>')
 vim.keymap.set('', '<C-j>', '5j')
 vim.keymap.set('', '<C-k>', '5k')
 vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
@@ -28,7 +28,7 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {no
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
-vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope layout_strategy=vertical live_grep<cr>')
 vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<cr>')
 vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<cr>')
