@@ -75,7 +75,7 @@ in
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
 
     {
-      plugin = nvim-base16;
+      plugin = base16-nvim;
       config = with config.colorScheme.palette; toLua ''
         require('base16-colorscheme').setup({
             base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
