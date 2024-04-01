@@ -19,6 +19,15 @@ require('mason-lspconfig').setup_handlers({
     })
   end,
 
+  ["typst_lsp"] = function ()
+    require 'lspconfig'.typst_lsp.setup {
+      capabilities = lsp_capabilities,
+      settings = {
+        exportPdf = 'onType',
+      },
+    }
+  end,
+
   ["lua_ls"] = function()
     require 'lspconfig'.lua_ls.setup {
       capabilities = lsp_capabilities,

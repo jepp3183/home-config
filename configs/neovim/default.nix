@@ -66,6 +66,7 @@ in
     null-ls-nvim
     dressing-nvim
     ansible-vim
+    typst-vim
 
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
