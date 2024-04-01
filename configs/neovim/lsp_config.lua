@@ -60,7 +60,9 @@ cmp.event:on(
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' }
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'async_path' },
   },
   completion = {
     completeopt = 'menu,menuone,noinsert'

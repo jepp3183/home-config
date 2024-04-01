@@ -85,7 +85,7 @@ in
     ./configs/vscode.nix
     # ./configs/zellij.nix
     (import ./configs/zellij.nix {
-      inherit pkgs;
+      inherit pkgs config inputs;
       configLines = "";
      })
   ];

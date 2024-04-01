@@ -59,6 +59,8 @@ in
     nvim-cmp
     luasnip
     cmp_luasnip
+    cmp-buffer
+    cmp-async-path
     mason-nvim
     mason-lspconfig-nvim
     null-ls-nvim
