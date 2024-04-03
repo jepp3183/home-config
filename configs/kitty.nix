@@ -3,8 +3,8 @@ with config.colorScheme.palette; {
   home.file.".config/kitty/kitty.conf" = {
     executable = false;
     text = ''
-    font_family FiraCode Nerd Font Mono
-    font_size 11
+    font_family CaskaydiaCove Nerd Font Mono
+    font_size 12
 
     shell_integration no-rc
 

@@ -54,7 +54,7 @@ in
     jq
     jid
 
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
 
 
     # PYTHON

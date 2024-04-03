@@ -11,36 +11,7 @@ in
    vimAlias = true;
    vimdiffAlias = true;
    extraLuaConfig = ''
-    vim.opt.number = true
-    vim.opt.cursorline = true
-    vim.opt.relativenumber = true
-    vim.opt.signcolumn = "yes"
-
-    vim.opt.tabstop = 4
-    vim.opt.shiftwidth = 4
-    vim.opt.softtabstop = 4
-    vim.opt.expandtab = true
-    vim.opt.autoindent = true
-    vim.opt.smartindent = true
-
-
-    vim.opt.incsearch = true
-    vim.opt.termguicolors = true
-    vim.opt.hidden = true
-    vim.opt.splitright = true
-    vim.opt.splitbelow = true
-    vim.opt.wrap = false
-    vim.opt.ignorecase = true
-    vim.opt.smartcase = true
-    vim.opt.scrolloff = 8
-    vim.opt.mouse = "a"
-
-    vim.g.typst_pdf_viewer = "zathura"
-
-    -- For which-key:
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-
+    ${builtins.readFile ./basics.lua}
     ${builtins.readFile ./lsp_config.lua}
     ${builtins.readFile ./mappings.lua}
    '';
@@ -76,6 +47,7 @@ in
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
+    { plugin = toggleterm-nvim; config = toLua ''require('toggleterm').setup{} ''; }
 
     {
       plugin = base16-nvim;
@@ -86,12 +58,6 @@ in
             base08 = '#${base08}', base09 = '#${base09}', base0A = '#${base0A}', base0B = '#${base0B}',
             base0C = '#${base0C}', base0D = '#${base0D}', base0E = '#${base0E}', base0F = '#${base0F}',
         })
-      '';
-    }
-    {
-      plugin = toggleterm-nvim;
-      config = toLua ''
-        require('toggleterm').setup{}
       '';
     }
     {
