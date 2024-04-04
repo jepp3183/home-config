@@ -7,9 +7,8 @@
 
   home.file.".config/zellij/config.kdl".text = ''
     pane_frames false
-    copy_on_select false
     default_layout "compact"
-    mouse_mode false
+    mouse_mode true
 
     keybinds {
       unbind "Ctrl q"
