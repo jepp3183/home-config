@@ -23,6 +23,7 @@
       wgd = "wg-quick down";
       dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
+      lfd = "cd (lf -print-last-dir)";
     };
     interactiveShellInit = ''
       set fish_greeting
@@ -32,10 +33,6 @@
       bind \ck up-or-search
 
       function ns; nix-shell --run fish -p $argv; end
-
-      function lfd --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
-        cd "(command lf -print-last-dir $argv)"
-      end
     '';
   };
 }

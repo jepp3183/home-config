@@ -28,7 +28,7 @@
       '';
       mkdir = "&mkdir -p $1";
       touch = "&touch $1";
-      trash = "&mv $fx ~/.trash";
+      trash = "&mv --backup=t $fx ~/.trash";
       extract = "%${pkgs.atool}/bin/aunpack $f";
       zip = ''
         ''${{
