@@ -74,7 +74,6 @@
       S = "!fish";
       e = "extract";
       f = "filter";
-      H = "set hidden!";
       zi = "zi";
     };
 
