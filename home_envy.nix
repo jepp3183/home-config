@@ -39,7 +39,7 @@ in
     nushell
     rclone
     wireguard-tools
-    rofi
+    fuzzel
     # sage
     atool
     unzip
@@ -61,6 +61,8 @@ in
       notebook
       pycryptodome
       scikit-learn
+      networkx
+      torchvision
     ]))
   ];
 
@@ -73,7 +75,7 @@ in
     ./configs/lf.nix
     ./configs/waybar.nix
     # ./configs/sioyek.nix
-    ./configs/rofi.nix
+    ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
     # ./configs/zellij.nix

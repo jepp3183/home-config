@@ -2,7 +2,7 @@
 let 
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
-    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | ${pkgs.rofi}/bin/rofi  -dmenu -matching fuzzy -i -sort -sorting-method fzf)
+    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel  --dmenu --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
     type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
@@ -14,12 +14,12 @@ let
   '';
 
   launcher = pkgs.writeShellScriptBin "launcher.sh" ''
-    ${pkgs.rofi}/bin/rofi -theme-str "window {width:30%;}" -show drun -modes "drun,run" -show-icons 
+    ${pkgs.fuzzel}/bin/fuzzel
   '';
 
   power_menu = pkgs.writeShellScriptBin "power_menu.sh" ''
     choice=$(printf ' Shutdown\n󰤄 Suspend\n Reboot\n Lock'\
-              | rofi -dmenu -i -matching fuzzy -sorting-method fzf -theme-str "window {width:20%; height:30%;}"\
+              | fuzzel --dmenu --width=14 --lines=5\
               | awk '{print $2}'
             )
     case $choice in
