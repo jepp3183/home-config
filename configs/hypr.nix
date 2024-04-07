@@ -140,8 +140,8 @@ with config.colorScheme.palette; {
       # Brightness + Volume
       bind = , XF86MonBrightnessDown, exec, brightnessctl s 10%-
       bind = , XF86MonBrightnessUp, exec, brightnessctl s +10%
-      # bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-      # bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+      bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
       bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- -l 1.5
       bind = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5
       bind = , XF86AudioPlay, exec, playerctl play-pause

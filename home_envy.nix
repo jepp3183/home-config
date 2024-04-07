@@ -22,15 +22,8 @@ in
     discord
     vlc
     qimgv
+    insync
 
-    # Required for hypr and waybar to work well
-    networkmanagerapplet
-    dunst
-    libnotify
-    pavucontrol
-    brightnessctl
-    playerctl
-    
     # CMD UTILS
     wl-clipboard
     fd
@@ -46,8 +39,8 @@ in
     nushell
     rclone
     wireguard-tools
-    sage
     rofi
+    # sage
     atool
     unzip
     zip
@@ -58,17 +51,17 @@ in
 
 
     # PYTHON
-    # (python3.withPackages(ps: with ps; [ 
-    #   numpy 
-    #   matplotlib 
-    #   pandas
-    #   scipy
-    #   ipykernel
-    #   jupyter
-    #   notebook
-    #   pycryptodome
-    #   scikit-learn
-    # ]))
+    (python3.withPackages(ps: with ps; [ 
+      numpy 
+      matplotlib 
+      pandas
+      scipy
+      ipykernel
+      jupyter
+      notebook
+      pycryptodome
+      scikit-learn
+    ]))
   ];
 
   imports = [
