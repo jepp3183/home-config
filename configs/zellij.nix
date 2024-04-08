@@ -8,6 +8,7 @@
   home.file.".config/zellij/config.kdl".text = ''
     pane_frames false
     default_layout "compact"
+    default_mode "locked"
     mouse_mode true
 
     keybinds {
