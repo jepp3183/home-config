@@ -104,6 +104,11 @@ in
         require("neo-tree").setup({
             source_selector = {
                 winbar = true
+            },
+            window = {
+                mappings = {
+                    ["l"] = "open",
+                },
             }
         })
       '';
