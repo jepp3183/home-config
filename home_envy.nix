@@ -15,6 +15,13 @@ in
   home.username = "jeppe";
   home.homeDirectory = "/home/jeppe";
   home.packages = with pkgs; [
+    # LSP
+    pyright
+    ruff
+    lua-language-server
+    nil
+    typst-lsp
+
     # GUI Packages
     firefox
     spotify
@@ -46,6 +53,7 @@ in
     zip
     jq
     jid
+    typst
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
 

@@ -7,51 +7,45 @@ vim.diagnostic.config({
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {},
-})
-require('mason-lspconfig').setup_handlers({
-  -- Default for all LSP
-  function(server)
-    require('lspconfig')[server].setup({
-      capabilities = lsp_capabilities,
-    })
-  end,
+local standard_servers = {
+  "pyright",
+  "nil_ls",
+  "ruff",
+}
+for i=1, #standard_servers do
+  require('lspconfig')[standard_servers[i]].setup({
+    capabilities = lsp_capabilities,
+  })
+end
 
-  ["typst_lsp"] = function ()
-    require 'lspconfig'.typst_lsp.setup {
-      capabilities = lsp_capabilities,
-      settings = {
-        exportPdf = 'onType',
-      },
-    }
-  end,
+require 'lspconfig'.typst_lsp.setup {
+  capabilities = lsp_capabilities,
+  settings = {
+    exportPdf = 'onType',
+  },
+}
 
-  ["lua_ls"] = function()
-    require 'lspconfig'.lua_ls.setup {
-      capabilities = lsp_capabilities,
-      on_init = function(client)
-        local path = client.workspace_folders[1].name
-        if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-          client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
-            Lua = {
-              runtime = {
-                version = 'LuaJIT'
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true)
-              }
-            }
-          })
-          client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-        end
-        return true
-      end
-    }
+require 'lspconfig'.lua_ls.setup {
+  capabilities = lsp_capabilities,
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+      client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT'
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = vim.api.nvim_get_runtime_file("", true)
+          }
+        }
+      })
+      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+    end
+    return true
   end
-})
+}
 
 local has_words_before = function()
   unpack = unpack or table.unpack

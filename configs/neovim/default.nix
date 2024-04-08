@@ -32,8 +32,8 @@ in
     cmp_luasnip
     cmp-buffer
     cmp-async-path
-    mason-nvim
-    mason-lspconfig-nvim
+    # mason-nvim
+    # mason-lspconfig-nvim
     null-ls-nvim
     dressing-nvim
     ansible-vim
