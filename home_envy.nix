@@ -7,7 +7,7 @@ in
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = (_: true);
-    permittedInsecurePackages = with pkgs; [
+    permittedInsecurePackages = [
       "electron-25.9.0"
     ];
   };
@@ -15,13 +15,6 @@ in
   home.username = "jeppe";
   home.homeDirectory = "/home/jeppe";
   home.packages = with pkgs; [
-    # LSP
-    pyright
-    ruff
-    lua-language-server
-    nil
-    typst-lsp
-
     # GUI Packages
     firefox
     spotify
@@ -30,33 +23,14 @@ in
     vlc
     qimgv
     insync
+    fuzzel
 
     # CMD UTILS
     wl-clipboard
-    fd
-    ripgrep
-    eza
-    bat
-    bat-extras.batman
-    btop
-    fzf
-    gdu
-    lazygit
-    libqalculate
-    nushell
     rclone
     wireguard-tools
-    fuzzel
     # sage
-    atool
-    unzip
-    zip
-    jq
-    jid
     typst
-
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
-
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
@@ -76,17 +50,17 @@ in
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/common.nix
+    ./configs/git.nix
     ./configs/hypr.nix
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
     ./configs/lf.nix
     ./configs/waybar.nix
-    # ./configs/sioyek.nix
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
-    # ./configs/zellij.nix
     (import ./configs/zellij.nix {
       inherit pkgs config inputs;
       configLines = "";
@@ -95,7 +69,7 @@ in
 
   colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./walls/lake.jpeg;
+  #   path = ./walls/dune.jpg;
   #   kind = "dark";
   # };
 
@@ -103,20 +77,10 @@ in
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
-    # "application/pdf" = "sioyek.desktop";
     "application/pdf" = "org.pwmt.zathura.desktop";
     "image/jpeg" = "qimgv.desktop";
     "image/png" = "qimgv.desktop";
     "image/gif" = "qimgv.desktop";
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Jeppe Allerslev";
-    userEmail = "jeppeallerslev@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-    };
   };
   
   home.stateVersion = "23.05";
