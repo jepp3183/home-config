@@ -4,6 +4,16 @@ let
   toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
 in
 {
+  home.packages = with pkgs; [
+    # LSP
+    pyright
+    ruff
+    lua-language-server
+    nil
+    typst-lsp
+    ccls
+  ];
+
   programs.neovim = {
    enable = true;  
    defaultEditor = true;

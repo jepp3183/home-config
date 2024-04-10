@@ -11,6 +11,7 @@ local standard_servers = {
   "pyright",
   "nil_ls",
   "ruff",
+  "ccls",
 }
 for i=1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({
