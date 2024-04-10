@@ -119,7 +119,7 @@ with config.colorScheme.palette; {
       $mainMod = SUPER
 
       bind = $mainMod, M, exit, 
-      bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- < (${pkgs.sway-contrib.grimshot}/bin/grimshot save area) | wl-copy"
+      bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- < (${pkgs.sway-contrib.grimshot}/bin/grimshot save area) | ${pkgs.wl-clipboard}/bin/wl-copy"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
 
       # Testing...
