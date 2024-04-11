@@ -6,7 +6,7 @@ let
     type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
-        nohup kitty -e nvim "$file" >/dev/null 2>&1  &
+        nohup wezterm -e nvim "$file" >/dev/null 2>&1  &
     else
         nohup xdg-open "$file" >/dev/null 2>&1 &
     fi
@@ -108,10 +108,10 @@ with config.colorScheme.palette; {
       exec-once=nm-applet --indicator
       exec-once=dunst
       exec-once=insync start --qt-qpa-platform=xcb
-      exec-once=[workspace special:terminal silent] kitty
-      exec-once=[workspace special:qalc silent] kitty -e qalc
+      exec-once=[workspace special:terminal silent] wezterm
+      exec-once=[workspace special:qalc silent] wezterm -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
-      windowrule=opacity 0.90,(kitty)
+      windowrule=opacity 0.90,(wezterm)
 
       # ===========================================
       # BINDS
@@ -129,7 +129,7 @@ with config.colorScheme.palette; {
       bind = $mainMod, Y, togglespecialworkspace, qalc
 
       # RUN
-      bind = $mainMod, Return, exec, kitty
+      bind = $mainMod, Return, exec, wezterm
       bind = $mainMod, B, exec, firefox
       bind = $mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh
       bind = $mainMod, SPACE, exec, ${launcher}/bin/launcher.sh

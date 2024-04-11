@@ -81,13 +81,13 @@ in
             format = "{icon} {usage:2}%";
             format-icons =[(icon "")];
             tooltip = true;
-            on-click = "kitty -e btop";
+            on-click = "wezterm -e btop";
             interval = 5;
         };
         memory = {
             format = "{icon} {:2}%";
             format-icons = [(icon "")];
-            on-click = "kitty -e btop";
+            on-click = "wezterm -e btop";
             interval = 5;
         };
         battery = {

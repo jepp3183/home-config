@@ -28,10 +28,10 @@ in
         return {
             enable_wayland = false,
             colors = wezterm.color.load_base16_scheme '${colorFile}',
-            font = 'CaskaydiaCove Nerd Font Mono',
+            font = wezterm.font 'CaskaydiaCove Nerd Font Mono',
             font_size = 13.0,
             enable_tab_bar = false,
-            window_background_opacity = 0.9,
+            window_close_confirmation = 'NeverPrompt',
         }
         '';
     };
