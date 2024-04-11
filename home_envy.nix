@@ -25,6 +25,8 @@ in
     insync
     fuzzel
 
+    yazi
+
     # CMD UTILS
     wl-clipboard
     rclone
@@ -61,6 +63,7 @@ in
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
+    ./configs/wezterm.nix
     (import ./configs/zellij.nix {
       inherit pkgs config inputs;
       configLines = "";

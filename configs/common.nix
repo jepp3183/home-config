@@ -8,6 +8,7 @@
     bat
     bat-extras.batman
     btop
+    htop
     fzf
     gdu
     lazygit
