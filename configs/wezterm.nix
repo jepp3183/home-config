@@ -32,6 +32,14 @@ in
             font_size = 13.0,
             enable_tab_bar = false,
             window_close_confirmation = 'NeverPrompt',
+
+            keys = {
+                {
+                    key = "t",
+                    mods = "CTRL",
+                    action = wezterm.action.DisableDefaultAssignment,
+                },
+            }
         }
         '';
     };

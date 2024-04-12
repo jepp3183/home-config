@@ -29,7 +29,6 @@ in
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    yazi
     # sage
     typst
     ansible
@@ -64,6 +63,7 @@ in
     ./configs/neovim
     ./configs/vscode.nix
     ./configs/wezterm.nix
+    ./configs/yazi.nix
     (import ./configs/zellij.nix {
       inherit pkgs config inputs;
       configLines = "";

@@ -24,6 +24,7 @@
       dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       lfd = "cd (lf -print-last-dir)";
+      y = "yazi";
     };
     interactiveShellInit = ''
       set fish_greeting
@@ -33,6 +34,15 @@
       bind \ck up-or-search
 
       function ns; nix-shell --run fish -p $argv; end
+
+      function yy
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        yazi $argv --cwd-file="$tmp"
+        if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+          cd "$cwd"
+        end
+        rm -f -- "$tmp"
+      end
     '';
   };
 }
