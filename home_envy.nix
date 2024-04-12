@@ -25,14 +25,14 @@ in
     insync
     fuzzel
 
-    yazi
 
     # CMD UTILS
     wl-clipboard
-    rclone
     wireguard-tools
+    yazi
     # sage
     typst
+    ansible
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 

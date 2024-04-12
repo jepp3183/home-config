@@ -1,5 +1,5 @@
 
-{pkgs, configLines ? "",...}:
+{configLines ? "",...}:
 {
   programs.zellij = {
       enable = true;
