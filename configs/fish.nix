@@ -12,6 +12,7 @@
     plugins = [
       { name = "hydro-prompt"; src = pkgs.fishPlugins.hydro.src; }
       { name = "plugin-git"; src = pkgs.fishPlugins.plugin-git.src; }
+      { name = "fzf"; src = pkgs.fishPlugins.fzf.src; }
     ];
     shellAliases = {
       gs = "${pkgs.git }/bin/git status";
@@ -25,6 +26,7 @@
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       lfd = "cd (lf -print-last-dir)";
       y = "yazi";
+      nv = "nvim";
     };
     interactiveShellInit = ''
       set fish_greeting
