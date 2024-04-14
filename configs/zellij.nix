@@ -1,11 +1,11 @@
 
-{configLines ? "",...}:
+{configLines ? "", config, ...}:
 {
   programs.zellij = {
       enable = true;
   };
 
-  home.file.".config/zellij/config.kdl".text = ''
+  home.file.".config/zellij/config.kdl".text = with config.colorScheme.palette; ''
     pane_frames false
     default_layout "compact"
     default_mode "locked"
@@ -27,6 +27,24 @@
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt x" { CloseFocus; }
+      }
+    }
+
+    theme "default"
+
+    themes {
+      default {
+        fg "#${base05}"
+        bg "#${base02}"
+        black "#${base00}"
+        red "#${base08}"
+        green "#${base0B}"
+        yellow "#${base0A}"
+        blue "#${base0D}"
+        magenta "#${base0E}"
+        cyan "#${base0C}"
+        white "#${base05}"
+        orange "#${base09}"
       }
     }
   '' + configLines;
