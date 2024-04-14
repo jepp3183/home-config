@@ -12,6 +12,7 @@ local standard_servers = {
   "nil_ls",
   "ruff",
   "ccls",
+  "ansiblels",
 }
 for i=1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({

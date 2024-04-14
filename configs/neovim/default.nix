@@ -11,6 +11,8 @@ in
     lua-language-server
     nil
     typst-lsp
+    ansible-language-server
+    ansible-lint
     ccls
   ];
 
