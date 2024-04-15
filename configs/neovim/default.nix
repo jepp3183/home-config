@@ -13,6 +13,9 @@ in
     typst-lsp
     ansible-language-server
     ansible-lint
+    yaml-language-server
+    docker-compose-language-service
+    dockerfile-language-server-nodejs
     ccls
   ];
 
@@ -120,6 +123,7 @@ in
             window = {
                 mappings = {
                     ["l"] = "open",
+                    ["h"] = "close",
                 },
             }
         })

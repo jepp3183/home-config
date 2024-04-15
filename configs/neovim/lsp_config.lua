@@ -13,6 +13,9 @@ local standard_servers = {
   "ruff",
   "ccls",
   "ansiblels",
+  "yamlls",
+  "docker_compose_language_service",
+  "dockerls",
 }
 for i=1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({
