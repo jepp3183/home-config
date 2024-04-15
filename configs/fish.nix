@@ -10,7 +10,7 @@
   programs.fish = {
     enable = true;
     plugins = [
-      { name = "hydro-prompt"; src = pkgs.fishPlugins.hydro.src; }
+      { name = "tide"; src = pkgs.fishPlugins.tide.src; }
       { name = "plugin-git"; src = pkgs.fishPlugins.plugin-git.src; }
       { name = "fzf"; src = pkgs.fishPlugins.fzf.src; }
     ];
