@@ -18,6 +18,7 @@
     zip
     jq
     jid
+    nix-search-cli
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
   ];

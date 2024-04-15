@@ -15,18 +15,21 @@
       { name = "fzf"; src = pkgs.fishPlugins.fzf.src; }
     ];
     shellAliases = {
-      gs = "${pkgs.git }/bin/git status";
       gg = "${pkgs.lazygit}/bin/lazygit";
       cat = "${pkgs.bat}/bin/bat";
       man = "${pkgs.bat-extras.batman}/bin/batman";
       ls = "${pkgs.eza}/bin/eza";
-      wgu = "wg-quick up";
-      wgd = "wg-quick down";
       dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       lfd = "cd (lf -print-last-dir)";
       y = "yazi";
+    };
+    shellAbbrs = {
+      nse = "nix-search -d";
+      wgu = "wg-quick up";
+      wgd = "wg-quick down";
       nv = "nvim";
+      gs = "git status";
     };
     interactiveShellInit = ''
       set fish_greeting
