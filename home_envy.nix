@@ -24,6 +24,7 @@ in
     qimgv
     insync
     fuzzel
+    vscode
 
 
     # CMD UTILS
@@ -32,6 +33,7 @@ in
     # sage
     typst
     ansible
+    httpie
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
