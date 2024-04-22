@@ -39,6 +39,7 @@ in
     (python3.withPackages(ps: with ps; [ 
       numpy 
       matplotlib 
+      tabulate
       pandas
       scipy
       ipykernel
