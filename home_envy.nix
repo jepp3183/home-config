@@ -25,12 +25,11 @@ in
     insync
     fuzzel
     vscode
-
+    ark
 
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    # sage
     typst
     ansible
     httpie
