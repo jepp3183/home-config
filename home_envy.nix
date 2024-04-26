@@ -26,6 +26,7 @@ in
     fuzzel
     vscode
     ark
+    cura
 
     # CMD UTILS
     wl-clipboard

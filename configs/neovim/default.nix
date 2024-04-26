@@ -122,8 +122,8 @@ in
             },
             window = {
                 mappings = {
-                    ["l"] = "open",
-                    ["h"] = "close",
+                    ["l"] = "toggle_node",
+                    ["h"] = "close_node",
                 },
             }
         })

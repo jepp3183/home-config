@@ -17,13 +17,13 @@
               delete-prev-word = "Control+u";
           };
           colors = {
-            background =     "${base00}ff";
-            border =         "${base0D}ff";
-            text =     "${base05}ff";
-            selection-text = "${base0D}ff"; 
-            selection =       "${base03}ff";
-            match =         "${base09}ff";
-            selection-match =         "${base09}ff";
+            background =       "${base00}ff";
+            border =           "${base0D}ff";
+            text =             "${base05}ff";
+            selection-text =   "${base0D}ff"; 
+            selection =        "${base03}ff";
+            match =            "${base09}ff";
+            selection-match =  "${base09}ff";
           };
       };
     };
