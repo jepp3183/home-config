@@ -37,18 +37,8 @@ in
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
-      numpy 
-      matplotlib 
-      tabulate
-      pandas
-      scipy
-      ipykernel
-      jupyter
-      notebook
-      pycryptodome
-      scikit-learn
-      networkx
-      torchvision
+      numpy
+      matplotlib
     ]))
   ];
 
