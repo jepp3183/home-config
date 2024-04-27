@@ -4,13 +4,24 @@ let
     if [ -z "$1" ]
     then
       choice=$(ls ${../files/devshells} | ${pkgs.fzf}/bin/fzf)
+      if [ -z "$choice" ]
+      then
+        echo "No shell chosen"
+        exit 0
+      fi
     else
       choice=$1.nix
     fi
+    path=${../files/devshells}/$choice 
 
-    echo "CHOICE: $choice"
-    cp --no-clobber ${../files/devshells}/$choice ./flake.nix
-    chmod 644 flake.nix
+    if [ -f  $path ]
+    then
+      cp --no-clobber $path ./flake.nix
+      chmod 644 flake.nix
+    else
+      echo "No such devshell: $choice"
+      exit 1
+    fi
   '';
 in
 {
