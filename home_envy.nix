@@ -75,7 +75,7 @@ in
 
   colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./walls/dune.jpg;
+  #   path = ./files/dune.jpg;
   #   kind = "dark";
   # };
 

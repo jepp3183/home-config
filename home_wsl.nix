@@ -59,7 +59,7 @@ in
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./walls/lake.jpeg;
+  #   path = ./files/lake.jpeg;
   #   kind = "dark";
   # };
 
