@@ -1,5 +1,22 @@
 {pkgs, ...}:
+let
+  dev_shell = pkgs.writeShellScriptBin "devshell" ''
+    if [ -z "$1" ]
+    then
+      choice=$(ls ${../files/devshells} | ${pkgs.fzf}/bin/fzf)
+    else
+      choice=$1.nix
+    fi
+
+    echo "CHOICE: $choice"
+    cp --no-clobber ${../files/devshells}/$choice ./flake.nix
+    chmod 644 flake.nix
+  '';
+in
 {
+  home.packages = [
+    dev_shell
+  ];
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;

@@ -9,22 +9,17 @@
       (system:
         let pkgs = nixpkgs.legacyPackages.${system}; in
         {
+
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [ 
-              (python3.withPackages(ps: with ps; [
-                ipython
-                ipykernel
-                jupyter
-                notebook
-                tqdm
-              ]))
             ];
 
             shellHook = ''
               exec fish
-              echo "Python Development Shell"
+              echo "Development Shell"
             '';
           };
+
         }
       );
 }
