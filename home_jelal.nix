@@ -19,7 +19,6 @@
     inputs.nix-colors.homeManagerModules.default
     ./configs/common.nix
     ./configs/fish.nix
-    ./configs/lf.nix
     ./configs/yazi.nix
     ./configs/neovim
     ( 
