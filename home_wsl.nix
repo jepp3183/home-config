@@ -13,31 +13,11 @@ in
   home.packages = with pkgs; [
     # CMD UTILS
     wl-clipboard
-    fd
-    ripgrep
-    eza
-    bat
-    bat-extras.batman
-    btop
-    fzf
-    gdu
-    lazygit
-    libqalculate
-    nushell
-    rclone
     wireguard-tools
-    sage
-    rofi
-    atool
-    unzip
-    zip
-
-    gcc
-
     typst
-    typst-lsp
+    httpie
 
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
@@ -52,9 +32,15 @@ in
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/common.nix
     ./configs/fish.nix
     ./configs/lf.nix
     ./configs/neovim
+    ./configs/yazi.nix
+    (import ./configs/zellij.nix {
+      inherit pkgs config inputs;
+      configLines = "";
+     })
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;
