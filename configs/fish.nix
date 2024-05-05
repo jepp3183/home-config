@@ -1,5 +1,33 @@
 {pkgs, ...}:
+let
+  dev_shell = pkgs.writeShellScriptBin "devshell" ''
+    if [ -z "$1" ]
+    then
+      choice=$(ls ${../files/devshells} | ${pkgs.fzf}/bin/fzf)
+      if [ -z "$choice" ]
+      then
+        echo "No shell chosen"
+        exit 0
+      fi
+    else
+      choice=$1.nix
+    fi
+    path=${../files/devshells}/$choice 
+
+    if [ -f  $path ]
+    then
+      cp --no-clobber $path ./flake.nix
+      chmod 644 flake.nix
+    else
+      echo "No such devshell: $choice"
+      exit 1
+    fi
+  '';
+in
 {
+  home.packages = [
+    dev_shell
+  ];
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;

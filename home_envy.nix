@@ -25,29 +25,21 @@ in
     insync
     fuzzel
     vscode
-
+    ark
+    cura
 
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    # sage
     typst
     ansible
     httpie
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
-      numpy 
-      matplotlib 
-      pandas
-      scipy
-      ipykernel
-      jupyter
-      notebook
-      pycryptodome
-      scikit-learn
-      networkx
-      torchvision
+      numpy
+      matplotlib
+      ipython
     ]))
   ];
 
@@ -74,7 +66,7 @@ in
 
   colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./walls/dune.jpg;
+  #   path = ./files/dune.jpg;
   #   kind = "dark";
   # };
 

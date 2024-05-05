@@ -47,8 +47,6 @@ in
     cmp_luasnip
     cmp-buffer
     cmp-async-path
-    # mason-nvim
-    # mason-lspconfig-nvim
     null-ls-nvim
     dressing-nvim
     ansible-vim
@@ -63,6 +61,16 @@ in
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
     { plugin = toggleterm-nvim; config = toLua ''require('toggleterm').setup{} ''; }
+
+    { plugin = copilot-lua; config = toLua ''
+        require('copilot').setup({
+            suggestion = {
+                auto_trigger = true,
+            },
+            copilot_node_command = '${pkgs.nodejs}/bin/node',
+        })
+    '';
+    }
 
     {
       plugin = base16-nvim;
@@ -122,8 +130,8 @@ in
             },
             window = {
                 mappings = {
-                    ["l"] = "open",
-                    ["h"] = "close",
+                    ["l"] = "toggle_node",
+                    ["h"] = "close_node",
                 },
             }
         })

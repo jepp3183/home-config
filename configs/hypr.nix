@@ -38,7 +38,7 @@ let
     esac
   '';
 
-  wallpaper = "${../walls/dune.jpg}";
+  wallpaper = "${../files/dune.jpg}";
 in
 with config.colorScheme.palette; {
   home.file.".config/hypr/hyprland.conf" = {

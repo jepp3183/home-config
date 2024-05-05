@@ -1,7 +1,7 @@
 {inputs, config, pkgs, ...}:
-let
-  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
-in
+# let
+#   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
+# in
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -13,34 +13,18 @@ in
   home.packages = with pkgs; [
     # CMD UTILS
     wl-clipboard
-    fd
-    ripgrep
-    eza
-    bat
-    bat-extras.batman
-    btop
-    fzf
-    gdu
-    lazygit
-    libqalculate
-    atool
-    unzip
-    zip
-    jq
-    jid
-
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
   ];
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/common.nix
     ./configs/fish.nix
-    ./configs/lf.nix
+    ./configs/yazi.nix
     ./configs/neovim
     ( 
      import ./configs/zellij.nix
      {
-       inherit pkgs;
+       inherit pkgs config inputs;
        configLines = ''
        default_shell "/home/jelal/.nix-profile/bin/fish"
        '';
@@ -48,7 +32,11 @@ in
     )
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  programs.fish.shellAliases = {
+    jump = ''ssh ssejejal@jump01.curasaas.netic.dk'';
+  };
+
+  colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
 
   fonts.fontconfig.enable = true;
 
