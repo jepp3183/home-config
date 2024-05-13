@@ -66,6 +66,15 @@ in
         require('copilot').setup({
             suggestion = {
                 auto_trigger = true,
+                keymap = {
+                    accept = '<C-l>',
+                },
+            },
+            panel = {
+                auto_refresh = true,
+                layout = {
+                    position = 'right',
+                },
             },
             copilot_node_command = '${pkgs.nodejs}/bin/node',
         })
@@ -98,6 +107,14 @@ in
         require('lualine').setup {
             options = {
                 theme = 'base16',
+            },
+            sections = {
+                lualine_a = {'mode'},
+                lualine_b = {'branch', 'diff', 'diagnostics'},
+                lualine_c = {'filename'},
+                lualine_x = {'encoding', 'fileformat', 'filetype'},
+                lualine_y = {'progress'},
+                lualine_z = {'location'}
             },
             tabline = {
               lualine_a = {
