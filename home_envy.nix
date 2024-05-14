@@ -27,6 +27,7 @@ in
     vscode
     ark
     cura
+    parsec-bin
 
     # CMD UTILS
     wl-clipboard
