@@ -51,6 +51,8 @@ in
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       lfd = "cd (lf -print-last-dir)";
       y = "yazi";
+      ll = "eza -a --icons --git --long --group-directories-first";
+      lt = "eza --icons --git --long --tree --level=2 --group-directories-first";
     };
     shellAbbrs = {
       nse = "nix-search -d";
