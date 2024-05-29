@@ -51,6 +51,7 @@ in
     dressing-nvim
     ansible-vim
     typst-vim
+    diffview-nvim
 
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
