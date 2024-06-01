@@ -16,7 +16,7 @@ in
   home.homeDirectory = "/home/jeppe";
   home.packages = with pkgs; [
     # GUI Packages
-    firefox
+    brave
     spotify
     obsidian
     discord
