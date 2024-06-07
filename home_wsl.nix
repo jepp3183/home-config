@@ -16,6 +16,7 @@ in
     wireguard-tools
     typst
     httpie
+    ansible
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
 
