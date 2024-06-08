@@ -9,7 +9,7 @@ vim.keymap.set('', '<C-k>', '5k')
 vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('n', '<C-q>', ':bd<CR>')
+vim.keymap.set('n', '<C-q>', ':bp<bar>sp<bar>bn<bar>bd<CR>')
 vim.keymap.set('n', '<M-p>', ':Copilot panel<CR>')
 
 -- Move selection up/down in visual mode

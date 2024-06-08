@@ -49,9 +49,9 @@ in
       ls = "${pkgs.eza}/bin/eza";
       dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
-      lfd = "cd (lf -print-last-dir)";
       y = "yazi";
-      ll = "eza -a --icons --git --long --group-directories-first";
+      ll = "eza --icons --git --long --group-directories-first";
+      la = "eza -a --icons --git --long --group-directories-first";
       lt = "eza --icons --git --long --tree --level=2 --group-directories-first";
     };
     shellAbbrs = {

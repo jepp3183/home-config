@@ -52,7 +52,6 @@ in
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
-    ./configs/lf.nix
     ./configs/waybar.nix
     ./configs/fuzzel.nix
     ./configs/neovim
