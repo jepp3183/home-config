@@ -59,7 +59,7 @@ in
       gs = "git status";
       ll = "eza --icons --git --long --group-directories-first";
       la = "eza -a --icons --git --long --group-directories-first";
-      lt = "eza --icons --git --long --tree --group-directories-first --level=2 ";
+      lt = "eza --icons --git --long --tree --group-directories-first --level=2";
     };
     interactiveShellInit = ''
       set fish_greeting
