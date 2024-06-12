@@ -16,6 +16,7 @@ in
     wireguard-tools
     typst
     httpie
+    ansible
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
 
@@ -34,7 +35,6 @@ in
     inputs.nix-colors.homeManagerModules.default
     ./configs/common.nix
     ./configs/fish.nix
-    ./configs/lf.nix
     ./configs/neovim
     ./configs/yazi.nix
     (import ./configs/zellij.nix {

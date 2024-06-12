@@ -9,7 +9,7 @@ vim.keymap.set('', '<C-k>', '5k')
 vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('n', '<C-q>', ':bd<CR>')
+vim.keymap.set('n', '<C-q>', ':bp<bar>sp<bar>bn<bar>bd<CR>')
 vim.keymap.set('n', '<M-p>', ':Copilot panel<CR>')
 
 -- Move selection up/down in visual mode
@@ -27,6 +27,8 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>gdo", ":DiffviewOpen<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>gdc", ":DiffviewClose<CR>", {noremap = true, silent = true})
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
