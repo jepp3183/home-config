@@ -57,6 +57,7 @@ in
       wgd = "wg-quick down";
       nv = "nvim";
       gs = "git status";
+      l = "eza --icons --git --long --group-directories-first";
       ll = "eza --icons --git --long --group-directories-first";
       la = "eza -a --icons --git --long --group-directories-first";
       lt = "eza --icons --git --long --tree --group-directories-first --level=2";
