@@ -61,6 +61,7 @@ in
       ll = "eza --icons --git --long --group-directories-first";
       la = "eza -a --icons --git --long --group-directories-first";
       lt = "eza --icons --git --long --tree --group-directories-first --level=2";
+      ap = "ansible-playbook";
     };
     interactiveShellInit = ''
       set fish_greeting

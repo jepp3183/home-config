@@ -2,7 +2,7 @@
 let 
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
-    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel  --dmenu --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
+    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --no-fuzzy --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
     type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
