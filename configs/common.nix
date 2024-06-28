@@ -19,6 +19,7 @@
     jq
     jid
     nix-search-cli
+    httpie
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
   ];

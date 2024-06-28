@@ -34,7 +34,6 @@ in
     wireguard-tools
     typst
     ansible
-    httpie
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
