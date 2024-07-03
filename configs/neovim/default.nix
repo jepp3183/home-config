@@ -81,7 +81,6 @@ in
           },
         })
     ''; }
-    { plugin = todo-comments-nvim; config = toLua ''require("todo-comments").setup()''; }
     { plugin = toggleterm-nvim; config = toLua ''
        require('toggleterm').setup{
         open_mapping = [[<c-t>]],
