@@ -27,6 +27,6 @@ vim.o.timeoutlen = 300
 vim.g.typst_pdf_viewer = "zathura"
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = 'typst',
+    pattern ={"typst", "markdown"},
     command = "setlocal wrap linebreak | nnoremap j gj| nnoremap k gk",
 })
