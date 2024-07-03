@@ -39,6 +39,7 @@ in
     nvim-web-devicons
     vim-signature
     plenary-nvim
+    nui-nvim
     telescope-fzf-native-nvim 
     nvim-lspconfig
     cmp-nvim-lsp
@@ -47,12 +48,10 @@ in
     cmp_luasnip
     cmp-buffer
     cmp-async-path
-    null-ls-nvim
     dressing-nvim
     ansible-vim
     typst-vim
     diffview-nvim
-    todo-comments-nvim
     nvim-notify
 
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
@@ -82,6 +81,7 @@ in
           },
         })
     ''; }
+    { plugin = todo-comments-nvim; config = toLua ''require("todo-comments").setup()''; }
     { plugin = toggleterm-nvim; config = toLua ''
        require('toggleterm').setup{
         open_mapping = [[<c-t>]],

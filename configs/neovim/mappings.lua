@@ -2,15 +2,20 @@ vim.g.mapleader = ' '
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
--- vim.keymap.set('n', '<Leader>e', ':Neotree source=last focus<CR>')
-vim.keymap.set('n', '<C-b>', ':Neotree source=last position=current toggle<CR>')
+vim.keymap.set('n', '<C-b>', function()
+  require('neo-tree.command').execute({
+    action = 'focus',
+    source = 'last',
+    position = 'current',
+  })
+end)
 vim.keymap.set('', '<C-j>', '5j')
 vim.keymap.set('', '<C-k>', '5k')
 vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
-vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('n', '<C-q>', ':bp<bar>sp<bar>bn<bar>bd<CR>')
-vim.keymap.set('n', '<M-p>', ':Copilot panel<CR>')
+vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
+vim.keymap.set('n', '<C-q>', '<cmd>bp<bar>sp<bar>bn<bar>bd<CR>')
+vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
 
 -- Move selection up/down in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -45,8 +50,8 @@ vim.keymap.set('n', '<Leader>fd', '<cmd>Telescope diagnostics<cr>')
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, {desc="Set diagnostic loclist"})
+vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float, {desc="Open diagnostic float"})
 
 -- LSP Shit
 local lsp_lines = false
@@ -68,17 +73,21 @@ vim.keymap.set('n', '<Leader>lm', '<cmd>Mason<cr>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, opts)
-    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>ll', _lsp_lines_toggle, opts)
+
+    local function mkopts(desc)
+      return { buffer = ev.buf, desc=desc }
+    end
+
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, mkopts("Go to declaration"))
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, mkopts("Go to definition"))
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, mkopts("Hover info"))
+    vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, mkopts("Rename in buffer"))
+    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, mkopts("Signature help"))
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, mkopts("Code action"))
+    vim.keymap.set('n', '<leader>ll', _lsp_lines_toggle, mkopts("Toggle lsp_lines"))
     vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
-    end, opts)
+    end, mkopts("Format buffer"))
   end,
 })
 
