@@ -26,12 +26,18 @@ vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Git
-vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>Neogit<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>Neogit pull<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gp", "<cmd>Neogit push<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gl", "<cmd>Neogit pull<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gp", "<cmd>Neogit push<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_branches<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", {noremap = true, silent = true})
+
+vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>hb", function() require('gitsigns').blame_line({full = true}) end)
+vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true})
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
