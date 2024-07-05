@@ -35,7 +35,6 @@ in
     vim-surround
     vim-repeat
     vim-unimpaired
-    vim-fugitive
     nvim-web-devicons
     vim-signature
     plenary-nvim
@@ -62,6 +61,7 @@ in
     { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
     { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
+    { plugin = neogit; config = toLua ''require("neogit").setup()''; }
     { plugin = noice-nvim; config = toLua ''
         require("noice").setup({
           lsp = {
