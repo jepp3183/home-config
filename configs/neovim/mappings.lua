@@ -19,8 +19,8 @@ vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
 vim.keymap.set('n', '<C-q>', '<cmd>bd<cr>')
 
 -- Move selection up/down in visual mode
-vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv<CR>")
-vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv<CR>")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
@@ -90,10 +90,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- copilot
--- vim.keymap.set('i', '<C-L>', 'copilot#Accept("<CR>")', {expr=true, silent=true, replace_keycodes=false})
--- vim.g.copilot_no_tab_map = true
-
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
 vim.keymap.set('n', 'ds', '<Plug>Dsurround')
@@ -106,4 +102,3 @@ vim.keymap.set('n', 'ySs', '<Plug>YSsurround')
 vim.keymap.set('n', 'ySS', '<Plug>YSsurround')
 vim.keymap.set('x', 'gs', '<Plug>VSurround')
 vim.keymap.set('x', 'gS', '<Plug>VgSurround')
-
