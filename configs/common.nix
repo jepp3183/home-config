@@ -17,7 +17,6 @@
     unzip
     zip
     jq
-    jid
     nix-search-cli
     httpie
 
