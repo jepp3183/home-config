@@ -57,10 +57,31 @@ in
     { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
-    { plugin = nvim-autopairs; config = toLua ''require("nvim-autopairs").setup()''; }
-    { plugin = comment-nvim; config = toLua ''require("Comment").setup()''; }
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
+
+    { plugin = mini-nvim; config = toLua ''
+      require("mini.bufremove").setup()
+      require("mini.comment").setup()
+      require("mini.pairs").setup()
+      require("mini.move").setup()
+      require("mini.splitjoin").setup()
+      require("mini.starter").setup({
+        evaluate_single = true
+      })
+
+      require("mini.sessions").setup({
+        autoread = true,
+      })
+
+      require("mini.indentscope").setup({
+        draw = {
+          delay = 0,
+          animation = require("mini.indentscope").gen_animation.none(),
+        }
+      })
+    ''; }
+
     { plugin = toggleterm-nvim; config = toLua ''
        require('toggleterm').setup{
         open_mapping = [[<c-t>]],

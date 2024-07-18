@@ -16,10 +16,18 @@ vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
 vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
+vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
--- Move selection up/down in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Sessions
+local function write_session()
+  local session = vim.fn.input("Session name: ")
+  if session == "" then
+    session = nil
+  end
+  MiniSessions.write(session)
+end
+vim.keymap.set('n', '<Leader>sw', write_session, {desc="Write session"})
+vim.keymap.set('n', '<Leader>sl', MiniSessions.select, {desc="Load session"})
 
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
