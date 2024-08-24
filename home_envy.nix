@@ -28,6 +28,7 @@ in
     ark
     cura
     parsec-bin
+    zed-editor
 
     # CMD UTILS
     wl-clipboard
