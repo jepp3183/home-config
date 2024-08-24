@@ -10,7 +10,7 @@ in
     ruff
     lua-language-server
     nil
-    typst-lsp
+    # typst-lsp broken...
     ansible-language-server
     ansible-lint
     yaml-language-server

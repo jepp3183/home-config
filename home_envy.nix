@@ -26,7 +26,7 @@ in
     fuzzel
     vscode
     ark
-    cura
+    # cura broken
     parsec-bin
     zed-editor
 
