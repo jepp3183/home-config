@@ -56,7 +56,7 @@ in
                 "10" = "10";
             };
             format = "{icon}";
-            persistent_workspaces = {
+            persistent-workspaces = {
               "*" = 5;
             };
         };

@@ -38,7 +38,7 @@ let
     esac
   '';
 
-  wallpaper = "${../files/dune.jpg}";
+  wallpaper = "${../../files/dune.jpg}";
 in
 with config.colorScheme.palette; {
   home.file.".config/hypr/hyprland.conf" = {
@@ -86,12 +86,6 @@ with config.colorScheme.palette; {
         animation=workspaces, 1, 6, default
         enabled=true
       }
-
-      master {
-        new_is_master=false
-        no_gaps_when_only=1
-        orientation=left
-      }
       gestures {
         workspace_swipe=true
       }
@@ -112,6 +106,8 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:qalc silent] wezterm -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
       windowrule=opacity 0.90,(wezterm)
+      env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+      env = HYPRCURSOR_SIZE,28
 
       # ===========================================
       # BINDS

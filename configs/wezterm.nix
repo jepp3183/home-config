@@ -32,6 +32,8 @@ in
             font_size = 13.0,
             enable_tab_bar = false,
             window_close_confirmation = 'NeverPrompt',
+            front_end = "WebGpu",
+            enable_wayland = false,
 
             keys = {
                 {

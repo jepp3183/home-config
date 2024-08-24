@@ -47,7 +47,7 @@ in
     inputs.nix-colors.homeManagerModules.default
     ./configs/common.nix
     ./configs/git.nix
-    ./configs/hypr.nix
+    ./configs/hypr/hypr.nix
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
