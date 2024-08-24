@@ -14,7 +14,6 @@ in
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    typst
     ansible
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })

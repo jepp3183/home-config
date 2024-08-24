@@ -33,7 +33,6 @@ in
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    typst
     ansible
 
     # PYTHON
