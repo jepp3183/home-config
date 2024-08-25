@@ -81,7 +81,6 @@ local _lsp_lines_toggle = function()
     })
   end
 end
-vim.keymap.set('n', '<Leader>lm', '<cmd>Mason<cr>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)

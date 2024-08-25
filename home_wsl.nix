@@ -17,16 +17,6 @@ in
     ansible
 
     (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
-
-    # PYTHON
-    (python3.withPackages(ps: with ps; [ 
-      numpy 
-      matplotlib 
-      pandas
-      scipy
-      jupyter
-      notebook
-    ]))
   ];
 
   imports = [
