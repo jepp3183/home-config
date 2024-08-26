@@ -54,11 +54,19 @@ in
 
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
-    { plugin = better-escape-nvim; config = toLua ''require("better_escape").setup()''; }
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
+    { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
+
+    { plugin = better-escape-nvim; config = toLua ''
+        require("better_escape").setup {
+            timeout = vim.o.timeoutlen,
+            default_mappings = true,
+            mappings = { t = { j = { k = false, j = false, }}}
+        }
+    ''; }
 
     { plugin = mini-nvim; config = toLua ''
       require("mini.bufremove").setup()
