@@ -138,7 +138,7 @@ in
 
     style = with config.colorScheme.palette; ''
       @define-color bg ${hexToRGBA 0.0 base00};
-      @define-color module-bg ${hexToRGBA 0.8 base0D};
+      @define-color module-bg ${hexToRGBA 1 base0D};
       @define-color text-color #${base01};
       @define-color hover-color #${base05};
 
@@ -161,7 +161,7 @@ in
      .modules-right > *, .modules-center > *, #custom-media  {
         color: @text-color;
         background-color: @module-bg;
-        border-radius: 15px;
+        border-radius: 12px;
      }
 
      .modules-right, .modules-left, .modules-center  {
