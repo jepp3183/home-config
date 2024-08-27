@@ -63,7 +63,8 @@ in
      })
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
+  # https://tinted-theming.github.io/base16-gallery/
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
   #   path = ./files/dune.jpg;
   #   kind = "dark";

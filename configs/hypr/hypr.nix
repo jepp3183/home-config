@@ -38,14 +38,25 @@ let
     esac
   '';
 
-  wallpaper = "${../../files/dune.jpg}";
+  wallpaper = "${../../files/mountain.jpg}";
 in
 with config.colorScheme.palette; {
+
+  services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          wallpaper
+        ];
+        wallpaper = ", ${wallpaper}";
+      };
+  };
+
   home.file.".config/hypr/hyprland.conf" = {
     executable = false;
     text = ''
       general {
-          gaps_in=3
+          gaps_in=5
           gaps_out=3
           border_size=2
           col.active_border=rgba(${base09}99) rgba(${base08}99) 45deg
@@ -108,16 +119,16 @@ with config.colorScheme.palette; {
         smart_split=false
         special_scale_factor=0.950000
       }
-      exec=${pkgs.swaybg}/bin/swaybg -i "${wallpaper}"
       exec=blueman-applet
       exec-once=waybar
+      exec-once=${pkgs.hyprpaper}/bin/hyprpaper
       exec-once=nm-applet --indicator
       exec-once=dunst
       exec-once=insync start --qt-qpa-platform=xcb
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
-      windowrule=opacity 0.90,(wezterm|kitty)
+      windowrule=opacity 0.85,(wezterm|kitty)
       env = HYPRCURSOR_THEME,rose-pine-hyprcursor
       env = HYPRCURSOR_SIZE,28
 

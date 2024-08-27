@@ -17,6 +17,7 @@ in
     docker-compose-language-service
     dockerfile-language-server-nodejs
     ccls
+    rust-analyzer
   ];
 
   programs.neovim = {
