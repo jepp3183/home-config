@@ -55,7 +55,7 @@ in
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
-    ./configs/wezterm.nix
+    # ./configs/wezterm.nix
     ./configs/yazi.nix
     (import ./configs/zellij.nix {
       inherit pkgs config inputs;
