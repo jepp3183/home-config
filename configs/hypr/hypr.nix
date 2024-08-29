@@ -128,6 +128,7 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
+      monitor=, highrr, auto, 1
       windowrule=opacity 0.85,(wezterm|kitty)
       env = HYPRCURSOR_THEME,rose-pine-hyprcursor
       env = HYPRCURSOR_SIZE,28
