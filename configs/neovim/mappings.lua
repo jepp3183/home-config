@@ -22,7 +22,7 @@ vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 local function write_session()
   local session = vim.fn.input("Session name: ")
   if session == "" then
-    session = nil
+    return
   end
   MiniSessions.write(session)
 end
