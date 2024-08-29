@@ -4,7 +4,7 @@ with config.colorScheme.palette; {
     executable = false;
     text = ''
     font_family CaskaydiaCove Nerd Font Mono
-    font_size 12
+    font_size 13
 
     shell_integration no-rc
 

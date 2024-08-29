@@ -1,7 +1,5 @@
 vim.g.mapleader = ' '
 vim.keymap.set('n', 'q:', '<Nop>')
-vim.keymap.set('i', 'jj', '<Esc>')
-vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
 vim.keymap.set('n', '<C-b>', function()
   require('neo-tree.command').execute({
@@ -10,6 +8,10 @@ vim.keymap.set('n', '<C-b>', function()
     position = 'current',
   })
 end)
+
+local yazi = require('yazi')
+vim.keymap.set('n', '<C-y>', yazi.yazi, {desc = "Open yazi"})
+
 vim.keymap.set('', '<C-j>', '5j')
 vim.keymap.set('', '<C-k>', '5k')
 vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
@@ -42,10 +44,11 @@ vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", {noremap = true, si
 vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_branches<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", {noremap = true, silent = true})
-
 vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>hb", function() require('gitsigns').blame_line({full = true}) end)
+vim.keymap.set("n", "<leader>hb", function() require('gitsigns').blame_line({full = true}) end, {desc = "blame line"})
 vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true})
+vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true})
+vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true})
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
@@ -81,7 +84,6 @@ local _lsp_lines_toggle = function()
     })
   end
 end
-vim.keymap.set('n', '<Leader>lm', '<cmd>Mason<cr>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)

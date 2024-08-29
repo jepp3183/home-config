@@ -6,7 +6,7 @@ let
     type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
-        nohup wezterm -e nvim "$file" >/dev/null 2>&1  &
+        nohup kitty -e nvim "$file" >/dev/null 2>&1  &
     else
         nohup xdg-open "$file" >/dev/null 2>&1 &
     fi
@@ -38,19 +38,32 @@ let
     esac
   '';
 
-  wallpaper = "${../files/dune.jpg}";
+  wallpaper = "${../../files/mountain.jpg}";
 in
 with config.colorScheme.palette; {
+
+  services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          wallpaper
+        ];
+        wallpaper = ", ${wallpaper}";
+      };
+  };
+
   home.file.".config/hypr/hyprland.conf" = {
     executable = false;
     text = ''
       general {
-          gaps_in=3
+          gaps_in=5
           gaps_out=3
           border_size=2
           col.active_border=rgba(${base09}99) rgba(${base08}99) 45deg
           col.inactive_border=rgba(${base01}99)
           layout=dwindle
+          resize_on_border=true
+          gaps_workspaces=10
       }
       decoration {
         blur {
@@ -74,24 +87,28 @@ with config.colorScheme.palette; {
         kb_options=ctrl:nocaps,grp:alt_shift_toggle
         repeat_delay=500
         repeat_rate=30
-        sensitivity=0
+        sensitivity=0.2
       }
+      # animations {
+      #   bezier=myBezier, 0.05, 0.9, 0.1, 1.05
+      #   animation=windows, 1, 7, myBezier
+      #   animation=windowsOut, 1, 7, default, popin 80%
+      #   animation=border, 1, 10, default
+      #   animation=borderangle, 1, 8, default
+      #   animation=fade, 1, 7, default
+      #   animation=workspaces, 1, 6, default
+      #   enabled=true
+      # }
       animations {
-        bezier=myBezier, 0.05, 0.9, 0.1, 1.05
-        animation=windows, 1, 7, myBezier
-        animation=windowsOut, 1, 7, default, popin 80%
-        animation=border, 1, 10, default
-        animation=borderangle, 1, 8, default
-        animation=fade, 1, 7, default
-        animation=workspaces, 1, 6, default
-        enabled=true
+        enabled=1
+        # bezier=overshot,0.05,0.9,0.1,1.1
+        bezier=overshot,0.13,0.99,0.29,1.1
+        animation=windows,1,4,overshot,slide
+        animation=border,1,10,default
+        animation=fade,1,10,default
+        animation=workspaces,1,6,overshot,slidefade 20%
       }
 
-      master {
-        new_is_master=false
-        no_gaps_when_only=1
-        orientation=left
-      }
       gestures {
         workspace_swipe=true
       }
@@ -102,16 +119,18 @@ with config.colorScheme.palette; {
         smart_split=false
         special_scale_factor=0.950000
       }
-      exec=${pkgs.swaybg}/bin/swaybg -i "${wallpaper}"
       exec=blueman-applet
       exec-once=waybar
+      exec-once=${pkgs.hyprpaper}/bin/hyprpaper
       exec-once=nm-applet --indicator
       exec-once=dunst
       exec-once=insync start --qt-qpa-platform=xcb
-      exec-once=[workspace special:terminal silent] wezterm
-      exec-once=[workspace special:qalc silent] wezterm -e qalc
+      exec-once=[workspace special:terminal silent] kitty
+      exec-once=[workspace special:qalc silent] kitty -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
-      windowrule=opacity 0.90,(wezterm)
+      windowrule=opacity 0.85,(wezterm|kitty)
+      env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+      env = HYPRCURSOR_SIZE,28
 
       # ===========================================
       # BINDS
@@ -129,7 +148,7 @@ with config.colorScheme.palette; {
       bind = $mainMod, Y, togglespecialworkspace, qalc
 
       # RUN
-      bind = $mainMod, Return, exec, wezterm
+      bind = $mainMod, Return, exec, kitty
       bind = $mainMod, B, exec, brave
       bind = $mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh
       bind = $mainMod, SPACE, exec, ${launcher}/bin/launcher.sh

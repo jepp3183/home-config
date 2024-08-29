@@ -26,13 +26,13 @@ in
     fuzzel
     vscode
     ark
-    cura
+    # cura broken
     parsec-bin
+    zed-editor
 
     # CMD UTILS
     wl-clipboard
     wireguard-tools
-    typst
     ansible
 
     # PYTHON
@@ -47,7 +47,7 @@ in
     inputs.nix-colors.homeManagerModules.default
     ./configs/common.nix
     ./configs/git.nix
-    ./configs/hypr.nix
+    ./configs/hypr/hypr.nix
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
@@ -55,7 +55,7 @@ in
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
-    ./configs/wezterm.nix
+    # ./configs/wezterm.nix
     ./configs/yazi.nix
     (import ./configs/zellij.nix {
       inherit pkgs config inputs;
@@ -63,7 +63,8 @@ in
      })
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
+  # https://tinted-theming.github.io/base16-gallery/
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
   #   path = ./files/dune.jpg;
   #   kind = "dark";

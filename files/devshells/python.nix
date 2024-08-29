@@ -7,22 +7,24 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem
       (system:
-        let pkgs = nixpkgs.legacyPackages.${system}; in
+        let pkgs = import nixpkgs {
+          system = system;
+          config = { allowUnfree = true; };
+        }; in
         {
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [ 
               (python3.withPackages(ps: with ps; [
-                ipython
-                ipykernel
-                jupyter
-                notebook
-                tqdm
+                # ipython
+                # ipykernel
+                # jupyter
+                # notebook
+                # tqdm
               ]))
             ];
 
             shellHook = ''
               exec fish
-              echo "Python Development Shell"
             '';
           };
         }
