@@ -18,6 +18,8 @@
               cargo
               rustc
               bacon
+              clippy
+              rustfmt
             ];
 
             shellHook = ''
