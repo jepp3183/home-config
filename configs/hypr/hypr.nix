@@ -65,6 +65,10 @@ with config.colorScheme.palette; {
           resize_on_border=true
           gaps_workspaces=10
       }
+      misc {
+          disable_hyprland_logo=true
+          force_default_wallpaper=0
+      }
       decoration {
         blur {
           enabled=true
@@ -114,9 +118,10 @@ with config.colorScheme.palette; {
       }
       dwindle {
         no_gaps_when_only=1
-        preserve_split=true
         pseudotile=true
+        preserve_split=true
         smart_split=false
+        force_split=2
         special_scale_factor=0.950000
       }
       exec=blueman-applet
@@ -128,6 +133,7 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
       monitor=eDP-1,1920x1080@60.033001,auto,1
+      monitor=desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1
       monitor=, highrr, auto, 1
       windowrule=opacity 0.85,(wezterm|kitty)
       env = HYPRCURSOR_THEME,rose-pine-hyprcursor
