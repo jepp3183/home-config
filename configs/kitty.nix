@@ -8,8 +8,21 @@ with config.colorScheme.palette; {
 
     shell_integration no-rc
 
-    # background_opacity = "0.7"
     confirm_os_window_close 0
+
+    touch_scroll_multiplier 2.0
+    scrollback_lines 10000
+    scrollback_pager_history_size 10
+    enable_audio_bell no
+
+
+    # NOTE: edit command with alt+e! this is a fish function
+    map ctrl+c copy_or_interrupt
+    map ctrl+shift+h show_scrollback
+
+
+
+
 
     background #${base00}
     foreground #${base05}
