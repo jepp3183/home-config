@@ -1,5 +1,18 @@
 {inputs, config, pkgs, ...}:
 {
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
+  };
+
+  programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+  };
+
   home.packages = with pkgs; [
     # CMD UTILS
     fd

@@ -24,7 +24,6 @@
             ];
 
             shellHook = ''
-              exec fish
             '';
           };
         }
