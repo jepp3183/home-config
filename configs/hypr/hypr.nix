@@ -124,6 +124,12 @@ with config.colorScheme.palette; {
         force_split=2
         special_scale_factor=0.950000
       }
+
+
+      # ===========================================
+      # EXECS
+      # ===========================================
+
       exec=blueman-applet
       exec-once=waybar
       exec-once=${pkgs.hyprpaper}/bin/hyprpaper
@@ -132,12 +138,23 @@ with config.colorScheme.palette; {
       exec-once=insync start --qt-qpa-platform=xcb
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
+      exec-once=discord
+
+      # ===========================================
+      # RULES + ENV
+      # ===========================================
+      windowrule=opacity 0.85,(wezterm|kitty)
+      windowrulev2=workspace special:discord silent, class:^(discord)$
+      windowrulev2=float, class:^(xdg-desktop-portal-gtk)$
+      env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+      env = HYPRCURSOR_SIZE,28
+
+      # ===========================================
+      # MONITORS
+      # ===========================================
       monitor=eDP-1,1920x1080@60.033001,auto,1
       monitor=desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1
       monitor=, highrr, auto, 1
-      windowrule=opacity 0.85,(wezterm|kitty)
-      env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-      env = HYPRCURSOR_SIZE,28
 
       # ===========================================
       # BINDS
@@ -148,11 +165,12 @@ with config.colorScheme.palette; {
       bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- < (${pkgs.sway-contrib.grimshot}/bin/grimshot save area) | ${pkgs.wl-clipboard}/bin/wl-copy"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
 
-      # Testing...
+      # Workspaces
       bind = $mainMod, O, movetoworkspace, special
       bind = $mainMod, P, togglespecialworkspace, 
       bind = $mainMod, U, togglespecialworkspace, terminal
       bind = $mainMod, Y, togglespecialworkspace, qalc
+      bind = $mainMod, F12, togglespecialworkspace, discord
 
       # RUN
       bind = $mainMod, Return, exec, kitty
