@@ -139,6 +139,7 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
       exec-once=discord
+      exec-once=1password --silent
 
       # ===========================================
       # RULES + ENV
@@ -146,6 +147,11 @@ with config.colorScheme.palette; {
       windowrule=opacity 0.85,(wezterm|kitty)
       windowrulev2=workspace special:discord silent, class:^(discord)$
       windowrulev2=float, class:^(xdg-desktop-portal-gtk)$
+
+      windowrulev2 = float, title:(1Password)
+      windowrulev2 = size 60% 60%, title:^(1Password)$
+      windowrulev2 = center, title:(1Password)
+
       env = HYPRCURSOR_THEME,rose-pine-hyprcursor
       env = HYPRCURSOR_SIZE,28
 
@@ -164,6 +170,7 @@ with config.colorScheme.palette; {
       bind = $mainMod, M, exit, 
       bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- < (${pkgs.sway-contrib.grimshot}/bin/grimshot save area) | ${pkgs.wl-clipboard}/bin/wl-copy"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
+      bind = $mainMod, code:61, exec, 1password
 
       # Workspaces
       bind = $mainMod, O, movetoworkspace, special
