@@ -61,6 +61,21 @@ in
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
 
+    { plugin = markview-nvim; config = toLua ''
+        require("markview").setup({
+            modes = { "n", "i", "no", "c" },
+            hybrid_modes = { "i" },
+
+            -- This is nice to have
+            callbacks = {
+                on_enable = function (_, win)
+                    vim.wo[win].conceallevel = 2;
+                    vim.wo[win].concealcursor = "nc";
+                end
+            }
+        })
+    '';}
+
     { plugin = better-escape-nvim; config = toLua ''
         require("better_escape").setup {
             timeout = vim.o.timeoutlen,
