@@ -67,6 +67,7 @@ in
       set fish_greeting
 
       set -x ANSIBLE_STDOUT_CALLBACK yaml
+      set -x NIXPKGS_ALLOW_UNFREE 1
 
       bind \ck up-or-search
 
