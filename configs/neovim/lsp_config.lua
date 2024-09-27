@@ -16,7 +16,8 @@ local standard_servers = {
   "yamlls",
   "docker_compose_language_service",
   "dockerls",
-  "rust_analyzer"
+  "rust_analyzer",
+  "elixirls"
 }
 for i=1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({

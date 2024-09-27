@@ -17,6 +17,8 @@ let
     if [ -f  $path ]
     then
       cp --no-clobber $path ./flake.nix
+      echo "use flake" >> .envrc
+      direnv allow
       chmod 644 flake.nix
     else
       echo "No such devshell: $choice"

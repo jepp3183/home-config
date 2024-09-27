@@ -18,6 +18,7 @@ in
     dockerfile-language-server-nodejs
     ccls
     rust-analyzer
+    elixir-ls
   ];
 
   programs.neovim = {
