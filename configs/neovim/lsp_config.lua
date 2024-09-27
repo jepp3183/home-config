@@ -17,13 +17,18 @@ local standard_servers = {
   "docker_compose_language_service",
   "dockerls",
   "rust_analyzer",
-  "elixirls"
 }
+
 for i=1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({
     capabilities = lsp_capabilities,
   })
 end
+
+require 'lspconfig'.elixirls.setup {
+  capabilities = lsp_capabilities,
+  cmd = { "elixir-ls" },
+}
 
 require 'lspconfig'.typst_lsp.setup {
   capabilities = lsp_capabilities,
