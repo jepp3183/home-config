@@ -65,7 +65,7 @@ vim.keymap.set('n', '<Leader>fd', '<cmd>Telescope diagnostics<cr>')
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, {desc="Set diagnostic loclist"})
+vim.keymap.set('n', '<space>q', '<cmd>Trouble diagnostics toggle<cr>', {desc="Set diagnostic loclist"})
 vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float, {desc="Open diagnostic float"})
 
 -- LSP Shit

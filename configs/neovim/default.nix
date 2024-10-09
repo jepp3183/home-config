@@ -62,6 +62,20 @@ in
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
 
+    { plugin = trouble-nvim; config = toLua ''
+        require("trouble").setup {
+                modes = {
+                    diagnostics = { -- Configure symbols mode
+                        win = {
+                            type = "split",     -- split window
+                            relative = "win",   -- relative to current window
+                            size = 0.4,         -- 30% of the window
+                        },
+                    },
+                },
+            }
+    '';}
+
     { plugin = nvim-treesitter-textobjects; config = toLua ''
         require'nvim-treesitter.configs'.setup {
             textobjects = {
@@ -71,6 +85,8 @@ in
                         keymaps = {
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
+                            ["aa"] = "@parameter.outer",
+                            ["ia"] = "@parameter.inner",
                         },
                         selection_modes = {
                             ['@parameter.outer'] = 'v', -- charwise
