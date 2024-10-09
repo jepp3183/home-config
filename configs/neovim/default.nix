@@ -62,6 +62,43 @@ in
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
 
+    { plugin = nvim-treesitter-textobjects; config = toLua ''
+        require'nvim-treesitter.configs'.setup {
+            textobjects = {
+                select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                        },
+                        selection_modes = {
+                            ['@parameter.outer'] = 'v', -- charwise
+                            ['@function.outer'] = 'V', -- linewise
+                        },
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                    },
+                },
+                lsp_interop = {
+                  enable = true,
+                  border = 'none',
+                  floating_preview_opts = {},
+                  peek_definition_code = {
+                    ["<leader>df"] = "@function.outer",
+                  },
+                },
+            }
+        } 
+    '';}
+
     { plugin = markview-nvim; config = toLua ''
         require("markview").setup({
             modes = { "n", "i", "no", "c" },

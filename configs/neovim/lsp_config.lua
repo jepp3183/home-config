@@ -80,7 +80,7 @@ cmp.setup({
   mapping = {
     -- ['<C-y>'] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_jumpable() then
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.confirm({select = false})
