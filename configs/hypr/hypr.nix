@@ -139,13 +139,14 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:terminal silent] kitty
       exec-once=[workspace special:qalc silent] kitty -e qalc
       exec-once=discord
-      exec-once=1password --silent
+      exec-once=1password
 
       # ===========================================
       # RULES + ENV
       # ===========================================
       windowrule=opacity 0.85,(wezterm|kitty)
       windowrulev2=workspace special:discord silent, class:^(discord)$
+      windowrulev2=workspace special:1password silent, class:^(1Password)$
       windowrulev2=float, class:^(xdg-desktop-portal-gtk)$
 
       windowrulev2 = float, title:(1Password)
@@ -171,7 +172,6 @@ with config.colorScheme.palette; {
       bind = $mainMod, M, exit, 
       bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.imagemagick}/bin/convert - -shave 1x1 PNG:- < (${pkgs.sway-contrib.grimshot}/bin/grimshot save area) | ${pkgs.wl-clipboard}/bin/wl-copy"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
-      bind = $mainMod, code:61, exec, 1password
 
       # Workspaces
       bind = $mainMod, O, movetoworkspace, special
@@ -179,6 +179,7 @@ with config.colorScheme.palette; {
       bind = $mainMod, U, togglespecialworkspace, terminal
       bind = $mainMod, Y, togglespecialworkspace, qalc
       bind = $mainMod, F12, togglespecialworkspace, discord
+      bind = $mainMod, code:61, togglespecialworkspace, 1password
 
       # RUN
       bind = $mainMod, Return, exec, kitty
