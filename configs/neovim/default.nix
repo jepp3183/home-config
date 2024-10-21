@@ -17,7 +17,6 @@ in
     docker-compose-language-service
     dockerfile-language-server-nodejs
     ccls
-    # rust-analyzer
     elixir-ls
   ];
 
@@ -54,6 +53,7 @@ in
     typst-vim
     diffview-nvim
 
+
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
@@ -61,6 +61,16 @@ in
     { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
+
+    { plugin = rustaceanvim; config = toLua ''
+        vim.g.rustaceanvim = {
+          tools = {
+            float_win_config = {
+              border = 'rounded',
+            }
+          }
+        }
+    ''; }
 
     { plugin = trouble-nvim; config = toLua ''
         require("trouble").setup {
@@ -105,7 +115,7 @@ in
                 },
                 lsp_interop = {
                   enable = true,
-                  border = 'none',
+                  border = 'rounded',
                   floating_preview_opts = {},
                   peek_definition_code = {
                     ["<leader>df"] = "@function.outer",
