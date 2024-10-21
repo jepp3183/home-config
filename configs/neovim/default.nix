@@ -17,7 +17,7 @@ in
     docker-compose-language-service
     dockerfile-language-server-nodejs
     ccls
-    rust-analyzer
+    # rust-analyzer
     elixir-ls
   ];
 
