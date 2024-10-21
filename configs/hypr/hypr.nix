@@ -161,8 +161,7 @@ with config.colorScheme.palette; {
       # ===========================================
       monitor=eDP-1,1920x1080@60.033001,auto,1
       monitor=desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1
-      monitor=desc:Samsung Electric Company LF24T35 HK2R500619, highrr, auto-up, 1
-      monitor=, highrr, auto, 1
+      monitor=, highrr, auto-up, 1
 
       # ===========================================
       # BINDS
