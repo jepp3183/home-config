@@ -20,6 +20,21 @@ vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
 vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
+-- Folding
+local function cond_fold()
+  if not vim.opt.foldenable then
+    vim.api.nvim_set_option_value('foldenable', true, {scope='local'})
+  end
+
+  vim.api.nvim_feedkeys('za', 'n', false)
+end
+vim.opt.foldenable = false
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.keymap.set('n', '<tab>',cond_fold)
+
 -- Sessions
 local function write_session()
   local session = vim.fn.input("Session name: ")

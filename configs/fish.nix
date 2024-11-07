@@ -64,6 +64,7 @@ in
       la = "eza -a --icons --git --long --group-directories-first";
       lt = "eza --icons --git --long --tree --group-directories-first --level=2";
       ap = "ansible-playbook";
+      k = "kubectl";
     };
     interactiveShellInit = ''
       set fish_greeting
