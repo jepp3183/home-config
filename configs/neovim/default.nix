@@ -332,7 +332,7 @@ in
           pickers = {
             find_files = {
                 hidden = true,
-                file_ignore_patterns = { "node_modules", ".git/" }
+                file_ignore_patterns = { "node_modules", ".git/", ".elixir_ls" }
             }
           },
           extensions = {
