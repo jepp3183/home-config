@@ -18,6 +18,7 @@ in
     dockerfile-language-server-nodejs
     ccls
     elixir-ls
+    lldb
   ];
 
   programs.neovim = {
@@ -29,6 +30,7 @@ in
    extraLuaConfig = ''
     ${builtins.readFile ./basics.lua}
     ${builtins.readFile ./lsp_config.lua}
+    ${builtins.readFile ./dap_config.lua}
     ${builtins.readFile ./mappings.lua}
    '';
    
@@ -52,8 +54,12 @@ in
     ansible-vim
     typst-vim
     diffview-nvim
+    nvim-dap
+    telescope-dap-nvim
 
 
+    { plugin = nvim-dap-ui; config = toLua ''require('dapui').setup()''; }
+    { plugin = nvim-dap-virtual-text; config = toLua ''require('nvim-dap-virtual-text').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
     { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
@@ -345,6 +351,7 @@ in
           }
         }
         require('telescope').load_extension('fzf')
+        require('telescope').load_extension('dap')
       '';
     }
    ];
