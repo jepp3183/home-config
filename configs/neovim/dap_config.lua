@@ -1,9 +1,9 @@
 local dap = require('dap')
-local ui = require "dapui"
+local ui = require('dapui')
 
 dap.adapters.lldb = {
   type = 'executable',
-  command = '/home/jeppe_wsl/.nix-profile/bin/lldb-dap', -- adjust as needed, must be absolute path
+  command = os.getenv("HOME")..'/.nix-profile/bin/lldb-dap', -- adjust as needed, must be absolute path
   name = 'lldb'
 }
 
