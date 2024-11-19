@@ -15,6 +15,8 @@
    };
 
     nix-colors.url = "github:misterio77/nix-colors";
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs:
@@ -26,6 +28,7 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs;
+          inherit system;
         };
         modules = [ ./home_envy.nix ];
       };

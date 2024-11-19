@@ -24,9 +24,9 @@ in
     fuzzel
     vscode
     ark
-    # cura broken
     parsec-bin
     zed-editor
+    inputs.zen-browser.packages."${system}".specific
 
     # CMD UTILS
     wl-clipboard
