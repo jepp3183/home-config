@@ -120,6 +120,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- DAP
+local dap = require('dap')
+vim.keymap.set('n', '<Leader>rr', '<cmd>Telescope dap configurations layout_strategy=vertical<cr>')
+vim.keymap.set('n', '<Leader>fr', '<cmd>Telescope dap commands<cr>')
+vim.keymap.set('n', '<Leader>rb', dap.toggle_breakpoint)
+vim.keymap.set("n", "<space>rc", dap.run_to_cursor)
+vim.keymap.set("n", "<space>?", function()
+  require("dapui").eval(nil, { enter = true })
+end)
+
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
 vim.keymap.set('n', 'ds', '<Plug>Dsurround')
