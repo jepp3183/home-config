@@ -58,17 +58,17 @@ in
     telescope-dap-nvim
 
 
-    { plugin = nvim-dap-ui; config = toLua ''require('dapui').setup()''; }
-    { plugin = nvim-dap-virtual-text; config = toLua ''require('nvim-dap-virtual-text').setup()''; }
-    { plugin = lsp_lines-nvim; config = toLua ''require('lsp_lines').setup()'';}
-    { plugin = which-key-nvim; config = toLua ''require("which-key").setup()'';}
-    { plugin = guess-indent-nvim; config = toLua ''require("guess-indent").setup()''; }
-    { plugin = nvim-colorizer-lua; config = toLua ''require("colorizer").setup()''; }
-    { plugin = gitsigns-nvim; config = toLua ''require("gitsigns").setup()''; }
-    { plugin = neogit; config = toLua ''require("neogit").setup()''; }
-    { plugin = yazi-nvim; config = toLua ''require("yazi").setup()''; }
+    { plugin = nvim-dap-ui; config = toLua /* lua */ ''require('dapui').setup()''; }
+    { plugin = nvim-dap-virtual-text; config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()''; }
+    { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
+    { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
+    { plugin = guess-indent-nvim; config = toLua /* lua */ ''require("guess-indent").setup()''; }
+    { plugin = nvim-colorizer-lua; config = toLua /* lua */ ''require("colorizer").setup()''; }
+    { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
+    { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
+    { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
 
-    { plugin = noice-nvim; config = toLua ''
+    { plugin = noice-nvim; config = toLua /* lua */ ''
         require("noice").setup({
           lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -89,7 +89,7 @@ in
         })
     ''; }
 
-    { plugin = rustaceanvim; config = toLua ''
+    { plugin = rustaceanvim; config = toLua /* lua */ ''
         vim.g.rustaceanvim = {
           tools = {
             float_win_config = {
@@ -99,7 +99,7 @@ in
         }
     ''; }
 
-    { plugin = trouble-nvim; config = toLua ''
+    { plugin = trouble-nvim; config = toLua /* lua */ ''
         require("trouble").setup {
                 modes = {
                     diagnostics = { -- Configure symbols mode
@@ -113,7 +113,7 @@ in
             }
     '';}
 
-    { plugin = nvim-treesitter-textobjects; config = toLua ''
+    { plugin = nvim-treesitter-textobjects; config = toLua /* lua */ ''
         require'nvim-treesitter.configs'.setup {
             textobjects = {
                 select = {
@@ -152,7 +152,7 @@ in
         } 
     '';}
 
-    { plugin = markview-nvim; config = toLua ''
+    { plugin = markview-nvim; config = toLua /* lua */ ''
         require("markview").setup({
             modes = { "n", "i", "no", "c" },
             hybrid_modes = { "i" },
@@ -167,7 +167,7 @@ in
         })
     '';}
 
-    { plugin = better-escape-nvim; config = toLua ''
+    { plugin = better-escape-nvim; config = toLua /* lua */ ''
         require("better_escape").setup {
             timeout = vim.o.timeoutlen,
             default_mappings = true,
@@ -175,7 +175,7 @@ in
         }
     ''; }
 
-    { plugin = mini-nvim; config = toLua ''
+    { plugin = mini-nvim; config = toLua /* lua */ ''
       require("mini.bufremove").setup()
       require("mini.comment").setup()
       require("mini.pairs").setup()
@@ -197,7 +197,7 @@ in
       })
     ''; }
 
-    { plugin = toggleterm-nvim; config = toLua ''
+    { plugin = toggleterm-nvim; config = toLua /* lua */ ''
        require('toggleterm').setup{
         open_mapping = [[<c-t>]],
         size =  function(term)
@@ -211,7 +211,7 @@ in
       }
     ''; }
 
-    { plugin = copilot-lua; config = toLua ''
+    { plugin = copilot-lua; config = toLua /* lua */ ''
         require('copilot').setup({
             suggestion = {
                 auto_trigger = true,
@@ -232,7 +232,7 @@ in
 
     {
       plugin = base16-nvim;
-      config = with config.colorScheme.palette; toLua ''
+      config = with config.colorScheme.palette; toLua /* lua */ ''
         require('base16-colorscheme').setup({
             base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
             base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
@@ -243,7 +243,7 @@ in
     }
     {
       plugin = leap-nvim;
-      config = toLua ''
+      config = toLua /* lua */ ''
         require("leap").add_default_mappings()
         require("leap").setup {
           highlight_unlabeled = true;
@@ -252,7 +252,7 @@ in
     }
     {
       plugin = lualine-nvim;
-      config = toLua ''
+      config = toLua /* lua */ ''
         require('lualine').setup {
             options = {
                 theme = 'base16',
@@ -289,7 +289,7 @@ in
     }
     {
       plugin = neo-tree-nvim;
-      config = toLua ''
+      config = toLua /* lua */ ''
         require("neo-tree").setup({
             source_selector = {
                 winbar = true
@@ -305,7 +305,7 @@ in
     }
     {
       plugin = nvim-treesitter.withAllGrammars;
-      config = toLua ''
+      config = toLua /* lua */ ''
         require'nvim-treesitter.configs'.setup {
           autotag = {
             enable = true,
@@ -323,7 +323,7 @@ in
     }
     {
       plugin = telescope-nvim;
-      config = toLua ''
+      config = toLua /* lua */ ''
         local telescope = require('telescope')
         require('telescope').setup{
           defaults = {
