@@ -30,7 +30,6 @@ in
    extraLuaConfig = ''
     ${builtins.readFile ./basics.lua}
     ${builtins.readFile ./lsp_config.lua}
-    ${builtins.readFile ./dap_config.lua}
     ${builtins.readFile ./mappings.lua}
    '';
    
@@ -54,12 +53,8 @@ in
     ansible-vim
     typst-vim
     diffview-nvim
-    nvim-dap
     telescope-dap-nvim
 
-
-    { plugin = nvim-dap-ui; config = toLua /* lua */ ''require('dapui').setup()''; }
-    { plugin = nvim-dap-virtual-text; config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
     { plugin = guess-indent-nvim; config = toLua /* lua */ ''require("guess-indent").setup()''; }
@@ -67,6 +62,76 @@ in
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
+    { plugin = nvim-dap-ui; config = toLua /* lua */ ''require('dapui').setup()''; }
+    { plugin = nvim-dap-virtual-text; config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()''; }
+    { plugin = nvim-dap; config = toLua /* lua */ ''
+        local dap = require('dap')
+        local ui = require('dapui')
+
+        dap.adapters.lldb = {
+          type = 'executable',
+          command = '${pkgs.lldb}/bin/lldb-dap', -- adjust as needed, must be absolute path
+          name = 'lldb'
+        }
+
+        dap.configurations.rust = {
+          {
+            name = 'Launch',
+            type = 'lldb',
+            request = 'launch',
+            program = function()
+              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = "''${workspaceFolder}",
+            stopOnEntry = false,
+            args = {},
+          },
+        }
+
+        dap.adapters.mix_task = {
+          type = 'executable',
+          command = "${pkgs.elixir-ls}/lib/debug_adapter.sh",
+          args = {}
+        }
+
+        dap.configurations.elixir = {
+          {
+            type = "mix_task",
+            name = "mix test",
+            task = 'test',
+            taskArgs = {"--trace"},
+            request = "launch",
+            startApps = true, -- for Phoenix projects
+            projectDir = "''${workspaceFolder}",
+            requireFiles = {
+              "test/**/test_helper.exs",
+              "test/**/*_test.exs"
+            }
+          },
+          {
+            type = "mix_task",
+            name = "mix run --no-halt",
+            task = 'run',
+            taskArgs = {"--no-halt"},
+            request = "launch",
+            startApps = false, -- for Phoenix projects
+            projectDir = "''${workspaceFolder}",
+          },
+        }
+
+        dap.listeners.before.attach.dapui_config = function()
+          ui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+          ui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+          ui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+          ui.close()
+        end
+    ''; }
 
     { plugin = noice-nvim; config = toLua /* lua */ ''
         require("noice").setup({
