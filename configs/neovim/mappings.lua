@@ -123,7 +123,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- DAP
 local dap = require('dap')
 vim.keymap.set('n', '<Leader>rr', '<cmd>Telescope dap configurations layout_strategy=vertical<cr>')
-vim.keymap.set('n', '<Leader>fr', '<cmd>Telescope dap commands<cr>')
+vim.keymap.set('n', '<Leader>rf', '<cmd>Telescope dap commands<cr>')
 vim.keymap.set('n', '<Leader>rb', dap.toggle_breakpoint)
 vim.keymap.set("n", "<space>rc", dap.run_to_cursor)
 vim.keymap.set("n", "<space>?", function()
