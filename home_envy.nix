@@ -55,10 +55,6 @@ in
     ./configs/vscode.nix
     # ./configs/wezterm.nix
     ./configs/yazi.nix
-    (import ./configs/zellij.nix {
-      inherit pkgs config inputs;
-      configLines = "";
-     })
   ];
 
   # https://tinted-theming.github.io/base16-gallery/

@@ -39,7 +39,13 @@
         };
         modules = [ ./home_wsl.nix ];
       };
-
+      homeConfigurations."jeppe_qarma" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+        modules = [ ./home_jelal.nix ];
+      };
       homeConfigurations."jelal" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
