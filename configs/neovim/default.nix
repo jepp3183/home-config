@@ -62,6 +62,21 @@ in
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
+
+    { plugin = elixir-tools-nvim; config = toLua /* lua */ ''
+      require("elixir").setup({
+        elixirls = {
+            cmd = "elixir-ls",
+            settings = {
+              dialyzerEnabled = true,
+              fetchDeps = true,
+              enableTestLenses = true,
+              suggestSpecs = false,
+            }
+        }
+      })
+    ''; }
+
     { plugin = nvim-dap-ui; config = toLua /* lua */ ''require('dapui').setup()''; }
     { plugin = nvim-dap-virtual-text; config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()''; }
     { plugin = nvim-dap; config = toLua /* lua */ ''
