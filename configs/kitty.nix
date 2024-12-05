@@ -6,6 +6,7 @@ with config.colorScheme.palette; {
     font_family CaskaydiaCove Nerd Font Mono
     font_size 13
 
+    shell fish
     shell_integration no-rc
 
     confirm_os_window_close 0

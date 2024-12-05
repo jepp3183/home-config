@@ -74,6 +74,10 @@ in
       k = "kubectl";
     };
     interactiveShellInit = ''
+
+      source ~/.asdf/asdf.fish
+
+
       set fish_greeting
 
       set -x ANSIBLE_STDOUT_CALLBACK yaml
