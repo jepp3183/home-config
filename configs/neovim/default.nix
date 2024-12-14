@@ -42,6 +42,7 @@ in
     plenary-nvim
     nui-nvim
     telescope-fzf-native-nvim 
+    telescope-live-grep-args-nvim
     nvim-lspconfig
     cmp-nvim-lsp
     nvim-cmp
@@ -416,6 +417,7 @@ in
       plugin = telescope-nvim;
       config = toLua /* lua */ ''
         local telescope = require('telescope')
+        local lga_actions = require('telescope-live-grep-args.actions')
         require('telescope').setup{
           defaults = {
             mappings = {
@@ -438,11 +440,19 @@ in
               override_generic_sorter = true,  -- override the generic sorter
               override_file_sorter = true,     -- override the file sorter
               case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            },
+            live_grep_args = {
+              mappings = {
+                i = {
+                  ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " })
+                }     
+              }
             }
           }
         }
         require('telescope').load_extension('fzf')
         require('telescope').load_extension('dap')
+        require('telescope').load_extension('live_grep_args')
       '';
     }
    ];
