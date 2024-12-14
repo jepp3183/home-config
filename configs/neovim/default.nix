@@ -63,6 +63,10 @@ in
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
 
+    { plugin = harpoon2; config = toLua /* lua */ ''
+      require("harpoon").setup()
+    '';}
+
     { plugin = avante-nvim; config = toLua /* lua */ ''
       require('avante_lib').load()
       require('avante').setup({
