@@ -1,4 +1,5 @@
 -- Options:
+vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.relativenumber = true

@@ -63,6 +63,13 @@ in
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
 
+    { plugin = avante-nvim; config = toLua /* lua */ ''
+      require('avante_lib').load()
+      require('avante').setup({
+        provider = 'copilot',
+      })
+    ''; }
+
     { plugin = elixir-tools-nvim; config = toLua /* lua */ ''
       require("elixir").setup({
         elixirls = {
