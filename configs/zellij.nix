@@ -1,4 +1,3 @@
-
 {configLines ? "", config, ...}:
 {
   programs.zellij = {
@@ -7,8 +6,10 @@
 
   home.file.".config/zellij/config.kdl".text = with config.colorScheme.palette; ''
     pane_frames false
-    default_layout "compact"
+    // default_layout "compact"
     default_mode "locked"
+    default_shell "fish"
+    copy_on_select false
     mouse_mode true
 
     keybinds {
