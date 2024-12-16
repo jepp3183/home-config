@@ -63,9 +63,17 @@ in
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
+    { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
+    { plugin = nvim-autopairs; config = toLua /* lua */ ''
+      local npairs = require('nvim-autopairs')
+      npairs.setup()
 
-    { plugin = harpoon2; config = toLua /* lua */ ''
-      require("harpoon").setup()
+      local endwise = require('nvim-autopairs.ts-rule').endwise
+      npairs.add_rules(
+        {
+          endwise('do$', 'end', 'elixir', nil) 
+        }
+      )
     '';}
 
     { plugin = avante-nvim; config = toLua /* lua */ ''
@@ -270,7 +278,6 @@ in
     { plugin = mini-nvim; config = toLua /* lua */ ''
       require("mini.bufremove").setup()
       require("mini.comment").setup()
-      require("mini.pairs").setup()
       require("mini.move").setup()
       require("mini.splitjoin").setup()
       require("mini.starter").setup({
