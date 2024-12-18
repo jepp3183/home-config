@@ -10,6 +10,7 @@ with config.colorScheme.palette; {
     shell_integration no-rc
 
     confirm_os_window_close 0
+    hide_window_decorations yes
 
     touch_scroll_multiplier 2.0
     scrollback_lines 10000
