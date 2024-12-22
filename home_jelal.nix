@@ -21,15 +21,7 @@
     ./configs/fish.nix
     ./configs/yazi.nix
     ./configs/neovim
-    ( 
-     import ./configs/zellij.nix
-     {
-       inherit pkgs config inputs;
-       configLines = ''
-       default_shell "/home/jelal/.nix-profile/bin/fish"
-       '';
-     }
-    )
+    ./configs/zellij.nix
   ];
 
   programs.fish.shellAliases = {

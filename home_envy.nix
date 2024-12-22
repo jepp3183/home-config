@@ -55,6 +55,7 @@ in
     ./configs/vscode.nix
     # ./configs/wezterm.nix
     ./configs/yazi.nix
+    ./configs/zellij.nix
   ];
 
   # https://tinted-theming.github.io/base16-gallery/

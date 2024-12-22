@@ -25,10 +25,7 @@ in
     ./configs/fish.nix
     ./configs/neovim
     ./configs/yazi.nix
-    (import ./configs/zellij.nix {
-      inherit pkgs config inputs;
-      configLines = "";
-     })
+    ./configs/zellij.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;

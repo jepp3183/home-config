@@ -1,4 +1,4 @@
-{configLines ? "", config, ...}:
+{config, ...}:
 {
   programs.zellij = {
       enable = true;
@@ -48,5 +48,5 @@
         orange "#${base09}"
       }
     }
-  '' + configLines;
+  '';
 }
