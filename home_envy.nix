@@ -53,7 +53,6 @@ in
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
-    # ./configs/wezterm.nix
     ./configs/yazi.nix
     ./configs/zellij.nix
   ];

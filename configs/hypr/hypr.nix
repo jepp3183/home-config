@@ -76,11 +76,15 @@ with config.colorScheme.palette; {
           passes=2
           size=8
         }
-        col.shadow=rgba(1a1a1aee)
-        drop_shadow=true
+        shadow {
+          enabled=true
+            color=rgba(1a1a1aee)
+            render_power=3
+            range=4
+        }
+
         rounding=5
-        shadow_range=4
-        shadow_render_power=3
+
       }
       input {
         touchpad {
@@ -117,7 +121,6 @@ with config.colorScheme.palette; {
         workspace_swipe=true
       }
       dwindle {
-        no_gaps_when_only=1
         pseudotile=true
         preserve_split=true
         smart_split=false
@@ -144,6 +147,17 @@ with config.colorScheme.palette; {
       # ===========================================
       # RULES + ENV
       # ===========================================
+      
+      # No gaps when only:
+      workspace = w[tv1], gapsout:0, gapsin:0
+      workspace = f[1], gapsout:0, gapsin:0
+      windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
+      windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
+      windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+      windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+      
+
+      
       # windowrule=opacity 0.95,(wezterm|kitty)
       windowrulev2=workspace special:discord silent, class:^(discord)$
       windowrulev2=workspace special:1password silent, class:^(1Password)$

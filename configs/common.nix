@@ -33,7 +33,9 @@
     nix-search-cli
     httpie
 
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.meslo-lg
+    nerd-fonts.caskaydia-cove
   ];
   fonts.fontconfig.enable = true;
 }

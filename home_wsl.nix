@@ -15,8 +15,6 @@ in
     wl-clipboard
     wireguard-tools
     ansible
-
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" "CascadiaCode" ]; })
   ];
 
   imports = [
