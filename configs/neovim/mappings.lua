@@ -65,7 +65,9 @@ vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>gg", function () Snacks.lazygit() end, {noremap = true, silent = true, desc = "Lazygit"})
+vim.keymap.set("n", "<leader>go", function () Snacks.gitbrowse() end, {noremap = true, silent = true, desc = "Lazygit"})
 vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({full = true}) end, {desc = "blame line"})
 vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true})

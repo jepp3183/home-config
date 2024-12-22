@@ -65,6 +65,15 @@ in
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
     { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
+
+    { plugin = snacks-nvim; config = toLua /* lua */ ''
+      require("snacks").setup({
+        gitbrowse = {enabled = true},
+        lazygit = {enabled = true}
+      })
+    ''; }
+      
+
     { plugin = nvim-autopairs; config = toLua /* lua */ ''
       local npairs = require('nvim-autopairs')
       npairs.setup()

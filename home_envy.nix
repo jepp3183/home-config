@@ -69,6 +69,12 @@ in
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
+    "default-web-browser"           = "zen.desktop" ;
+    "text/html"                     = "zen.desktop" ;
+    "x-scheme-handler/http"         = "zen.desktop" ;
+    "x-scheme-handler/https"        = "zen.desktop" ;
+    "x-scheme-handler/about"        = "zen.desktop" ;
+    "x-scheme-handler/unknown"      = "zen.desktop" ;
     "application/pdf" = "org.pwmt.zathura.desktop";
     "image/jpeg" = "qimgv.desktop";
     "image/png" = "qimgv.desktop";
