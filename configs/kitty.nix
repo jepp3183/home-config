@@ -17,14 +17,9 @@ with config.colorScheme.palette; {
     scrollback_pager_history_size 10
     enable_audio_bell no
 
-
     # NOTE: edit command with alt+e! this is a fish function
     map ctrl+c copy_or_interrupt
     map ctrl+shift+h show_scrollback
-
-
-
-
 
     background #${base00}
     foreground #${base05}
