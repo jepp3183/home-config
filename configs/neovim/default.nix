@@ -55,7 +55,7 @@ in
     typst-vim
     diffview-nvim
     telescope-dap-nvim
-    # nvim-notify
+    nvim-notify
 
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
@@ -461,7 +461,7 @@ in
         require('telescope').load_extension('fzf')
         require('telescope').load_extension('dap')
         require('telescope').load_extension('live_grep_args')
-        -- require("telescope").load_extension("notify")
+        require("telescope").load_extension("notify")
       '';
     }
    ];
