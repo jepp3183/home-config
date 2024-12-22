@@ -55,6 +55,7 @@ in
     typst-vim
     diffview-nvim
     telescope-dap-nvim
+    # nvim-notify
 
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
@@ -184,7 +185,7 @@ in
             command_palette = true, -- position the cmdline and popupmenu together
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = false, -- add a border to hover docs and signature help
+            lsp_doc_border = true, -- add a border to hover docs and signature help
           },
         })
     ''; }
@@ -460,6 +461,7 @@ in
         require('telescope').load_extension('fzf')
         require('telescope').load_extension('dap')
         require('telescope').load_extension('live_grep_args')
+        -- require("telescope").load_extension("notify")
       '';
     }
    ];
