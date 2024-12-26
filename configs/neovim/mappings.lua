@@ -8,6 +8,7 @@ vim.keymap.set('n', '<C-b>', function()
     position = 'current',
   })
 end)
+vim.keymap.set('n', '-', MiniFiles.open, {desc = "Open mini.files"})
 
 local yazi = require('yazi')
 vim.keymap.set('n', '<C-y>', yazi.yazi, {desc = "Open yazi"})
@@ -79,16 +80,26 @@ vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true})
 
 -- Telescope
-vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
-vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep_args layout_strategy=vertical<cr>')
-vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<cr>')
-vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<cr>')
-vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<cr>')
-vim.keymap.set('n', '<Leader>fc', '<cmd>Telescope find_files cwd=~/.config/home-manager<cr>')
-vim.keymap.set('n', '<Leader>fs', '<cmd>Telescope lsp_document_symbols<cr>')
-vim.keymap.set('n', '<Leader>fS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>')
-vim.keymap.set('n', '<Leader>fr', '<cmd>Telescope lsp_references<cr>')
-vim.keymap.set('n', '<Leader>fd', '<cmd>Telescope diagnostics<cr>')
+local fl = require('fzf-lua')
+vim.keymap.set('n', '<Leader>ff', fl.files, {desc="Find files"})
+vim.keymap.set('n', '<Leader>fg', function()
+  fl.live_grep_glob({
+    winopts={
+      preview={
+        layout='vertical',
+        vertical='up:50%',
+      }
+    }
+  })
+end, {desc="Live grep"})
+vim.keymap.set('n', '<Leader>fb', fl.buffers, {desc="Buffers"})
+vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
+vim.keymap.set('n', '<Leader>fk', fl.keymaps, {desc="Keymaps"})
+vim.keymap.set('n', '<Leader>fc', function() fl.files({ cwd = "~/.config/home-manager" }) end, {desc="Config files"})
+vim.keymap.set('n', '<Leader>fs', fl.lsp_document_symbols, {desc="Document symbols"})
+vim.keymap.set('n', '<Leader>fS', fl.lsp_workspace_symbols, {desc="Workspace symbols"})
+vim.keymap.set('n', '<Leader>fr', fl.lsp_references, {desc="References"})
+vim.keymap.set('n', '<Leader>fd', fl.diagnostics_document, {desc="Diagnostics"})
 
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -125,7 +136,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, mkopts("Hover info"))
     vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, mkopts("Rename in buffer"))
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, mkopts("Signature help"))
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, mkopts("Code action"))
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', fl.lsp_code_actions, mkopts("Code action"))
     vim.keymap.set('n', '<leader>ll', _lsp_lines_toggle, mkopts("Toggle lsp_lines"))
     vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
@@ -135,8 +146,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- DAP
 local dap = require('dap')
-vim.keymap.set('n', '<Leader>rr', '<cmd>Telescope dap configurations layout_strategy=vertical<cr>')
-vim.keymap.set('n', '<Leader>rf', '<cmd>Telescope dap commands<cr>')
+vim.keymap.set('n', '<Leader>rr', function ()
+  fl.dap_configurations({
+    winopts={
+      preview={
+        layout='vertical',
+        vertical='up:50%',
+      }
+    }
+  })
+end, {desc="DAP configurations"})
+vim.keymap.set('n', '<Leader>rf', fl.dap_commands, {desc="DAP commands"})
 vim.keymap.set('n', '<Leader>rb', dap.toggle_breakpoint)
 vim.keymap.set("n", "<space>rc", dap.run_to_cursor)
 vim.keymap.set("n", "<space>?", function()

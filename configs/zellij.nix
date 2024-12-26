@@ -55,7 +55,7 @@
       }
 
       locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt g" { SwitchToMode "normal"; }
       }
       pane {
         bind "left" { MoveFocus "left"; }
@@ -190,7 +190,7 @@
         bind "Alt right" { MoveFocusOrTab "right"; }
       }
       shared_except "locked" "renametab" "renamepane" {
-        bind "Ctrl g" { SwitchToMode "locked"; }
+        bind "Alt g" { SwitchToMode "locked"; }
       }
       shared_except "locked" "entersearch" {
         bind "enter" { SwitchToMode "locked"; }

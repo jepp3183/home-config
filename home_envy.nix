@@ -26,7 +26,7 @@ in
     ark
     parsec-bin
     zed-editor
-    inputs.zen-browser.packages."${system}".specific
+    inputs.zen-browser.packages."${system}".default
 
     # CMD UTILS
     wl-clipboard

@@ -41,8 +41,6 @@ in
     vim-signature
     plenary-nvim
     nui-nvim
-    telescope-fzf-native-nvim 
-    telescope-live-grep-args-nvim
     nvim-lspconfig
     cmp-nvim-lsp
     nvim-cmp
@@ -54,7 +52,6 @@ in
     ansible-vim
     typst-vim
     diffview-nvim
-    telescope-dap-nvim
     nvim-notify
 
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
@@ -65,6 +62,16 @@ in
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
     { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
+
+    { plugin = fzf-lua; config = toLua /* lua */ ''
+      require("fzf-lua").setup({
+          winopts = {
+              preview = {
+                  delay = 0,
+              }
+          }
+      })
+    ''; }
 
     { plugin = snacks-nvim; config = toLua /* lua */ ''
       require("snacks").setup({
@@ -290,19 +297,12 @@ in
       require("mini.comment").setup()
       require("mini.move").setup()
       require("mini.splitjoin").setup()
+      require('mini.files').setup()
       require("mini.starter").setup({
         evaluate_single = true
       })
-
       require("mini.sessions").setup({
         autoread = true,
-      })
-
-      require("mini.indentscope").setup({
-        draw = {
-          delay = 0,
-          animation = require("mini.indentscope").gen_animation.none(),
-        }
       })
     ''; }
 
@@ -428,49 +428,6 @@ in
           additional_vim_regex_highlighting = false,
         },
         }
-      '';
-    }
-    {
-      plugin = telescope-nvim;
-      config = toLua /* lua */ ''
-        local telescope = require('telescope')
-        local lga_actions = require('telescope-live-grep-args.actions')
-        require('telescope').setup{
-          defaults = {
-            mappings = {
-              i = {
-                  ["<Esc>"] = require('telescope.actions').close,
-                  ["<C-j>"] = require('telescope.actions').move_selection_next,
-                  ["<C-k>"] = require('telescope.actions').move_selection_previous,
-                  },
-            }
-          },
-          pickers = {
-            find_files = {
-                hidden = true,
-                file_ignore_patterns = { "node_modules", ".git/", ".elixir_ls" }
-            }
-          },
-          extensions = {
-            fzf = {
-              fuzzy = true,                    -- false will only do exact matching
-              override_generic_sorter = true,  -- override the generic sorter
-              override_file_sorter = true,     -- override the file sorter
-              case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-            },
-            live_grep_args = {
-              mappings = {
-                i = {
-                  ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " })
-                }     
-              }
-            }
-          }
-        }
-        require('telescope').load_extension('fzf')
-        require('telescope').load_extension('dap')
-        require('telescope').load_extension('live_grep_args')
-        require("telescope").load_extension("notify")
       '';
     }
    ];
