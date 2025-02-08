@@ -72,6 +72,8 @@ in
       lt = "eza --icons --git --long --tree --group-directories-first --level=2";
       ap = "ansible-playbook";
       k = "kubectl";
+      mt = "mix test";
+      mc = "mix compile";
     };
     interactiveShellInit = ''
       set fish_greeting

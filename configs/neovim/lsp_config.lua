@@ -16,6 +16,7 @@ local standard_servers = {
   "yamlls",
   "docker_compose_language_service",
   "dockerls",
+  "elixirls"
 }
 
 for i=1, #standard_servers do
@@ -24,10 +25,10 @@ for i=1, #standard_servers do
   })
 end
 
--- require 'lspconfig'.elixirls.setup {
---   capabilities = lsp_capabilities,
---   cmd = { "elixir-ls" },
--- }
+require 'lspconfig'.elixirls.setup {
+  capabilities = lsp_capabilities,
+  cmd = { "elixir-ls" },
+}
 
 require 'lspconfig'.typst_lsp.setup {
   capabilities = lsp_capabilities,

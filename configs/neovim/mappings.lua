@@ -21,11 +21,6 @@ vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
 vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
--- Avante
-vim.keymap.set({ "n", "v" }, '<leader>aa', function() require("avante.api").ask() end, {desc = "avante: ask"})
-vim.keymap.set("v", '<leader>ar', function() require("avante.api").refresh() end, {desc = "avante: refresh"})
-vim.keymap.set("v", '<leader>ae', function() require("avante.api").edit() end, {desc = "avante: edit"})
-
 -- Harpoon
 local harpoon = require('harpoon')
 vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)

@@ -10,7 +10,6 @@ in
     ruff
     lua-language-server
     nil
-    typst-lsp
     ansible-language-server
     ansible-lint
     yaml-language-server
@@ -92,27 +91,6 @@ in
         }
       )
     '';}
-
-    { plugin = avante-nvim; config = toLua /* lua */ ''
-      require('avante_lib').load()
-      require('avante').setup({
-        -- provider = 'copilot',
-      })
-    ''; }
-
-    { plugin = elixir-tools-nvim; config = toLua /* lua */ ''
-      require("elixir").setup({
-        elixirls = {
-            cmd = "elixir-ls",
-            settings = {
-              dialyzerEnabled = true,
-              fetchDeps = true,
-              enableTestLenses = true,
-              suggestSpecs = false,
-            }
-        }
-      })
-    ''; }
 
     { plugin = nvim-dap-ui; config = toLua /* lua */ ''require('dapui').setup()''; }
     { plugin = nvim-dap-virtual-text; config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()''; }
