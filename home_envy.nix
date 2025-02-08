@@ -25,8 +25,11 @@ in
     vscode
     ark
     parsec-bin
+    qpdfview
     zed-editor
     inputs.zen-browser.packages."${system}".default
+    inputs.ghostty.packages."${system}".default
+    zotero
 
     # CMD UTILS
     wl-clipboard

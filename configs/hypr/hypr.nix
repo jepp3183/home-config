@@ -175,7 +175,8 @@ with config.colorScheme.palette; {
       # ===========================================
       monitor=eDP-1,1920x1080@60.033001,auto,1
       monitor=desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1
-      monitor=, highrr, auto-up, 1
+      monitor=desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1
+      monitor=, preferred, auto-up, 1
 
       # ===========================================
       # BINDS
