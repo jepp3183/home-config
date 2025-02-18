@@ -18,6 +18,7 @@ in
     ccls
     elixir-ls
     lldb
+    fish-lsp
   ];
 
   programs.neovim = {

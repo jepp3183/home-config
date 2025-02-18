@@ -93,6 +93,15 @@ in
         end
         rm -f -- "$tmp"
       end
+
+       function cdl
+          set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
+          set -a dirs ~/proj/qarmainspect/backend/
+          set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
+          if [ -n "$choice" ]
+            cd $choice
+          end
+        end
     '';
   };
 }

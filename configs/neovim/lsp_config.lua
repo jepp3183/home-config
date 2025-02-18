@@ -16,7 +16,8 @@ local standard_servers = {
   "yamlls",
   "docker_compose_language_service",
   "dockerls",
-  "elixirls"
+  "elixirls",
+  "fish_lsp"
 }
 
 for i=1, #standard_servers do
