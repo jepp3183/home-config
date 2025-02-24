@@ -329,13 +329,23 @@ in
         })
       '';
     }
+#     {
+#       plugin = leap-nvim;
+#       config = toLua /* lua */ ''
+#         require("leap").add_default_mappings()
+#         require("leap").setup {
+#           highlight_unlabeled = true;
+#         }
+#       '';
+#     }
     {
-      plugin = leap-nvim;
+      plugin = flash-nvim;
       config = toLua /* lua */ ''
-        require("leap").add_default_mappings()
-        require("leap").setup {
-          highlight_unlabeled = true;
-        }
+        require("flash").setup({
+            modes = {
+              search = {enabled = true},
+            },
+        })
       '';
     }
     {
