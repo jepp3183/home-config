@@ -81,6 +81,10 @@ in
       set -x ANSIBLE_STDOUT_CALLBACK yaml
       set -x NIXPKGS_ALLOW_UNFREE 1
 
+      if [ -e ~/.anthropic_api_key ] 
+        set -x ANTHROPIC_API_KEY (cat ~/.anthropic_api_key)
+      end
+
       bind \ck up-or-search
 
       function ns; nix-shell --run fish -p $argv; end
