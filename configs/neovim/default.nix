@@ -341,6 +341,7 @@ in
     {
       plugin = flash-nvim;
       config = toLua /* lua */ ''
+        vim.cmd[[ highlight FlashLabel guibg=#ff0000 guifg=#ffffff ]]
         require("flash").setup({
             modes = {
               search = {enabled = true},
