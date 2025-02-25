@@ -75,7 +75,7 @@ in
       mt = "mix test";
       mc = "mix compile";
     };
-    interactiveShellInit = ''
+    interactiveShellInit = /*fish*/''
       set fish_greeting
 
       set -x ANSIBLE_STDOUT_CALLBACK yaml
@@ -98,14 +98,21 @@ in
         rm -f -- "$tmp"
       end
 
-       function cdl
-          set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
-          set -a dirs ~/proj/qarmainspect/backend/
-          set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
-          if [ -n "$choice" ]
-            cd $choice
-          end
+      function wt
+        set -l choice (git worktree list | awk '{print $1}' | fzf --with-nth -1 -d /)
+        if [ -n "$choice" ]
+          cd $choice
         end
+      end
+
+     function cdl
+        set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
+        set -a dirs ~/proj/qarmainspect/backend/
+        set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
+        if [ -n "$choice" ]
+          cd $choice
+        end
+      end
     '';
   };
 }
