@@ -12,7 +12,7 @@ local standard_servers = {
   "nil_ls",
   "ruff",
   "ccls",
-  "ansiblels",
+  -- "ansiblels",
   "yamlls",
   "docker_compose_language_service",
   "dockerls",

@@ -10,7 +10,7 @@ in
     ruff
     lua-language-server
     nil
-    ansible-language-server
+    # ansible-language-server
     ansible-lint
     yaml-language-server
     docker-compose-language-service
