@@ -19,6 +19,7 @@ in
     elixir-ls
     lldb
     fish-lsp
+    tinymist
   ];
 
   programs.neovim = {
@@ -50,7 +51,6 @@ in
     cmp-async-path
     dressing-nvim
     ansible-vim
-    typst-vim
     diffview-nvim
     nvim-notify
 

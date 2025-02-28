@@ -17,7 +17,8 @@ local standard_servers = {
   "docker_compose_language_service",
   "dockerls",
   "elixirls",
-  "fish_lsp"
+  "fish_lsp",
+  "tinymist"
 }
 
 for i=1, #standard_servers do
@@ -31,11 +32,12 @@ require 'lspconfig'.elixirls.setup {
   cmd = { "elixir-ls" },
 }
 
-require 'lspconfig'.typst_lsp.setup {
+require 'lspconfig'.tinymist.setup {
   capabilities = lsp_capabilities,
   settings = {
     exportPdf = 'onType',
-  },
+    formatterMode = 'typstfmt',
+  }
 }
 
 require 'lspconfig'.lua_ls.setup {
