@@ -63,6 +63,19 @@ in
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
     { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
 
+    { plugin = codecompanion-nvim; config = toLua /* lua */ ''
+        require("codecompanion").setup({
+          strategies = {
+            chat = {
+              adapter = "anthropic",
+            },
+            inline = {
+              adapter = "anthropic",
+            },
+          }
+        })
+    ''; }
+
     { plugin = fzf-lua; config = toLua /* lua */ ''
       require("fzf-lua").setup({
           winopts = {
@@ -248,20 +261,29 @@ in
         } 
     '';}
 
-    { plugin = markview-nvim; config = toLua /* lua */ ''
-        require("markview").setup({
-            modes = { "n", "i", "no", "c" },
-            hybrid_modes = { "i" },
-
-            -- This is nice to have
-            callbacks = {
-                on_enable = function (_, win)
-                    vim.wo[win].conceallevel = 2;
-                    vim.wo[win].concealcursor = "nc";
-                end
-            }
+    { plugin = render-markdown-nvim; config = toLua /* lua */ ''
+        require("render-markdown").setup({
+          file_types = { 'markdown', 'codecompanion' },
         })
-    '';}
+    ''; }
+
+    # { plugin = markview-nvim; config = toLua /* lua */ ''
+    #     require("markview").setup({
+    #         preview = {
+    #           modes = { "n", "i", "no", "c" },
+    #           hybrid_modes = { "i" },
+    #           filetypes = { "markdown", "codecompanion" },
+    #           ignore_buftypes = {},
+    #           -- This is nice to have
+    #           callbacks = {
+    #               on_enable = function (_, win)
+    #                   vim.wo[win].conceallevel = 2;
+    #                   vim.wo[win].concealcursor = "nc";
+    #               end
+    #           }
+    #         },
+    #     })
+    # '';}
 
     { plugin = better-escape-nvim; config = toLua /* lua */ ''
         require("better_escape").setup {

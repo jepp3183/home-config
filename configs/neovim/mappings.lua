@@ -15,10 +15,9 @@ vim.keymap.set('n', '<C-y>', yazi.yazi, {desc = "Open yazi"})
 
 vim.keymap.set('', '<C-j>', '5j')
 vim.keymap.set('', '<C-k>', '5k')
-vim.keymap.set('n', '<C-h>', '<cmd>bprev<cr>')
-vim.keymap.set('n', '<C-l>', '<cmd>bnext<cr>')
-vim.keymap.set('n', '<C-s>', '<cmd>update<cr>')
-vim.keymap.set('n', '<M-p>', '<cmd>Copilot panel<CR>')
+vim.keymap.set('n', '<C-h>', vim.cmd.bprev)
+vim.keymap.set('n', '<C-l>', vim.cmd.bnext)
+vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
 -- Harpoon
@@ -73,6 +72,13 @@ vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = t
 vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true})
 vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true})
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true})
+
+-- Ai Shit
+vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
 
 -- Telescope
 local fl = require('fzf-lua')
