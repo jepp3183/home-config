@@ -53,7 +53,8 @@ in
     ansible-vim
     diffview-nvim
     nvim-notify
-
+    
+    { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
     { plugin = guess-indent-nvim; config = toLua /* lua */ ''require("guess-indent").setup()''; }
@@ -263,27 +264,27 @@ in
 
     { plugin = render-markdown-nvim; config = toLua /* lua */ ''
         require("render-markdown").setup({
-          file_types = { 'markdown', 'codecompanion' },
+          file_types = { 'codecompanion' },
         })
     ''; }
 
-    # { plugin = markview-nvim; config = toLua /* lua */ ''
-    #     require("markview").setup({
-    #         preview = {
-    #           modes = { "n", "i", "no", "c" },
-    #           hybrid_modes = { "i" },
-    #           filetypes = { "markdown", "codecompanion" },
-    #           ignore_buftypes = {},
-    #           -- This is nice to have
-    #           callbacks = {
-    #               on_enable = function (_, win)
-    #                   vim.wo[win].conceallevel = 2;
-    #                   vim.wo[win].concealcursor = "nc";
-    #               end
-    #           }
-    #         },
-    #     })
-    # '';}
+    { plugin = markview-nvim; config = toLua /* lua */ ''
+        require("markview").setup({
+            preview = {
+              modes = { "n", "i", "no", "c" },
+              hybrid_modes = { "i" },
+              filetypes = { "markdown", "typst" },
+              ignore_buftypes = {},
+              -- This is nice to have
+              callbacks = {
+                  on_enable = function (_, win)
+                      vim.wo[win].conceallevel = 2;
+                      vim.wo[win].concealcursor = "nc";
+                  end
+              }
+            },
+        })
+    '';}
 
     { plugin = better-escape-nvim; config = toLua /* lua */ ''
         require("better_escape").setup {
