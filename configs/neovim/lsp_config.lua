@@ -21,7 +21,7 @@ local standard_servers = {
   "tinymist"
 }
 
-for i=1, #standard_servers do
+for i = 1, #standard_servers do
   require('lspconfig')[standard_servers[i]].setup({
     capabilities = lsp_capabilities,
   })
@@ -79,7 +79,7 @@ cmp.setup({
     -- ['<C-y>'] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.confirm({select = false})
+        cmp.confirm({ select = false })
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else

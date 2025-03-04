@@ -85,6 +85,8 @@ in
         set -x ANTHROPIC_API_KEY (cat ~/.anthropic_api_key)
       end
 
+      set -x AIDER_MODEL sonnet
+
       bind \ck up-or-search
 
       function ns; nix-shell --run fish -p $argv; end
