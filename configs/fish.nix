@@ -72,6 +72,7 @@ in
       lt = "eza --icons --git --long --tree --group-directories-first --level=2";
       ap = "ansible-playbook";
       k = "kubectl";
+      lzd = "lazydocker";
       mt = "mix test";
       mc = "mix compile";
     };

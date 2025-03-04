@@ -32,6 +32,7 @@
     jq
     nix-search-cli
     httpie
+    lazydocker
     aider-chat
 
     nerd-fonts.fira-code
