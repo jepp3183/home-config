@@ -5,7 +5,7 @@ vim.keymap.set('n', '<C-b>', function()
   require('neo-tree.command').execute({
     action = 'focus',
     source = 'last',
-    position = 'current',
+    position = 'left',
   })
 end)
 vim.keymap.set('n', '-', MiniFiles.open, {desc = "Open mini.files"})

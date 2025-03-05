@@ -377,6 +377,7 @@ in
       plugin = lualine-nvim;
       config = toLua /* lua */ ''
         require('lualine').setup {
+            extensions = {'fzf', 'neo-tree'},
             options = {
                 theme = 'base16',
             },
@@ -421,6 +422,7 @@ in
                 mappings = {
                     ["l"] = "toggle_node",
                     ["h"] = "close_node",
+                    ["<c-b>"] = "close_window"
                 },
             }
         })
