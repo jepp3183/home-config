@@ -33,6 +33,8 @@
     nix-search-cli
     httpie
     lazydocker
+    kubectl
+    k9s
     aider-chat
 
     nerd-fonts.fira-code
