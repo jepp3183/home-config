@@ -32,6 +32,7 @@ in
     ${builtins.readFile ./basics.lua}
     ${builtins.readFile ./lsp_config.lua}
     ${builtins.readFile ./mappings.lua}
+    ${builtins.readFile ./snippets.lua}
    '';
    
    plugins = with pkgs.vimPlugins; [
