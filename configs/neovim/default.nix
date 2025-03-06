@@ -65,6 +65,12 @@ in
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
     { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
 
+    { plugin = auto-session; config = toLua /* lua */ ''
+        require("auto-session").setup {
+          suppressed_dirs = { "~/", "~/pro", "~/Downloads", "/"},
+        }
+    '';}
+
     { plugin = codecompanion-nvim; config = toLua /* lua */ ''
         require("codecompanion").setup({
           strategies = {
@@ -91,7 +97,37 @@ in
     { plugin = snacks-nvim; config = toLua /* lua */ ''
       require("snacks").setup({
         gitbrowse = {enabled = true},
-        lazygit = {enabled = true}
+        lazygit = {enabled = true},
+        dashboard = {
+            enabled = true,
+            keys = {
+              { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+              { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+              { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+              { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+              { icon = " ", key = "h", desc = "Config", action = ":lua require('fzf-lua').files({cwd = '~/.config/home-manager})" },
+              { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            },
+            sections = {
+                { section = "keys", gap = 1, padding = 1 },
+                { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                {
+                  pane = 2,
+                  icon = " ",
+                  title = "Git Status",
+                  section = "terminal",
+                  enabled = function()
+                    return Snacks.git.get_root() ~= nil
+                  end,
+                  cmd = "git status --short --branch --renames",
+                  height = 5,
+                  padding = 1,
+                  ttl = 5 * 60,
+                  indent = 3,
+                },
+              },
+        },
       })
     ''; }
       
@@ -284,7 +320,7 @@ in
             preview = {
               modes = { "n", "i", "no", "c" },
               hybrid_modes = { "i" },
-              filetypes = { "markdown", "typst" },
+              filetypes = { "markdown" },
               ignore_buftypes = {},
               -- This is nice to have
               callbacks = {
@@ -311,12 +347,6 @@ in
       require("mini.move").setup()
       require("mini.splitjoin").setup()
       require('mini.files').setup()
-      require("mini.starter").setup({
-        evaluate_single = true
-      })
-      require("mini.sessions").setup({
-        autoread = true,
-      })
     ''; }
 
     { plugin = toggleterm-nvim; config = toLua /* lua */ ''

@@ -44,17 +44,6 @@ vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
 -- vim.opt.foldlevel = 99
 -- vim.keymap.set('n', '<tab>',cond_fold)
 
--- Sessions
-local function write_session()
-  local session = vim.fn.input("Session name: ")
-  if session == "" then
-    return
-  end
-  MiniSessions.write(session)
-end
-vim.keymap.set('n', '<Leader>sw', write_session, {desc="Write session"})
-vim.keymap.set('n', '<Leader>sl', MiniSessions.select, {desc="Load session"})
-
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
