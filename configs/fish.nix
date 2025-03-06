@@ -86,7 +86,7 @@ in
         set -x ANTHROPIC_API_KEY (cat ~/.anthropic_api_key)
       end
 
-      set -x AIDER_MODEL sonnet
+      set -x AIDER_MODEL claude-3-7-sonnet-latest
 
       bind \ck up-or-search
 
