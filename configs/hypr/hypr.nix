@@ -197,7 +197,7 @@ with config.colorScheme.palette; {
 
       # RUN
       bind = $mainMod, Return, exec, kitty
-      bind = $mainMod, B, exec, zen
+      bind = $mainMod, B, exec, firefox
       bind = $mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh
       bind = $mainMod, SPACE, exec, ${launcher}/bin/launcher.sh
 
