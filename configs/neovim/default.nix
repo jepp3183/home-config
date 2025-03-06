@@ -197,6 +197,16 @@ in
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true, -- add a border to hover docs and signature help
           },
+          routes = {
+              {
+                filter = {
+                  event = "msg_show",
+                  kind = "",
+                  find = "written",
+                },
+                opts = { skip = true },
+              },
+            },
         })
     ''; }
 
@@ -385,7 +395,17 @@ in
                 lualine_a = {'mode'},
                 lualine_b = {'branch', 'diff', 'diagnostics'},
                 lualine_c = {'filename'},
-                lualine_x = {'encoding', 'fileformat', 'filetype'},
+                
+                lualine_x = {
+                    { 
+                        require("noice").api.statusline.mode.get,
+                        cond = require("noice").api.statusline.mode.has,
+                        color = { fg = "#cc0000" }, 
+                    },
+                    'encoding',
+                    'fileformat',
+                    'filetype'
+                },
                 lualine_y = {'progress'},
                 lualine_z = {'location'}
             },
@@ -402,7 +422,8 @@ in
               },
               lualine_b = {},
               lualine_c = {},
-              lualine_x = {},
+              lualine_x = {
+              },
               lualine_y = {},
               lualine_z = {
                {'filename', path = 1}
