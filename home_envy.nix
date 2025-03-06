@@ -23,7 +23,6 @@ in
     insync
     fuzzel
     vscode
-    ark
     parsec-bin
     qpdfview
     zed-editor

@@ -2,6 +2,7 @@
 {
   programs.zellij = {
       enable = true;
+      enableFishIntegration = false;
   };
 
   home.file.".config/zellij/config.kdl".text = with config.colorScheme.palette; ''
