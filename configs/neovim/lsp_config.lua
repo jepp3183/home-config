@@ -19,7 +19,7 @@ local standard_servers = {
   "elixirls",
   "fish_lsp",
   "tinymist",
-  "harper_ls",
+  -- "harper_ls", Disable until typst features fixed
 }
 
 for i = 1, #standard_servers do

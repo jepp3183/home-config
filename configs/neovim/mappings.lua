@@ -90,6 +90,7 @@ vim.keymap.set('n', '<Leader>fs', fl.lsp_document_symbols, {desc="Document symbo
 vim.keymap.set('n', '<Leader>fS', fl.lsp_workspace_symbols, {desc="Workspace symbols"})
 vim.keymap.set('n', '<Leader>fr', fl.lsp_references, {desc="References"})
 vim.keymap.set('n', '<Leader>fd', fl.diagnostics_document, {desc="Diagnostics"})
+vim.keymap.set('n', 'z=', fl.spell_suggest, {desc="Spell suggest"})
 
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
