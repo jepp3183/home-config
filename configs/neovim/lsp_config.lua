@@ -12,13 +12,14 @@ local standard_servers = {
   "nil_ls",
   "ruff",
   "ccls",
-  -- "ansiblels",
+  -- "ansiblels", PERFORMANCE ISSUES
   "yamlls",
   "docker_compose_language_service",
   "dockerls",
   "elixirls",
   "fish_lsp",
-  "tinymist"
+  "tinymist",
+  "harper_ls",
 }
 
 for i = 1, #standard_servers do

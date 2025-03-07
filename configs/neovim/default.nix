@@ -20,6 +20,7 @@ in
     lldb
     fish-lsp
     tinymist
+    (pkgs.callPackage ./harper.nix {})
   ];
 
   programs.neovim = {
