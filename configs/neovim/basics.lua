@@ -26,5 +26,12 @@ vim.o.timeoutlen = 300
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern ={"typst", "markdown"},
-    command = "setlocal wrap linebreak | nnoremap j gj| nnoremap k gk",
+    callback = function ()
+        vim.opt.wrap = true
+        vim.opt.linebreak = true
+        vim.opt.spell = true
+        vim.opt.spelllang = "en"
+        vim.api.nvim_buf_set_keymap(0, "n", "j", "gj", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "k", "gk", {noremap = true})
+    end
 })
