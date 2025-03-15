@@ -19,7 +19,6 @@ local standard_servers = {
   "elixirls",
   "fish_lsp",
   "tinymist",
-  "harper_ls",
 }
 
 for i = 1, #standard_servers do
@@ -27,6 +26,19 @@ for i = 1, #standard_servers do
     capabilities = lsp_capabilities,
   })
 end
+
+require 'lspconfig'.harper_ls.setup {
+  capabilities = lsp_capabilities,
+  filetypes = { "typst", "markdown" },
+  settings = {
+    ["harper-ls"] = {
+      userDictPath = "~/dict.txt",
+      linters = {
+        SpellCheck = false
+      }
+    }
+  }
+}
 
 require 'lspconfig'.elixirls.setup {
   capabilities = lsp_capabilities,
