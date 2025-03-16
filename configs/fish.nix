@@ -61,7 +61,8 @@ in
       y = "yazi";
     };
     shellAbbrs = {
-      nse = "nix-search -d";
+      nse = "nix-search -d -r";
+      ns = "nix-shell --run fish -p";
       wgu = "wg-quick up";
       wgd = "wg-quick down";
       nv = "nvim";
@@ -82,15 +83,13 @@ in
       set -x ANSIBLE_STDOUT_CALLBACK yaml
       set -x NIXPKGS_ALLOW_UNFREE 1
 
+      set -x AIDER_MODEL claude-3-7-sonnet-latest
       if [ -e ~/.anthropic_api_key ] 
         set -x ANTHROPIC_API_KEY (cat ~/.anthropic_api_key)
       end
 
-      set -x AIDER_MODEL claude-3-7-sonnet-latest
 
       bind \ck up-or-search
-
-      function ns; nix-shell --run fish -p $argv; end
 
       function yy
         set tmp (mktemp -t "yazi-cwd.XXXXXX")
