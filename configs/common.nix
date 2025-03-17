@@ -32,6 +32,7 @@
     jq
     nix-search-cli
     httpie
+    posting
     lazydocker
     kubectl
     k9s
