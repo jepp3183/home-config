@@ -380,15 +380,6 @@ in
         })
       '';
     }
-#     {
-#       plugin = leap-nvim;
-#       config = toLua /* lua */ ''
-#         require("leap").add_default_mappings()
-#         require("leap").setup {
-#           highlight_unlabeled = true;
-#         }
-#       '';
-#     }
     {
       plugin = flash-nvim;
       config = toLua /* lua */ ''
@@ -400,6 +391,28 @@ in
         })
       '';
     }
+
+    { plugin = bufferline-nvim; config = toLua /* lua */ ''
+        require("bufferline").setup {
+            options = {
+                diagnostics = "nvim_lsp",
+                diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                  local icon = level:match("error") and " " or " "
+                  return " " .. icon .. count
+                end,
+                offsets = {
+                    {
+                        filetype = "neo-tree",
+                        text = "Neo-tree",
+                        highlight = "Directory",
+                        text_align = "left",
+                    },
+                }
+            }
+        }
+        '';
+    }
+
     {
       plugin = lualine-nvim;
       config = toLua /* lua */ ''
@@ -407,12 +420,13 @@ in
             extensions = {'fzf', 'neo-tree'},
             options = {
                 theme = 'base16',
+                component_separators = { left = "|", right = "|" },
+                section_separators = { left = "", right = "" },
             },
             sections = {
                 lualine_a = {'mode'},
                 lualine_b = {'branch', 'diff', 'diagnostics'},
-                lualine_c = {'filename'},
-                
+                lualine_c = {{'filename', path=1}},
                 lualine_x = {
                     { 
                         require("noice").api.statusline.mode.get,
@@ -425,26 +439,6 @@ in
                 },
                 lualine_y = {'progress'},
                 lualine_z = {'location'}
-            },
-            tabline = {
-              lualine_a = {
-               {'buffers',
-                symbols = {
-                 modified = ' ●',      -- Text to show when the buffer is modified
-                 alternate_file = "", -- Text to show to identify the alternate file
-                 directory =  '',
-                }
-                }
-
-              },
-              lualine_b = {},
-              lualine_c = {},
-              lualine_x = {
-              },
-              lualine_y = {},
-              lualine_z = {
-               {'filename', path = 1}
-              }
             }
         }
         '';
