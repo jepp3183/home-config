@@ -158,7 +158,7 @@ with config.colorScheme.palette; {
       
 
       
-      windowrule=opacity 0.90,(wezterm|kitty)
+      # windowrule=opacity 0.90,(wezterm|kitty)
       windowrulev2=workspace special:discord silent, class:^(discord)$
       windowrulev2=workspace special:1password silent, class:^(1Password)$
       windowrulev2=float, class:^(xdg-desktop-portal-gtk)$
