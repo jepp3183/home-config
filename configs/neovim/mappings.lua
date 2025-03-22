@@ -71,9 +71,9 @@ vim.cmd([[cab cc CodeCompanion]])
 
 -- Telescope
 local fl = require('fzf-lua')
-vim.keymap.set('n', '<Leader>ff', fl.files, {desc="Find files"})
-vim.keymap.set('n', '<Leader>fg', function()
+local function lg(search)
   fl.live_grep_glob({
+    search = search,
     winopts={
       preview={
         layout='vertical',
@@ -81,7 +81,9 @@ vim.keymap.set('n', '<Leader>fg', function()
       }
     }
   })
-end, {desc="Live grep"})
+end
+vim.keymap.set('n', '<Leader>ff', fl.files, {desc="Find files"})
+vim.keymap.set('n', '<Leader>fg', function() lg("") end, {desc="Live grep"})
 vim.keymap.set('n', '<Leader>fb', fl.buffers, {desc="Buffers"})
 vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
 vim.keymap.set('n', '<Leader>fk', fl.keymaps, {desc="Keymaps"})
@@ -91,6 +93,39 @@ vim.keymap.set('n', '<Leader>fS', fl.lsp_workspace_symbols, {desc="Workspace sym
 vim.keymap.set('n', '<Leader>fr', fl.lsp_references, {desc="References"})
 vim.keymap.set('n', '<Leader>fd', fl.diagnostics_document, {desc="Diagnostics"})
 vim.keymap.set('n', 'z=', fl.spell_suggest, {desc="Spell suggest"})
+
+-- Grep for selection / operator-pending
+local function grep_visual_selection()
+  local old_reg = vim.fn.getreg('"')
+  local old_regtype = vim.fn.getregtype('"')
+  vim.cmd('normal! y')
+  local selected_text = vim.fn.getreg('"')
+  selected_text = selected_text:gsub("\n", "")
+  vim.fn.setreg('"', old_reg, old_regtype)
+  lg(selected_text)
+end
+vim.keymap.set('x', '<leader>fw', grep_visual_selection, {desc="Grep visual selection", noremap=true})
+
+_G.grep_operator = function(motion_type)
+  local old_reg = vim.fn.getreg('"')
+  local old_regtype = vim.fn.getregtype('"')
+  if motion_type == 'line' then
+    vim.cmd([[normal! '[V']y]])
+  elseif motion_type == 'block' then
+    vim.cmd([[normal! `[<C-V>`]y]])
+  else
+    vim.cmd([[normal! `[v`]y]])
+  end
+  local selected_text = vim.fn.getreg('"')
+  selected_text = vim.trim(selected_text:gsub("\n", ""))
+  vim.fn.setreg('"', old_reg, old_regtype)
+  lg(selected_text)
+end
+
+vim.keymap.set('n', '<leader>fw', function ()
+  vim.o.operatorfunc = 'v:lua.grep_operator'
+  return 'g@'
+end, {desc="Grep selection", expr = true, noremap = true})
 
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
