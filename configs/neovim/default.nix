@@ -64,7 +64,6 @@ in
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
-    { plugin = harpoon2; config = toLua /* lua */ ''require("harpoon").setup()'';}
 
     { plugin = auto-session; config = toLua /* lua */ ''
         require("auto-session").setup {
