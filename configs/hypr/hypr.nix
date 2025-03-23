@@ -18,10 +18,11 @@ let
   '';
 
   power_menu = pkgs.writeShellScriptBin "power_menu.sh" ''
-    choice=$(printf ' Shutdown\n󰤄 Suspend\n Reboot\n Lock'\
+      choice=$(printf ' Shutdown\n󰤄 Suspend\n Reboot\n Lock\n Log out'\
               | fuzzel --dmenu --width=14 --lines=5\
-              | awk '{print $2}'
+              | awk '{print $2$3}'
             )
+
     case $choice in
         Shutdown)
             systemctl poweroff
@@ -34,6 +35,9 @@ let
             ;;
         Lock)
             swaylock -i ${wallpaper}
+            ;;
+        Logout)
+            hyprctl dispatch exit
             ;;
     esac
   '';
@@ -56,7 +60,7 @@ with config.colorScheme.palette; {
     executable = false;
     text = ''
       general {
-          gaps_in=5
+          gaps_in=4
           gaps_out=3
           border_size=2
           col.active_border=rgba(${base09}99) rgba(${base08}99) 45deg
