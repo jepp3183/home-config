@@ -187,7 +187,6 @@ with config.colorScheme.palette; {
       # ===========================================
       $mainMod = SUPER
 
-      bind = $mainMod, M, exit, 
       bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
 
