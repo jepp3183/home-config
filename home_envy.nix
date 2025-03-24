@@ -57,6 +57,7 @@ in
     ./configs/vscode.nix
     ./configs/yazi.nix
     ./configs/zellij.nix
+    ./configs/posting.nix
   ];
 
   # https://tinted-theming.github.io/tinted-gallery/
