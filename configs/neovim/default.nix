@@ -45,17 +45,13 @@ in
     plenary-nvim
     nui-nvim
     nvim-lspconfig
-    cmp-nvim-lsp
-    nvim-cmp
     luasnip
-    cmp_luasnip
-    cmp-buffer
-    cmp-async-path
     dressing-nvim
     ansible-vim
     diffview-nvim
     nvim-notify
-    
+    blink-cmp
+
     { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
