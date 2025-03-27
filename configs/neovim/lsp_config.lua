@@ -76,6 +76,15 @@ require 'lspconfig'.lua_ls.setup {
 }
 
 require('blink.cmp').setup({
+  sources = {
+    default = { 'avante', 'lsp', 'path', 'snippets', 'buffer' },
+    providers = {
+      avante = {
+        module = 'blink-cmp-avante',
+        name = 'Avante',
+      }
+    }
+  },
   keymap = {
     preset = 'super-tab',
     ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
@@ -97,7 +106,7 @@ require('blink.cmp').setup({
       auto_show_delay_ms = 0,
       update_delay_ms = 0,
     },
-  }
+  },
 })
 
 vim.diagnostic.config({

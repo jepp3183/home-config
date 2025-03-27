@@ -3,7 +3,7 @@ vim.keymap.set('n', 'q:', '<Nop>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
 vim.keymap.set('n', '<C-b>', function()
   require('neo-tree.command').execute({
-    action = 'focus',
+    toggle = true,
     source = 'last',
     position = 'left',
   })
@@ -20,45 +20,31 @@ vim.keymap.set('n', '<C-l>', vim.cmd.bnext)
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
--- -- Folding
--- local function cond_fold()
---   if not vim.opt.foldenable then
---     vim.api.nvim_set_option_value('foldenable', true, {scope='local'})
---   end
---
---   vim.api.nvim_feedkeys('za', 'n', false)
--- end
--- vim.opt.foldenable = false
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldtext = ""
--- vim.opt.foldlevel = 99
--- vim.keymap.set('n', '<tab>',cond_fold)
-
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Git
-vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gg", function () Snacks.lazygit() end, {noremap = true, silent = true, desc = "Lazygit"})
-vim.keymap.set("n", "<leader>go", function () Snacks.gitbrowse() end, {noremap = true, silent = true, desc = "Git Browse"})
-vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({full = true}) end, {desc = "blame line"})
-vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true})
-vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", {noremap = true, silent = true, desc = "Open Neogit"})
+vim.keymap.set("n", "<leader>gg", function () require('snacks').lazygit() end, {noremap = true, silent = true, desc = "Lazygit"})
+vim.keymap.set("n", "<leader>go", function () require('snacks').gitbrowse() end, {noremap = true, silent = true, desc = "Git Browse"})
+vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true, desc = "Neogit commit"})
+vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({full = true}) end, {desc = "Blame line"})
+vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true, desc = "Gitsigns blame"})
+vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true, desc = "Toggle current line blame"})
+vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", {noremap = true, silent = true, desc = "Stage buffer"})
+vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true, silent = true, desc = "Preview hunk"})
+vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true, desc = "Reset hunk"})
+vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true, desc = "Next hunk"})
+vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true, desc = "Previous hunk"})
 
 -- Ai Shit
-vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
--- Expand 'cc' into 'CodeCompanion' in the command line
-vim.cmd([[cab cc CodeCompanion]])
+--- Avante
+vim.keymap.set({ "n", "v" }, '<leader>aa', function() require("avante.api").ask() end, {desc = "avante: ask"})
+vim.keymap.set("v", '<leader>ar', function() require("avante.api").refresh() end, {desc = "avante: refresh"})
+vim.keymap.set("v", '<leader>ae', function() require("avante.api").edit() end, {desc = "avante: edit"})
+
+
 
 -- Telescope
 local fl = require('fzf-lua')

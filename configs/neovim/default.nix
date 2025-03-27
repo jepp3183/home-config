@@ -50,6 +50,7 @@ in
     ansible-vim
     diffview-nvim
     nvim-notify
+    blink-cmp-avante
     blink-cmp
 
     { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
@@ -67,18 +68,18 @@ in
         }
     '';}
 
-    { plugin = codecompanion-nvim; config = toLua /* lua */ ''
-        require("codecompanion").setup({
-          strategies = {
-            chat = {
-              adapter = "anthropic",
-            },
-            inline = {
-              adapter = "anthropic",
-            },
-          }
-        })
+    { plugin = avante-nvim; config = toLua /* lua */ ''
+      vim.opt.laststatus = 3
+      require('avante_lib').load()
+      require('avante').setup({
+        windows = {
+            ask = {
+                start_insert = false
+            }
+        }
+      })
     ''; }
+
 
     { plugin = fzf-lua; config = toLua /* lua */ ''
       require("fzf-lua").setup({
@@ -307,7 +308,7 @@ in
 
     { plugin = render-markdown-nvim; config = toLua /* lua */ ''
         require("render-markdown").setup({
-          file_types = { 'codecompanion' },
+          file_types = { 'Avante' },
         })
     ''; }
 
