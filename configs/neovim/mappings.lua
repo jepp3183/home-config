@@ -44,8 +44,6 @@ vim.keymap.set({ "n", "v" }, '<leader>aa', function() require("avante.api").ask(
 vim.keymap.set("v", '<leader>ar', function() require("avante.api").refresh() end, {desc = "avante: refresh"})
 vim.keymap.set("v", '<leader>ae', function() require("avante.api").edit() end, {desc = "avante: edit"})
 
-
-
 -- Telescope
 local fl = require('fzf-lua')
 local function lg(search)
@@ -63,13 +61,19 @@ vim.keymap.set('n', '<Leader>ff', fl.files, {desc="Find files"})
 vim.keymap.set('n', '<Leader>fg', function() lg("") end, {desc="Live grep"})
 vim.keymap.set('n', '<Leader>fb', fl.buffers, {desc="Buffers"})
 vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
+vim.keymap.set('n', '<leader>fm', function() fl.marks({marks="%a"}) end, {desc="Marks"})
 vim.keymap.set('n', '<Leader>fk', fl.keymaps, {desc="Keymaps"})
-vim.keymap.set('n', '<Leader>fc', function() fl.files({ cwd = "~/.config/home-manager" }) end, {desc="Config files"})
+vim.keymap.set('n', '<Leader>fc', fl.commands, {desc="Commands"})
+vim.keymap.set('n', '<Leader>fC', fl.command_history, {desc="Command history"})
 vim.keymap.set('n', '<Leader>fs', fl.lsp_document_symbols, {desc="Document symbols"})
 vim.keymap.set('n', '<Leader>fS', fl.lsp_workspace_symbols, {desc="Workspace symbols"})
 vim.keymap.set('n', '<Leader>fr', fl.lsp_references, {desc="References"})
 vim.keymap.set('n', '<Leader>fd', fl.diagnostics_document, {desc="Diagnostics"})
 vim.keymap.set('n', 'z=', fl.spell_suggest, {desc="Spell suggest"})
+
+vim.api.nvim_create_user_command('ConfigFind', function()
+  fl.files({ cwd = "~/.config/home-manager" })
+end, { desc = "Find files in config directory" })
 
 -- Grep for selection / operator-pending
 local function grep_visual_selection()
