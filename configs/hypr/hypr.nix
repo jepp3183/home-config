@@ -58,6 +58,10 @@ with config.colorScheme.palette; {
 
   services.kdeconnect.enable = true;
 
+  home.packages = [
+    pkgs.cliphist
+  ];
+
   home.file.".config/hypr/hyprland.conf" = {
     executable = false;
     text = ''
@@ -151,6 +155,8 @@ with config.colorScheme.palette; {
       exec-once=1password
       exec-once=kdeconnectd
       exec-once=kdeconnect-indicator
+      exec-once = wl-paste --type text --watch cliphist store # Stores only text data
+      exec-once = wl-paste --type image --watch cliphist store # Stores only image data
 
       # ===========================================
       # RULES + ENV
@@ -163,8 +169,6 @@ with config.colorScheme.palette; {
       windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
       windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
       windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
-      
-
       
       # windowrule=opacity 0.90,(wezterm|kitty)
       windowrulev2=workspace special:discord silent, class:^(discord)$
@@ -193,6 +197,7 @@ with config.colorScheme.palette; {
 
       bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area"
       bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
+      bind = SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl
 
       # Workspaces
       bind = $mainMod, O, movetoworkspace, special
