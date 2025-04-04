@@ -56,6 +56,8 @@ with config.colorScheme.palette; {
       };
   };
 
+  services.kdeconnect.enable = true;
+
   home.file.".config/hypr/hyprland.conf" = {
     executable = false;
     text = ''
@@ -147,6 +149,8 @@ with config.colorScheme.palette; {
       exec-once=[workspace special:qalc silent] kitty -e qalc
       exec-once=discord
       exec-once=1password
+      exec-once=kdeconnectd
+      exec-once=kdeconnect-indicator
 
       # ===========================================
       # RULES + ENV
