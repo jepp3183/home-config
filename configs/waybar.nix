@@ -19,10 +19,32 @@ in
         height = 30;
         spacing = 5;
 
+        "custom/notification" = {
+            tooltip = false;
+            format = "{}{icon}";
+            "format-icons" = {
+                notification = icon "󱅫";
+                none = icon "";
+                "dnd-notification" = icon "";
+                "dnd-none" = icon "󰂛";
+                "inhibited-notification" = icon "";
+                "inhibited-none" = icon "";
+                "dnd-inhibited-notification" = icon "";
+                "dnd-inhibited-none" = icon "";
+            };
+            "return-type" = "json";
+            "exec-if" = "which swaync-client";
+            exec = "swaync-client -swb";
+            "on-click" = "sleep 0.1 && swaync-client -t -sw";
+            "on-click-right" = "sleep 0.1 && swaync-client -d -sw";
+            escape = true;
+        };
+
+
         modules-left = ["hyprland/workspaces" "custom/media"];
         # modules-center = ["hyprland/window"];
         modules-center = ["clock"];
-        modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray"];
+        modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray" "custom/notification"];
 
         tray = {
             icon-size = 21;
@@ -211,7 +233,7 @@ in
 
       #clock, #battery, #cpu, #memory, #disk, #temperature, #backlight,
       #network, #pulseaudio, #wireplumber, #custom-media, #tray,
-      #mode, #idle_inhibitor, #scratchpad, #mpd {
+      #mode, #idle_inhibitor, #scratchpad, #mpd, #custom-notification {
         padding: 0px 10px;
       }
 

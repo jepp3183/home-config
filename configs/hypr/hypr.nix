@@ -64,7 +64,7 @@ with config.colorScheme.palette; {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     settings = {
       general = {
         gaps_in = 4;
@@ -151,6 +151,12 @@ with config.colorScheme.palette; {
         "float, title:(1Password)"
         "size 60% 60%, title:^(1Password)$"
         "center, title:(1Password)"
+        "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+        "noanim, class:^(xwaylandvideobridge)$"
+        "noinitialfocus, class:^(xwaylandvideobridge)$"
+        "maxsize 1 1, class:^(xwaylandvideobridge)$"
+        "noblur, class:^(xwaylandvideobridge)$"
+        "nofocus, class:^(xwaylandvideobridge)$"
       ];
       
       # Environment variables
@@ -267,7 +273,8 @@ with config.colorScheme.palette; {
         "waybar"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "nm-applet --indicator"
-        "dunst"
+        "swaync"
+        "systemctl --user start hyprpolkitagent"
         "insync start --qt-qpa-platform=xcb"
         "[workspace special:terminal silent] kitty"
         "[workspace special:qalc silent] kitty -e qalc"
