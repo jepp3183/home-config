@@ -62,222 +62,222 @@ with config.colorScheme.palette; {
     pkgs.cliphist
   ];
 
-  home.file.".config/hypr/hyprland.conf" = {
-    executable = false;
-    text = ''
-      general {
-          gaps_in=4
-          gaps_out=3
-          border_size=2
-          col.active_border=rgba(${base09}99) rgba(${base08}99) 45deg
-          col.inactive_border=rgba(${base01}99)
-          layout=dwindle
-          resize_on_border=true
-          gaps_workspaces=10
-      }
-      misc {
-          disable_hyprland_logo=true
-          force_default_wallpaper=0
-      }
-      decoration {
-        blur {
-          enabled=true
-          ignore_opacity=true
-          passes=2
-          size=8
-        }
-        shadow {
-          enabled=true
-            color=rgba(1a1a1aee)
-            render_power=3
-            range=4
-        }
-
-        rounding=5
-
-      }
-      input {
-        touchpad {
-          natural_scroll=true
-        }
-        follow_mouse=1
-        kb_layout=us,dk
-        kb_options=ctrl:nocaps,grp:alt_shift_toggle
-        repeat_delay=500
-        repeat_rate=30
-        sensitivity=0.2
-      }
-      # animations {
-      #   bezier=myBezier, 0.05, 0.9, 0.1, 1.05
-      #   animation=windows, 1, 7, myBezier
-      #   animation=windowsOut, 1, 7, default, popin 80%
-      #   animation=border, 1, 10, default
-      #   animation=borderangle, 1, 8, default
-      #   animation=fade, 1, 7, default
-      #   animation=workspaces, 1, 6, default
-      #   enabled=true
-      # }
-      animations {
-        enabled=1
-        # bezier=overshot,0.05,0.9,0.1,1.1
-        bezier=overshot,0.13,0.99,0.29,1.1
-        animation=windows,1,4,overshot,slide
-        animation=border,1,10,default
-        animation=fade,1,10,default
-        animation=workspaces,1,6,overshot,slidefade 20%
-      }
-
-      gestures {
-        workspace_swipe=true
-      }
-      dwindle {
-        pseudotile=true
-        preserve_split=true
-        smart_split=false
-        force_split=2
-        special_scale_factor=0.950000
-      }
-
-
-      # ===========================================
-      # EXECS
-      # ===========================================
-
-      exec=blueman-applet
-      exec-once=waybar
-      exec-once=${pkgs.hyprpaper}/bin/hyprpaper
-      exec-once=nm-applet --indicator
-      exec-once=dunst
-      exec-once=insync start --qt-qpa-platform=xcb
-      exec-once=[workspace special:terminal silent] kitty
-      exec-once=[workspace special:qalc silent] kitty -e qalc
-      exec-once=discord
-      exec-once=1password
-      exec-once=kdeconnectd
-      exec-once=kdeconnect-indicator
-      exec-once = wl-paste --type text --watch cliphist store # Stores only text data
-      exec-once = wl-paste --type image --watch cliphist store # Stores only image data
-
-      # ===========================================
-      # RULES + ENV
-      # ===========================================
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    settings = {
+      general = {
+        gaps_in = 4;
+        gaps_out = 3;
+        border_size = 2;
+        "col.active_border" = "rgba(${base09}99) rgba(${base08}99) 45deg";
+        "col.inactive_border" = "rgba(${base01}99)";
+        layout = "dwindle";
+        resize_on_border = true;
+        gaps_workspaces = 10;
+      };
       
-      # No gaps when only:
-      workspace = w[tv1], gapsout:0, gapsin:0
-      workspace = f[1], gapsout:0, gapsin:0
-      windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-      windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-      windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-      windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+      misc = {
+        disable_hyprland_logo = true;
+        force_default_wallpaper = 0;
+      };
       
-      # windowrule=opacity 0.90,(wezterm|kitty)
-      windowrulev2=workspace special:discord silent, class:^(discord)$
-      windowrulev2=workspace special:1password silent, class:^(1Password)$
-      windowrulev2=float, class:^(xdg-desktop-portal-gtk)$
-
-      windowrulev2 = float, title:(1Password)
-      windowrulev2 = size 60% 60%, title:^(1Password)$
-      windowrulev2 = center, title:(1Password)
-
-      env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-      env = HYPRCURSOR_SIZE,28
-
-      # ===========================================
-      # MONITORS
-      # ===========================================
-      monitor=eDP-1,1920x1080@60.033001,auto,1
-      monitor=desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1
-      monitor=desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1
-      monitor=, preferred, auto-up, 1
-
-      # ===========================================
-      # BINDS
-      # ===========================================
-      $mainMod = SUPER
-
-      bind = $mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c "XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area"
-      bind = ALT, SPACE, exec, ${file_opener}/bin/open.sh
-      bind = SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl
-
-      # Workspaces
-      bind = $mainMod, O, movetoworkspace, special
-      bind = $mainMod, P, togglespecialworkspace, 
-      bind = $mainMod, U, togglespecialworkspace, terminal
-      bind = $mainMod, Y, togglespecialworkspace, qalc
-      bind = $mainMod, F12, togglespecialworkspace, discord
-      bind = $mainMod, code:61, togglespecialworkspace, 1password
-
-      # RUN
-      bind = $mainMod, Return, exec, kitty
-      bind = $mainMod, B, exec, firefox
-      bind = $mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh
-      bind = $mainMod, SPACE, exec, ${launcher}/bin/launcher.sh
-
-      # LID CLOSE
-      bindl = ,switch:Lid Switch, exec, swaylock -i ${wallpaper}
+      decoration = {
+        blur = {
+          enabled = true;
+          ignore_opacity = true;
+          passes = 2;
+          size = 8;
+        };
+        shadow = {
+          enabled = true;
+          color = "rgba(1a1a1aee)";
+          render_power = 3;
+          range = 4;
+        };
+        rounding = 5;
+      };
       
-      # Brightness + Volume
-      bind = , XF86MonBrightnessDown, exec, brightnessctl s 10%-
-      bind = , XF86MonBrightnessUp, exec, brightnessctl s +10%
-      bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-      bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-      bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- -l 1.5
-      bind = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5
-      bind = , XF86AudioPlay, exec, playerctl play-pause
-      bind = , XF86AudioPrev, exec, playerctl previous
-      bind = , XF86AudioNext, exec, playerctl next
-
-      # OTHER WINDOW CONTROLS
-      bind = $mainMod, F, fullscreen, 0
-      bind = $mainMod, Q, killactive, 
-      bind = $mainMod+SHIFT, F, togglefloating, 
-      bind = $mainMod, T, togglesplit, # dwindle
-
-      # RESIZE WINDOW
-      bind = $mainMod, left, resizeactive, -50 0
-      bind = $mainMod, right, resizeactive, 50 0
-      bind = $mainMod, up, resizeactive, 0 -50
-      bind = $mainMod, down, resizeactive, 0 50
-
-      # MOVE FOCUS
-      bind = $mainMod, H, movefocus, l
-      bind = $mainMod, L, movefocus, r
-      bind = $mainMod, K, movefocus, u
-      bind = $mainMod, J, movefocus, d
-
-      # MOVE WINDOWS
-      bind = $mainMod+SHIFT, H, movewindow, l
-      bind = $mainMod+SHIFT, L, movewindow, r
-      bind = $mainMod+SHIFT, K, movewindow, u
-      bind = $mainMod+SHIFT, J, movewindow, d
-
-      # Move/resize windows with mainMod + LMB/RMB and dragging
-      bindm = $mainMod, mouse:272, movewindow
-      bindm = $mainMod, mouse:273, resizewindow
-
-      # Switch workspaces with mainMod + [0-9]
-      bind = $mainMod, 1, workspace, 1
-      bind = $mainMod, 2, workspace, 2
-      bind = $mainMod, 3, workspace, 3
-      bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, 5, workspace, 5
-      bind = $mainMod, 6, workspace, 6
-      bind = $mainMod, 7, workspace, 7
-      bind = $mainMod, 8, workspace, 8
-      bind = $mainMod, 9, workspace, 9
-      bind = $mainMod, 0, workspace, 10
-
-      # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
-      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
-      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
-      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
-      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
-      bind = $mainMod SHIFT, 6, movetoworkspacesilent, 6
-      bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
-      bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
-      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-      bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
-    '';
+      input = {
+        touchpad = {
+          natural_scroll = true;
+        };
+        follow_mouse = 1;
+        kb_layout = "us,dk";
+        kb_options = "ctrl:nocaps,grp:alt_shift_toggle";
+        repeat_delay = 500;
+        repeat_rate = 30;
+        sensitivity = 0.2;
+      };
+      
+      animations = {
+        enabled = 1;
+        bezier = "overshot,0.13,0.99,0.29,1.1";
+        animation = [
+          "windows,1,4,overshot,slide"
+          "border,1,10,default"
+          "fade,1,10,default"
+          "workspaces,1,6,overshot,slidefade 20%"
+        ];
+      };
+      
+      gestures = {
+        workspace_swipe = true;
+      };
+      
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+        smart_split = false;
+        force_split = 2;
+        special_scale_factor = 0.95;
+      };
+      
+      # Workspace configurations
+      workspace = [
+        "w[tv1], gapsout:0, gapsin:0"
+        "f[1], gapsout:0, gapsin:0"
+      ];
+      
+      # Window rules
+      windowrulev2 = [
+        "bordersize 0, floating:0, onworkspace:w[tv1]"
+        "rounding 0, floating:0, onworkspace:w[tv1]"
+        "bordersize 0, floating:0, onworkspace:f[1]"
+        "rounding 0, floating:0, onworkspace:f[1]"
+        "workspace special:discord silent, class:^(discord)$"
+        "workspace special:1password silent, class:^(1Password)$"
+        "float, class:^(xdg-desktop-portal-gtk)$"
+        "float, title:(1Password)"
+        "size 60% 60%, title:^(1Password)$"
+        "center, title:(1Password)"
+      ];
+      
+      # Environment variables
+      env = [
+        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        "HYPRCURSOR_SIZE,28"
+      ];
+      
+      # Monitor configurations
+      monitor = [
+        "eDP-1,1920x1080@60.033001,auto,1"
+        "desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1"
+        "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
+        ", preferred, auto-up, 1"
+      ];
+      
+      # Key bindings
+      "$mainMod" = "SUPER";
+      
+      bind = [
+        "$mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area\""
+        "ALT, SPACE, exec, ${file_opener}/bin/open.sh"
+        "SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl"
+        
+        # Workspaces
+        "$mainMod, O, movetoworkspace, special"
+        "$mainMod, P, togglespecialworkspace, "
+        "$mainMod, U, togglespecialworkspace, terminal"
+        "$mainMod, Y, togglespecialworkspace, qalc"
+        "$mainMod, F12, togglespecialworkspace, discord"
+        "$mainMod, code:61, togglespecialworkspace, 1password"
+        
+        # Run applications
+        "$mainMod, Return, exec, kitty"
+        "$mainMod, B, exec, firefox"
+        "$mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh"
+        "$mainMod, SPACE, exec, ${launcher}/bin/launcher.sh"
+        
+        # Brightness and volume controls
+        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl s +10%"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- -l 1.5"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+        
+        # Window controls
+        "$mainMod, F, fullscreen, 0"
+        "$mainMod, Q, killactive, "
+        "$mainMod+SHIFT, F, togglefloating, "
+        "$mainMod, T, togglesplit, # dwindle"
+        
+        # Resize window
+        "$mainMod, left, resizeactive, -50 0"
+        "$mainMod, right, resizeactive, 50 0"
+        "$mainMod, up, resizeactive, 0 -50"
+        "$mainMod, down, resizeactive, 0 50"
+        
+        # Move focus
+        "$mainMod, H, movefocus, l"
+        "$mainMod, L, movefocus, r"
+        "$mainMod, K, movefocus, u"
+        "$mainMod, J, movefocus, d"
+        
+        # Move windows
+        "$mainMod+SHIFT, H, movewindow, l"
+        "$mainMod+SHIFT, L, movewindow, r"
+        "$mainMod+SHIFT, K, movewindow, u"
+        "$mainMod+SHIFT, J, movewindow, d"
+        
+        # Switch workspaces
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
+        
+        # Move active window to workspace
+        "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
+        "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
+        "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
+        "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
+        "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
+        "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
+        "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
+        "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
+        "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
+        "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
+      ];
+      
+      bindl = [
+        ",switch:Lid Switch, exec, swaylock -i ${wallpaper}"
+      ];
+      
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+      
+      # Startup applications
+      exec = [
+        "blueman-applet"
+      ];
+      
+      "exec-once" = [
+        "waybar"
+        "${pkgs.hyprpaper}/bin/hyprpaper"
+        "nm-applet --indicator"
+        "dunst"
+        "insync start --qt-qpa-platform=xcb"
+        "[workspace special:terminal silent] kitty"
+        "[workspace special:qalc silent] kitty -e qalc"
+        "discord"
+        "1password"
+        "kdeconnectd"
+        "kdeconnect-indicator"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+      ];
+    };
   };
 }
