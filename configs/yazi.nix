@@ -35,6 +35,8 @@
                     { on = ["<C-s>"]; run = ''shell "$SHELL" --block --confirm''; desc = "Drop to shell";}
                     { on = ["g" "u"]; run = ''cd ~/GDrive/SkoleShit/UNI''; desc = "Go to UNI";}
                     { on = ["g" "p"]; run = ''cd ~/proj''; desc = "Go to proj";}
+                    { on = ["g" "/"]; run = ''cd ~/''; desc = "Go to home";}
+                    { on = ["g" "d"]; run = ''cd ~/Downloads''; desc = "Go to Downloads";}
                 ];
             };
         };
