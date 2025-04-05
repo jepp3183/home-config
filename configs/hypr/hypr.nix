@@ -100,17 +100,18 @@ with config.colorScheme.palette; {
         disable_hyprland_logo = true;
         force_default_wallpaper = 0;
         font_family = "FiraCode Nerd Font Mono";
+        vfr = true;
       };
       
       decoration = {
         blur = {
-          enabled = true;
+          enabled = false;
           ignore_opacity = true;
           passes = 2;
           size = 8;
         };
         shadow = {
-          enabled = true;
+          enabled = false;
           color = "rgba(1a1a1aee)";
           render_power = 3;
           range = 4;
@@ -134,9 +135,9 @@ with config.colorScheme.palette; {
         enabled = 1;
         bezier = "overshot,0.13,0.99,0.29,1.1";
         animation = [
-          "windows,1,4,overshot,slide"
-          "border,1,10,default"
-          "fade,1,10,default"
+          "windows,1,3,overshot,popin"
+          "border,1,5,default"
+          "fade,1,5,default"
           "workspaces,1,6,overshot,slidefade 20%"
         ];
       };

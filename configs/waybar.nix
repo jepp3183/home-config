@@ -41,10 +41,10 @@ in
         };
 
 
-        modules-left = ["hyprland/workspaces" "custom/media"];
+        modules-left = ["hyprland/workspaces"];
         # modules-center = ["hyprland/window"];
-        modules-center = ["clock"];
-        modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray" "custom/notification"];
+        modules-center = ["clock"  "custom/notification"];
+        modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray"];
 
         tray = {
             icon-size = 21;
@@ -103,13 +103,13 @@ in
             format = "{icon} {usage:2}%";
             format-icons =[(icon "")];
             tooltip = true;
-            on-click = "wezterm -e btop";
+            on-click = "kitty -e btop";
             interval = 5;
         };
         memory = {
             format = "{icon} {:2}%";
             format-icons = [(icon "")];
-            on-click = "wezterm -e btop";
+            on-click = "kitty -e btop";
             interval = 5;
         };
         battery = {
@@ -126,16 +126,18 @@ in
             format-icons = map (x: (icon x)) ["" "" "" "" ""];
         };
         network = {
-            format-wifi = "{bandwidthUpBytes} {icon} {bandwidthDownBytes}";
+            format-wifi = "{essid}-{signalStrength}%";
             format-icons = [(icon "⇅")];
-            format-ethernet = "{ipaddr}/{cidr}";
-            tooltip-format = "{ifname} via {gwaddr}";
+            format-ethernet = "{ifname}";
+            tooltip-format = ''
+            {ifname} = {ipaddr}/{cidr}
+            gateway: {gwaddr}
+            {bandwidthUpBytes} {icon} {bandwidthDownBytes}'';
             format-linked = "{ifname} (No IP)";
-            format-disconnected = "Disconnected ⚠";
-            format-alt = "{ifname} = {ipaddr}/{cidr}";
+            format-disconnected = "⚠";
+            format-alt = "{bandwidthUpBytes} {icon} {bandwidthDownBytes}";
             interval = 5;
             max-length = 20;
-            min-length = 20;
         };
         pulseaudio = {
             format = "{volume}% {icon} {format_source}";
