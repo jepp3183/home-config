@@ -105,9 +105,9 @@ with config.colorScheme.palette; {
         follow_mouse = 1;
         kb_layout = "us,dk";
         kb_options = "ctrl:nocaps,grp:alt_shift_toggle";
-        repeat_delay = 500;
-        repeat_rate = 30;
-        sensitivity = 0.2;
+        repeat_delay = 250;
+        repeat_rate = 40;
+        sensitivity = 0.4;
       };
       
       animations = {
