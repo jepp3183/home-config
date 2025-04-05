@@ -76,10 +76,30 @@ with config.colorScheme.palette; {
         resize_on_border = true;
         gaps_workspaces = 10;
       };
-      
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+        smart_split = false;
+        force_split = 2;
+        special_scale_factor = 0.95;
+      };
+
+      group = {
+        groupbar = {
+          font_size = 14;
+          gradients = true;
+          text_color = "rgba(${base00}ff)";
+          "col.active" = "rgba(${base0D}ff)";
+          "col.inactive" = "rgba(${base0C}ff)";
+          # text_offset = ???
+        };
+      };
+
       misc = {
         disable_hyprland_logo = true;
         force_default_wallpaper = 0;
+        font_family = "FiraCode Nerd Font Mono";
       };
       
       decoration = {
@@ -123,14 +143,6 @@ with config.colorScheme.palette; {
       
       gestures = {
         workspace_swipe = true;
-      };
-      
-      dwindle = {
-        pseudotile = true;
-        preserve_split = true;
-        smart_split = false;
-        force_split = 2;
-        special_scale_factor = 0.95;
       };
       
       # Workspace configurations
@@ -182,8 +194,8 @@ with config.colorScheme.palette; {
         "SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl"
         
         # Workspaces
-        "$mainMod, O, movetoworkspace, special"
-        "$mainMod, P, togglespecialworkspace, "
+        "$mainMod+SHIFT, 0, movetoworkspace, special"
+        "$mainMod, 0, togglespecialworkspace, "
         "$mainMod, U, togglespecialworkspace, terminal"
         "$mainMod, Y, togglespecialworkspace, qalc"
         "$mainMod, F12, togglespecialworkspace, discord"
@@ -211,6 +223,11 @@ with config.colorScheme.palette; {
         "$mainMod, Q, killactive, "
         "$mainMod+SHIFT, F, togglefloating, "
         "$mainMod, T, togglesplit, # dwindle"
+
+        ## Grouping
+        "$mainMod, G, togglegroup"
+        "$mainMod, O, changegroupactive, f"
+        "$mainMod, I, changegroupactive, b"
         
         # Resize window
         "$mainMod, left, resizeactive, -50 0"
@@ -225,10 +242,10 @@ with config.colorScheme.palette; {
         "$mainMod, J, movefocus, d"
         
         # Move windows
-        "$mainMod+SHIFT, H, movewindow, l"
-        "$mainMod+SHIFT, L, movewindow, r"
-        "$mainMod+SHIFT, K, movewindow, u"
-        "$mainMod+SHIFT, J, movewindow, d"
+        "$mainMod+SHIFT, H, movewindoworgroup, l"
+        "$mainMod+SHIFT, L, movewindoworgroup, r"
+        "$mainMod+SHIFT, K, movewindoworgroup, u"
+        "$mainMod+SHIFT, J, movewindoworgroup, d"
         
         # Switch workspaces
         "$mainMod, 1, workspace, 1"
@@ -240,7 +257,6 @@ with config.colorScheme.palette; {
         "$mainMod, 7, workspace, 7"
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
         
         # Move active window to workspace
         "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
@@ -252,7 +268,6 @@ with config.colorScheme.palette; {
         "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
         "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
         "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
-        "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
       ];
       
       bindl = [
