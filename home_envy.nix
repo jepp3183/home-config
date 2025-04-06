@@ -27,8 +27,8 @@ in
     qpdfview
     zed-editor
     firefox
-    inputs.ghostty.packages."${system}".default
     zotero
+    multiviewer-for-f1
 
     # CMD UTILS
     wl-clipboard

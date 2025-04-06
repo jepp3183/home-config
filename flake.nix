@@ -15,8 +15,6 @@
    };
 
     nix-colors.url = "github:misterio77/nix-colors";
-
-    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs:
