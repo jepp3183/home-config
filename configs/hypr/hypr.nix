@@ -87,12 +87,16 @@ with config.colorScheme.palette; {
 
       group = {
         groupbar = {
-          font_size = 14;
+          font_size = 15;
+          height = 18;
           gradients = true;
           text_color = "rgba(${base00}ff)";
           "col.active" = "rgba(${base0D}ff)";
           "col.inactive" = "rgba(${base0C}ff)";
           # text_offset = ???
+          indicator_height = 0;
+          gradient_rounding = 5;
+
         };
       };
 
