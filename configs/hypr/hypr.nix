@@ -96,7 +96,7 @@ with config.colorScheme.palette; {
           # text_offset = ???
           indicator_height = 0;
           gradient_rounding = 5;
-
+          gradient_round_only_edges = false;
         };
       };
 
