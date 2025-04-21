@@ -26,7 +26,7 @@ in
     ./configs/zellij.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
   # colorScheme = nix-colors-lib.colorSchemeFromPicture {
   #   path = ./files/lake.jpeg;
   #   kind = "dark";
