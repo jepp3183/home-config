@@ -36,7 +36,7 @@
     kubectl
     k9s
     aider-chat
-    jiq
+    jnv
 
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
