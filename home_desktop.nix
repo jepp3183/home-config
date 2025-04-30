@@ -29,6 +29,8 @@ in
     firefox
     zotero
     multiviewer-for-f1
+    keymapp
+    streamdeck-ui
 
     # CMD UTILS
     wl-clipboard
@@ -58,6 +60,24 @@ in
     ./configs/zellij.nix
     ./configs/posting.nix
   ];
+
+  wayland.windowManager.hyprland = {
+    settings = {
+        exec = [
+          "xrandr --output DP-3 --primary"
+        ];
+        exec-once = [
+          "streamdeck -n"
+        ];
+        monitor = [
+          "DP-3, highrr, 0x0, 1"
+          "HDMI-A-1, preferred, 2560x100, 1"
+        ];
+        bind = [
+          "$mainMod, code:51, togglespecialworkspace, discord"
+        ];
+    };
+  };
 
   # https://tinted-theming.github.io/tinted-gallery/
   # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
