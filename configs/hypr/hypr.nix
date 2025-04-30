@@ -132,7 +132,7 @@ with config.colorScheme.palette; {
         kb_options = "ctrl:nocaps,grp:alt_shift_toggle";
         repeat_delay = 250;
         repeat_rate = 40;
-        sensitivity = 0.4;
+        sensitivity = -0.4;
       };
       
       animations = {
@@ -163,7 +163,6 @@ with config.colorScheme.palette; {
         "bordersize 0, floating:0, onworkspace:f[1]"
         "rounding 0, floating:0, onworkspace:f[1]"
         "workspace special:discord silent, class:^(discord)$"
-        "workspace special:1password silent, class:^(1Password)$"
         "float, class:^(xdg-desktop-portal-gtk)$"
         "float, title:(1Password)"
         "size 60% 60%, title:^(1Password)$"
@@ -180,14 +179,7 @@ with config.colorScheme.palette; {
       env = [
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
         "HYPRCURSOR_SIZE,28"
-      ];
-      
-      # Monitor configurations
-      monitor = [
-        "eDP-1,1920x1080@60.033001,auto,1"
-        "desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1"
-        "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
-        ", preferred, auto-up, 1"
+        "NVD_BACKEND,direct"
       ];
       
       # Key bindings
@@ -204,7 +196,6 @@ with config.colorScheme.palette; {
         "$mainMod, U, togglespecialworkspace, terminal"
         "$mainMod, Y, togglespecialworkspace, qalc"
         "$mainMod, F12, togglespecialworkspace, discord"
-        "$mainMod, code:61, togglespecialworkspace, 1password"
         
         # Run applications
         "$mainMod, Return, exec, kitty"
@@ -299,7 +290,7 @@ with config.colorScheme.palette; {
         "[workspace special:terminal silent] kitty"
         "[workspace special:qalc silent] kitty -e qalc"
         "discord"
-        "1password"
+        "1password --silent"
         "kdeconnectd"
         "kdeconnect-indicator"
         "wl-paste --type text --watch cliphist store"

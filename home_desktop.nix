@@ -58,16 +58,6 @@ in
     ./configs/zellij.nix
     ./configs/posting.nix
   ];
-  wayland.windowManager.hyprland = {
-    settings = {
-      monitor = [
-        "eDP-1,1920x1080@60.033001,auto,1"
-        "desc:Acer Technologies XF270HU T78EE0048521, highrr, auto-up, 1"
-        "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
-        ", preferred, auto-up, 1"
-      ];
-    };
-  };
 
   # https://tinted-theming.github.io/tinted-gallery/
   # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;

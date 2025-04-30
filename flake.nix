@@ -22,13 +22,21 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."jeppe" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."jeppe@nixos-envy" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs;
           inherit system;
         };
         modules = [ ./home_envy.nix ];
+      };
+      homeConfigurations."jeppe@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit system;
+        };
+        modules = [ ./home_desktop.nix ];
       };
       homeConfigurations."jeppe_wsl" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
