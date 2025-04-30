@@ -59,6 +59,7 @@ in
     ./configs/yazi.nix
     ./configs/zellij.nix
     ./configs/posting.nix
+    ./configs/streamdeck_ui.nix
   ];
 
   wayland.windowManager.hyprland = {
