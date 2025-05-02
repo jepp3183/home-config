@@ -73,15 +73,15 @@
                             "state": 0,
                             "states": {
                                 "0": {
-                                    "text": "",
+                                    "text": "SPEAKER",
                                     "icon": "",
                                     "keys": "",
                                     "write": "",
-                                    "command": "",
+                                    "command": "pactl set-default-sink alsa_output.pci-0000_28_00.4.analog-stereo",
                                     "brightness_change": 0,
                                     "switch_page": 0,
                                     "switch_state": 0,
-                                    "text_vertical_align": "",
+                                    "text_vertical_align": "middle",
                                     "text_horizontal_align": "",
                                     "font": "",
                                     "font_color": "",
@@ -94,15 +94,15 @@
                             "state": 0,
                             "states": {
                                 "0": {
-                                    "text": "",
+                                    "text": "HEADSET",
                                     "icon": "",
                                     "keys": "",
                                     "write": "",
-                                    "command": "",
+                                    "command": "pactl set-default-sink alsa_output.usb-FiiO_DigiHug_USB_Audio-01.analog-stereo",
                                     "brightness_change": 0,
                                     "switch_page": 0,
                                     "switch_state": 0,
-                                    "text_vertical_align": "",
+                                    "text_vertical_align": "middle",
                                     "text_horizontal_align": "",
                                     "font": "",
                                     "font_color": "",
@@ -339,7 +339,7 @@
                         }
                     }
                 },
-                "display_timeout": 1800,
+                "display_timeout": 36000,
                 "brightness": 100,
                 "brightness_dimmed": 0,
                 "rotation": 0,
