@@ -66,6 +66,11 @@ in
         "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
         ", preferred, auto-up, 1"
       ];
+
+      device = {
+        name = "syna32a0:00-06cb:ce14-touchpad";
+        sensitivity = 0.4;
+      };
     };
   };
 
