@@ -29,7 +29,6 @@ in
     firefox
     zotero
     multiviewer-for-f1
-    keymapp
     streamdeck-ui
 
     # CMD UTILS
@@ -66,6 +65,7 @@ in
     settings = {
         exec = [
           "xrandr --output DP-3 --primary"
+          "hyprctl dispatch workspace 1"
         ];
         exec-once = [
           "streamdeck -n"
@@ -73,6 +73,9 @@ in
         monitor = [
           "DP-3, highrr, 0x0, 1"
           "HDMI-A-1, preferred, 2560x100, 1"
+        ];
+        workspace = [
+          "name:1, monitor:DP-3"
         ];
         bind = [
           "$mainMod, code:51, togglespecialworkspace, discord"
