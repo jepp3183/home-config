@@ -42,7 +42,7 @@ let
     esac
   '';
 
-  wallpaper = "${../../files/mountain.jpg}";
+  wallpaper = "${../../files/astronaut.png}";
 in
 with config.colorScheme.palette; {
 
