@@ -78,9 +78,6 @@ in
                 "10" = "10";
             };
             format = "{icon}";
-            persistent-workspaces = {
-              "*" = 5;
-            };
         };
         clock = {
         format = "${icon ""} {:%A,%e.%B ${icon "󰥔"} %R}";

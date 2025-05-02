@@ -253,6 +253,8 @@ with config.colorScheme.palette; {
         "$mainMod, 7, workspace, 7"
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
+        "$mainMod+CTRL, h, workspace, r-1"
+        "$mainMod+CTRL, l, workspace, r+1"
         
         # Move active window to workspace
         "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
