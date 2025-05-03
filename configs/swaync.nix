@@ -3,7 +3,7 @@
     services.swaync.enable = true;
     services.swaync.settings = {
       "$schema" = "/etc/xdg/swaync/configSchema.json";
-      positionX = "right";
+      positionX = "center";
       positionY = "top";
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
@@ -257,7 +257,7 @@
     .control-center {
       background: @cc-bg;
       border: 2px solid #34548a;
-      border-radius: 0px;
+      border-radius: 10px;
     }
 
     .control-center-list {
