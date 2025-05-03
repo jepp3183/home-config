@@ -42,7 +42,7 @@ let
     esac
   '';
 
-  wallpaper = config.custom.wallpaper;
+  wallpaper = "${config.custom.wallpaper}";
 in
 with config.colorScheme.palette; {
 
