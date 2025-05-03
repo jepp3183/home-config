@@ -44,6 +44,7 @@ in
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/options.nix
     ./configs/common.nix
     ./configs/git.nix
     ./configs/hypr/hypr.nix
@@ -57,6 +58,7 @@ in
     ./configs/yazi.nix
     ./configs/zellij.nix
     ./configs/posting.nix
+    ./configs/swaync.nix
   ];
   wayland.windowManager.hyprland = {
     settings = {
@@ -81,6 +83,9 @@ in
   #   path = ./files/dune.jpg;
   #   kind = "dark";
   # };
+  
+  # Wallpaper path that can be used by other modules
+  custom.wallpaper = ./files/astronaut.png;
 
   fonts.fontconfig.enable = true;
 

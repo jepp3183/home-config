@@ -1,4 +1,4 @@
-{ pkgs, config, input, ...}:
+{ pkgs, config, inputs, ...}:
 {
     services.swaync.enable = true;
     services.swaync.settings = {
@@ -66,7 +66,7 @@
             }
             {
               label = "󰌾";
-              command = "swaylock -i ${wallpaper}";
+              command = "swaylock -i ${config.custom.wallpaper}";
             }
             {
               label = "󰍃";

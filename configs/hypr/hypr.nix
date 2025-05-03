@@ -42,7 +42,7 @@ let
     esac
   '';
 
-  wallpaper = "${../../files/astronaut.png}";
+  wallpaper = config.custom.wallpaper;
 in
 with config.colorScheme.palette; {
 
