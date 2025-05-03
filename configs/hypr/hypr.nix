@@ -165,6 +165,7 @@ with config.colorScheme.palette; {
         "workspace special:discord silent, class:^(discord)$"
         "float, class:^(xdg-desktop-portal-gtk)$"
         "float, title:(1Password)"
+        "float, class:(.blueman-manager-wrapped)"
         "size 60% 60%, title:^(1Password)$"
         "center, title:(1Password)"
         "opacity 0.0 override, class:^(xwaylandvideobridge)$"
