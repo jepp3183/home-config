@@ -109,19 +109,24 @@ with config.colorScheme.palette; {
       
       decoration = {
         blur = {
-          enabled = false;
+          enabled = true;
           ignore_opacity = true;
           passes = 2;
-          size = 8;
+          size = 1;
         };
         shadow = {
-          enabled = false;
+          enabled = true;
           color = "rgba(1a1a1aee)";
           render_power = 3;
           range = 4;
         };
         rounding = 5;
       };
+
+      layerrule = [
+        "blur, waybar"
+        "ignorezero, waybar"
+      ];
       
       input = {
         touchpad = {
@@ -189,7 +194,7 @@ with config.colorScheme.palette; {
       bind = [
         "$mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area\""
         "ALT, SPACE, exec, ${file_opener}/bin/open.sh"
-        "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl"
+        "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
         "$mainMod, N, exec, swaync-client -t"
         
         # Workspaces
@@ -282,6 +287,7 @@ with config.colorScheme.palette; {
       # Startup applications
       exec = [
         "blueman-applet"
+        ''hyprctl hyprpaper reload ,"${wallpaper}"''
       ];
       
       "exec-once" = [
@@ -290,7 +296,7 @@ with config.colorScheme.palette; {
         "nm-applet --indicator"
         "swaync"
         "systemctl --user start hyprpolkitagent"
-        "insync start --qt-qpa-platform=xcb"
+        "insync start"
         "[workspace special:terminal silent] kitty"
         "[workspace special:qalc silent] kitty -e qalc"
         "discord"

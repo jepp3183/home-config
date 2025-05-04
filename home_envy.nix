@@ -85,7 +85,7 @@ in
   # };
   
   # Wallpaper path that can be used by other modules
-  custom.wallpaper = ./files/astronaut.png;
+  custom.wallpaper = ./files/lake.jpeg;
 
   fonts.fontconfig.enable = true;
 

@@ -2,9 +2,6 @@
 
 let
     icon = i: "<span size='x-large' rise='-1800'>${i}</span>";
-    sep = sep: list: 
-      pkgs.lib.strings.splitString "." (builtins.concatStringsSep ".${sep}." list);
-
     hexToRGBString = inputs.nix-colors.lib.conversions.hexToRGBString;
     hexToRGBA = alpha: hex: "rgba(${hexToRGBString "," hex}, ${builtins.toString alpha})";
 in
@@ -42,27 +39,12 @@ in
 
 
         modules-left = ["hyprland/workspaces"];
-        # modules-center = ["hyprland/window"];
         modules-center = ["clock"  "custom/notification"];
         modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray"];
 
         tray = {
             icon-size = 21;
             spacing = 10;
-        };
-        "custom/sep" = {
-          format = " ";
-        };
-        "custom/media" = {
-            exec = ''playerctl metadata 2> /dev/null \
-            | grep ':artist\|:title' \
-            | awk '{$1="";$2="";print $0}' \
-            | tr '\n' '-' \
-            | sed -e 's/  //g' -e 's/-$//g'  -e 's/-/ - /'
-            '';
-            format = "{}";
-            interval = 1;
-            max-length = 35;
         };
         "hyprland/workspaces" = {
             format-icons = {
@@ -157,11 +139,13 @@ in
       }; 
     };
 
-    style = with config.colorScheme.palette; ''
-      @define-color bg ${hexToRGBA 0.0 base00};
-      @define-color module-bg ${hexToRGBA 1 base0D};
-      @define-color text-color #${base01};
+    style = with config.colorScheme.palette; /*css*/''
+      @define-color bg ${hexToRGBA 0 base00};
+      @define-color module-bg ${hexToRGBA 0.6 base00};
+      /* @define-color text-color #${base01}; */
+      @define-color text-color #${base06};
       @define-color hover-color #${base05};
+      @define-color urgent-color #eb4d4b;
 
       * {
           font-family: FiraCode Nerd Font Mono;
@@ -175,44 +159,31 @@ in
           transition-duration: .2s;
       }
 
-      window#waybar.empty {
-          background-color: transparent;
-      }
-
-     .modules-right > *, .modules-center > *, #custom-media  {
-        color: @text-color;
-        background-color: @module-bg;
-        border-radius: 12px;
-     }
-
-     .modules-right, .modules-left, .modules-center  {
+      .modules-right, .modules-left, .modules-center  {
         margin: 5px 5px;
       }
 
-      button {
-          /* Use box-shadow instead of border so the text isn't offset */
-          box-shadow: inset 0 -3px transparent;
-          /* Avoid rounded borders under each button name */
-          border: none;
-          border-radius: 0;
+      .modules-right > * > *, .modules-center > * > * {
+        color: @text-color;
+        background-color: @module-bg;
+        border-radius: 8px;
+        padding: 0px 10px;
       }
 
       #workspaces {
         background-color: transparent;
-        margin-right: 5px
       }
 
       #workspaces button {
           margin: 0px 2px;
           color: @text-color;
           background-color: @module-bg;
-          border-radius: 50%;
-          font-size: 18px;
-          font-weight: 700;
+          border-radius: 8px;
       }
 
       #workspaces button.active, #workspaces button.active.persistent {
           background-color: #${base0B};
+          color: #${base01};
           transition-property: background-color;
           transition-duration: .3s;
       }
@@ -221,38 +192,13 @@ in
         background: @hover-color;
       }
 
-      #workspaces button > * {
-          font-size: 18px;
-          font-weight: 700;
-      }
-
-      #workspaces button.empty {
-          background-color: transparent;
-      }
-
-      #clock, #battery, #cpu, #memory, #disk, #temperature, #backlight,
-      #network, #pulseaudio, #wireplumber, #custom-media, #tray,
-      #mode, #idle_inhibitor, #scratchpad, #mpd, #custom-notification {
-        padding: 0px 10px;
-      }
-
-
-
-      #custom-sep {
-        background-color: rgba(16, 22, 26, 1.0);
-        margin: 0px -2px;
-      }  
-
-      #custom-media {
-        font-size: 14px;
-      }
-
+      /* SPECIAL PROPERTIES */
       #workspaces button.urgent {
-          background-color: #eb4d4b;
+          background-color: @urgent-color;
       }
 
       #network.disconnected {
-          color: #f53c3c;
+          color: @urgent-color;
       }
 
       @keyframes blink {
@@ -262,7 +208,7 @@ in
       }
 
       #battery.critical:not(.charging) {
-          color: #f53c3c;
+          color: @urgent-color;
           animation-name: blink;
           animation-duration: 0.5s;
           animation-timing-function: linear;
@@ -272,7 +218,7 @@ in
 
       #tray > .needs-attention {
           -gtk-icon-effect: highlight;
-          background-color: #eb4d4b;
+          background-color: @urgent-color;
       }
 
       /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
