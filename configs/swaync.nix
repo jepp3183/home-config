@@ -11,12 +11,12 @@
       notification-icon-size = 64;
       notification-body-image-height = 100;
       notification-body-image-width = 200;
-      timeout = 10;
-      timeout-low = 5;
+      timeout = 5;
+      timeout-low = 2;
       timeout-critical = 0;
       fit-to-screen = false;
       control-center-width = 500;
-      control-center-height = 1033;
+      control-center-height = 1000;
       notification-window-width = 500;
       keyboard-shortcuts = true;
       image-visibility = "when-available";
@@ -27,6 +27,7 @@
       widgets = [
         "buttons-grid"
         "volume"
+        "dnd"
         "backlight"
         "mpris"
       ];
@@ -86,14 +87,6 @@
               command = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
               type = "toggle";
             }
-            {
-              label = "󰖩";
-              command = "iwgtk";
-            }
-            {
-              label = "󰂯";
-              command = "blueman-manager";
-            }
           ];
         };
       };
@@ -113,7 +106,7 @@
     @define-color bg-selected rgb(0, 128, 255);
 
     * {
-      font-family: JetBrainsMono NFM SemiBold;
+      font-family: FiraCode Nerd Font Mono;
     }
 
     .control-center .notification-row:focus,
@@ -126,13 +119,18 @@
       outline: none;
       margin: 0px;
       padding: 0px;
+      background: @cc-bg;
     }
 
     .notification {
       background: @cc-bg;
       border: 2px solid #34548a;
       border-radius: 0px;
-      margin: 3px -2px 3px 0px;
+      margin-right: -2px;
+    }
+
+    .notification-group {
+      background: @cc-bg;
     }
 
     .notification-content {
@@ -163,7 +161,7 @@
     }
 
     .notification-action {
-      border: 2px solid #34548a;
+      border: none;
       border-top: none;
       border-radius: 0px;
     }
@@ -182,16 +180,6 @@
     .notification-default-action:not(:only-child) {
       border-bottom-left-radius: 7px;
       border-bottom-right-radius: 7px;
-    }
-
-    .notification-action:first-child {
-      border-bottom-left-radius: 10px;
-      background: #1b1b2b;
-    }
-
-    .notification-action:last-child {
-      border-bottom-right-radius: 10px;
-      background: #1b1b2b;
     }
 
     .inline-reply {
@@ -257,7 +245,7 @@
     .control-center {
       background: @cc-bg;
       border: 2px solid #34548a;
-      border-radius: 10px;
+      border-radius: 0px;
     }
 
     .control-center-list {
@@ -303,7 +291,7 @@
       background: @noti-bg-darker;
       padding: 5px 10px;
       margin: 5px 10px;
-      border-radius: 5px;
+      border-radius: 0px;
       font-size: large;
       color: #7aa2f7;
     }
