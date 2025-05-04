@@ -189,7 +189,8 @@ with config.colorScheme.palette; {
       bind = [
         "$mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area\""
         "ALT, SPACE, exec, ${file_opener}/bin/open.sh"
-        "SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl"
+        "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && ${pkgs.wtype}/bin/wtype -M ctrl -k v -m ctrl"
+        "$mainMod, N, exec, swaync-client -t"
         
         # Workspaces
         "$mainMod+SHIFT, 0, movetoworkspace, special"

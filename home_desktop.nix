@@ -110,6 +110,7 @@ in
     "image/jpeg" = "qimgv.desktop";
     "image/png" = "qimgv.desktop";
     "image/gif" = "qimgv.desktop";
+    "inode/directory" = "org.kde.dolphin.desktop";
   };
   
   home.stateVersion = "23.05";
