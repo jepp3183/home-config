@@ -296,7 +296,6 @@ with config.colorScheme.palette; {
         "nm-applet --indicator"
         "swaync"
         "systemctl --user start hyprpolkitagent"
-        "insync start"
         "[workspace special:terminal silent] kitty"
         "[workspace special:qalc silent] kitty -e qalc"
         "discord"
