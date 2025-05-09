@@ -29,6 +29,7 @@ in
     firefox
     zotero
     multiviewer-for-f1
+    gimp
 
     # CMD UTILS
     wl-clipboard
@@ -67,6 +68,10 @@ in
         "desc:Acer Technologies XF270HU T78EE0048521, 2560x1440@144.01Hz, auto-right, 1"
         "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
         ", preferred, auto-up, 1"
+      ];
+
+      env = [
+        "GSK_RENDERER,ngl" 
       ];
 
       device = {
