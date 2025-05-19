@@ -66,7 +66,6 @@ in
       monitor = [
         "eDP-1,1920x1080@60.033001,auto,1"
         "desc:Acer Technologies XF270HU T78EE0048521, 2560x1440@144.01Hz, auto-right, 1"
-        "desc:Seiko Epson Corporation EPSON PJ 0x0101010, 1920x1200@59.95Hz, auto-up, 1"
         ", preferred, auto-up, 1"
       ];
 
