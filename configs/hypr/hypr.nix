@@ -141,7 +141,7 @@ with config.colorScheme.palette; {
       };
       
       animations = {
-        enabled = 1;
+        enabled = 0;
         bezier = "overshot,0.13,0.99,0.29,1.1";
         animation = [
           "windows,1,3,overshot,popin"
