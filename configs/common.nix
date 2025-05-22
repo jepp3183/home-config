@@ -37,6 +37,7 @@
     k9s
     aider-chat
     jnv
+    ripgrep-all
 
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
