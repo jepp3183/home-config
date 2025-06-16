@@ -16,7 +16,6 @@ local standard_servers = {
   "yamlls",
   "docker_compose_language_service",
   "dockerls",
-  "elixirls",
   "fish_lsp",
   "tinymist",
 }
