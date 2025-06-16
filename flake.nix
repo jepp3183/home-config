@@ -45,7 +45,7 @@
         };
         modules = [ ./home_wsl.nix ];
       };
-      homeConfigurations."jeppe_qarma" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."jeppe@jeppe-qarma-ThinkPad" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs;

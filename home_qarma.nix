@@ -11,26 +11,12 @@ in
     ];
   };
 
-  home.username = "jeppe_qarma";
-  home.homeDirectory = "/home/jeppe_qarma";
+  home.username = "jeppe";
+  home.homeDirectory = "/home/jeppe";
   home.packages = with pkgs; [
-    # GUI Packages
-    brave
-    inputs.zen-browser.packages."${system}".specific
-    spotify
-    vscode
-    zed-editor
-    ark
-
     # CMD UTILS
     wl-clipboard
-
-    # PYTHON
-    (python3.withPackages(ps: with ps; [ 
-      numpy
-      matplotlib
-      ipython
-    ]))
+    awscli2
   ];
 
   imports = [
@@ -41,7 +27,13 @@ in
     ./configs/neovim
     ./configs/kitty.nix
     ./configs/vscode.nix
+    ./configs/zellij.nix
+    ./configs/posting.nix
   ];
+
+  programs.fish.interactiveShellInit = ''
+      source ~/.asdf/asdf.fish
+  '';
 
   programs.git = {
     enable = true;
@@ -52,7 +44,7 @@ in
     };
   };
 
-  colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
+  colorScheme = inputs.nix-colors.colorSchemes.onedark;
 
   fonts.fontconfig.enable = true;
 
