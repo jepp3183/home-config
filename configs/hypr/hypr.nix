@@ -137,7 +137,7 @@ with config.colorScheme.palette; {
         kb_options = "ctrl:nocaps,grp:alt_shift_toggle";
         repeat_delay = 250;
         repeat_rate = 40;
-        sensitivity = -0.4;
+        sensitivity = -0.6;
       };
       
       animations = {
