@@ -24,6 +24,9 @@ vim.opt.mouse = "a"
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+-- Causes slow startup time!
+vim.g.editorconfig = false
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern ={"typst", "markdown"},
     callback = function ()
