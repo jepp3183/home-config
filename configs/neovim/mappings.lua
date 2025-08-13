@@ -57,17 +57,14 @@ local function lg(search)
     }
   })
 end
-
-local file_opts = {
-  winopts = {
-    preview = {
-      layout = 'vertical',
-      vertical = 'down:60%',
-    },
-  },
-}
-vim.keymap.set('n', '<Leader>ff', function() fl.files(file_opts) end, {desc="Find files"})
-vim.keymap.set('n', '<Leader>fo', function() fl.oldfiles(file_opts) end, {desc="Find files"})
+vim.keymap.set('n', '<Leader>ff', function() fl.files({
+    winopts={
+      preview={
+        layout='vertical',
+        vertical='down:60%',
+      }
+    }
+  }) end, {desc="Find files"})
 vim.keymap.set('n', '<Leader>fg', function() lg("") end, {desc="Live grep"})
 vim.keymap.set('n', '<Leader>fb', fl.buffers, {desc="Buffers"})
 vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
