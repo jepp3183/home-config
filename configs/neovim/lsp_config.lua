@@ -41,7 +41,10 @@ require 'lspconfig'.harper_ls.setup {
 
 require 'lspconfig'.elixirls.setup {
   capabilities = lsp_capabilities,
-  cmd = { "elixir-ls" },
+  cmd = { "/home/jeppe/.nix-profile/bin/elixir-ls" },
+  root_dir = function()
+    return vim.fn.getcwd()
+  end,
 }
 
 require 'lspconfig'.tinymist.setup {

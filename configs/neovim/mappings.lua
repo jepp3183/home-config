@@ -24,6 +24,39 @@ vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+-- Intuitive directional resizing with Ctrl+Arrow
+local opts = { noremap = true, silent = true }
+
+local function smart_resize(dir)
+  local amount = vim.v.count1 * 3  -- default step = 2 cols/rows; use a count to change it
+  local cur = vim.api.nvim_get_current_win()
+  local neighbor = vim.fn.winnr(dir)
+  local has_neighbor = neighbor ~= 0
+
+  if has_neighbor then
+    -- Shrink the neighbor on that side so the current window grows toward it
+    vim.cmd('wincmd ' .. dir)
+    if dir == 'h' or dir == 'l' then
+      vim.cmd('vertical resize -' .. amount)
+    else
+      vim.cmd('resize -' .. amount)
+    end
+    vim.api.nvim_set_current_win(cur)
+  else
+    -- No neighbor on that side: just shrink this window
+    if dir == 'h' or dir == 'l' then
+      vim.cmd('vertical resize -' .. amount)
+    else
+      vim.cmd('resize -' .. amount)
+    end
+  end
+end
+
+vim.keymap.set('n', '<C-Left>',  function() smart_resize('h') end, opts)
+vim.keymap.set('n', '<C-Right>', function() smart_resize('l') end, opts)
+vim.keymap.set('n', '<C-Up>',    function() smart_resize('k') end, opts)
+vim.keymap.set('n', '<C-Down>',  function() smart_resize('j') end, opts)
+
 -- Git
 vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", {noremap = true, silent = true, desc = "Open Neogit"})
 vim.keymap.set("n", "<leader>gg", function () require('snacks').lazygit() end, {noremap = true, silent = true, desc = "Lazygit"})
