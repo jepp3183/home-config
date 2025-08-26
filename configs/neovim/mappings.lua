@@ -80,7 +80,7 @@ vim.keymap.set("v", '<leader>ae', function() require("avante.api").edit() end, {
 -- Telescope
 local fl = require('fzf-lua')
 local function lg(search)
-  fl.live_grep_glob({
+  fl.live_grep({
     search = search,
     winopts={
       preview={

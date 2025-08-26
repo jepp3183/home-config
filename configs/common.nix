@@ -35,7 +35,7 @@
     lazydocker
     kubectl
     k9s
-    aider-chat
+    # aider-chat
     jnv
     ripgrep-all
 

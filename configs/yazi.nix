@@ -18,7 +18,7 @@
         enableFishIntegration = true;
         settings = {
             # See https://yazi-rs.github.io/docs/configuration/yazi/
-            manager = {
+            mgr = {
                 sort_sensitive = false;
                 sort_dir_first = true;
                 linemode = "mtime";
@@ -30,7 +30,7 @@
         };
         keymap = {
             # See https://yazi-rs.github.io/docs/configuration/keymap/
-            manager = {
+            mgr = {
                 prepend_keymap = [
                     { on = ["<C-s>"]; run = ''shell "$SHELL" --block --confirm''; desc = "Drop to shell";}
                     { on = ["g" "u"]; run = ''cd ~/GDrive/SkoleShit/UNI''; desc = "Go to UNI";}

@@ -2,6 +2,8 @@
     "diagnostics.globals": [
         "_lazygit_toggle",
         "_lsp_lines_toggle",
-        "vim"
+        "vim",
+        "MiniFiles",
+        "MiniBufremove"
     ]
 }
