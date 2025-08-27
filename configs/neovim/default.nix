@@ -62,6 +62,15 @@ in
     { plugin = neogit; config = toLua /* lua */ ''require("neogit").setup()''; }
     { plugin = yazi-nvim; config = toLua /* lua */ ''require("yazi").setup()''; }
 
+    neotest-elixir
+    { plugin = neotest; config = toLua /* lua */ ''
+      require("neotest").setup({
+          adapters = {
+              require("neotest-elixir")({})
+          },
+      })
+    '';}
+
     { plugin = auto-session; config = toLua /* lua */ ''
         require("auto-session").setup {
           suppressed_dirs = { "~/", "~/proj", "~/Downloads", "/"},
@@ -82,11 +91,17 @@ in
 
 
     { plugin = fzf-lua; config = toLua /* lua */ ''
+      local actions = require("fzf-lua").actions
       require("fzf-lua").setup({
           winopts = {
               preview = {
                   delay = 0,
               }
+          },
+          actions = {
+            files = {
+              ["enter"] = actions.file_edit
+            }
           }
       })
     ''; }

@@ -20,6 +20,7 @@ vim.keymap.set('n', '<C-l>', vim.cmd.bnext)
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
+
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
@@ -71,7 +72,7 @@ vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = tru
 vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true, desc = "Next hunk"})
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true, desc = "Previous hunk"})
 
--- Ai Shit
+-- AI Tools
 --- Avante
 vim.keymap.set({ "n", "v" }, '<leader>aa', function() require("avante.api").ask() end, {desc = "avante: ask"})
 vim.keymap.set("v", '<leader>ar', function() require("avante.api").refresh() end, {desc = "avante: refresh"})
@@ -209,6 +210,20 @@ vim.keymap.set("n", "<space>rc", dap.run_to_cursor)
 vim.keymap.set("n", "<space>?", function()
   require("dapui").eval(nil, { enter = true })
 end)
+
+-- Testing
+local neotest = require("neotest")
+vim.keymap.set("n", "<leader>tr", function() neotest.run.run() end, {desc = "Run nearest test"})
+vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, {desc = "Run current file"})
+vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, {desc = "Toggle test summary"})
+vim.keymap.set("n", "<leader>to", function() neotest.output.open() end, {desc = "Open test output"})
+vim.keymap.set("n", "<leader>tp", function() neotest.output_panel.toggle() end, {desc = "Toggle output panel"})
+vim.keymap.set("n", "<leader>tl", function() neotest.run.run_last() end, {desc = "Run last test"})
+vim.keymap.set("n", "<leader>td", function() neotest.run.run({strategy = "dap"}) end, {desc = "Debug nearest test"})
+vim.keymap.set("n", "<leader>ta", function() neotest.run.attach() end, {desc = "Attach to nearest test"})
+vim.keymap.set("n", "<leader>tw", function() neotest.watch.toggle() end, {desc = "Toggle test watching"})
+vim.keymap.set("n", "]t", function() neotest.jump.next() end, {desc = "Jump to next test"})
+vim.keymap.set("n", "[t", function() neotest.jump.prev() end, {desc = "Jump to previous test"})
 
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
