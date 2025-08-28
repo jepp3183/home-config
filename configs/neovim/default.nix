@@ -64,6 +64,12 @@ in
 
     neotest-elixir
     { plugin = neotest; config = toLua /* lua */ ''
+      vim.api.nvim_create_autocmd("FileType", {
+          pattern = "neotest-*",
+          callback = function()
+              vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+          end
+      })
       require("neotest").setup({
           adapters = {
               require("neotest-elixir")({})
