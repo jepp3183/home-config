@@ -106,7 +106,8 @@ in
           },
           actions = {
             files = {
-              ["enter"] = actions.file_edit
+              ["enter"] = actions.file_edit,
+              ["alt-q"] = actions.file_sel_to_qf,
             }
           }
       })
