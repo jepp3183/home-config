@@ -108,6 +108,8 @@ in
             files = {
               ["enter"] = actions.file_edit,
               ["alt-q"] = actions.file_sel_to_qf,
+              ["ctrl-s"] = actions.file_split,
+              ["ctrl-v"] = actions.file_vsplit,
             }
           }
       })
