@@ -20,37 +20,40 @@
   outputs = { nixpkgs, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ ];
+      };
+      
+      # Helper function to create home manager configurations
+      mkHome = { modules, includeSystem ? true }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit inputs;
+          } // (if includeSystem then { inherit system; } else {});
+          inherit modules;
+        };
     in {
-      homeConfigurations."jeppe@nixos-envy" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit system;
+      homeConfigurations = {
+        "jeppe@nixos-envy" = mkHome {
+          modules = [ ./home_envy.nix ];
         };
-        modules = [ ./home_envy.nix ];
-      };
-      homeConfigurations."jeppe@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit system;
+        
+        "jeppe@nixos-desktop" = mkHome {
+          modules = [ ./home_desktop.nix ];
         };
-        modules = [ ./home_desktop.nix ];
-      };
-      homeConfigurations."jeppe_wsl" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
+        
+        "jeppe_wsl" = mkHome {
+          modules = [ ./home_wsl.nix ];
+          includeSystem = false;
         };
-        modules = [ ./home_wsl.nix ];
-      };
-      homeConfigurations."jeppe@jeppe-qarma-ThinkPad" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
+        
+        "jeppe@jeppe-qarma-ThinkPad" = mkHome {
+          modules = [ ./home_qarma.nix ];
+          includeSystem = false;
         };
-        modules = [ ./home_qarma.nix ];
       };
     };
 }
