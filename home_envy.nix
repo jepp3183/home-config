@@ -30,6 +30,7 @@ in
     zotero
     multiviewer-for-f1
     gimp
+    freecad
 
     # CMD UTILS
     wl-clipboard
