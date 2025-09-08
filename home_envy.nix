@@ -1,12 +1,37 @@
 {inputs, config, pkgs, ...}:
 let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
+
+  bambu-studio-appimage = pkgs.appimageTools.wrapType2 rec {
+    name = "BambuStudio";
+    pname = "bambustudio";
+    version = "02.00.01.50";
+    src = pkgs.fetchurl {
+      url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_ubuntu-24.04_v${version}.AppImage";
+      sha256 = "sha256-wB14wr3akLPmi5jVqiVFkGGHVjZeR6BeAYgvdGuhsSw=";
+    };
+    profile = ''
+      export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      export GIO_MODULE_DIR="${pkgs.glib-networking}/lib/gio/modules/"
+    '';
+    extraPkgs = pkgs: with pkgs; [
+      cacert
+      curl
+      glib
+      glib-networking
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      webkitgtk_4_1
+    ];
+  };
 in
 {
 
   nixpkgs.config = {
     permittedInsecurePackages = [
       "electron-25.9.0"
+      "libsoup-2.74.3"
     ];
   };
 
@@ -31,6 +56,9 @@ in
     multiviewer-for-f1
     gimp
     freecad
+
+    # 3D PRINTING
+    bambu-studio-appimage
 
     # CMD UTILS
     wl-clipboard
