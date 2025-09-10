@@ -30,6 +30,7 @@ in
     zotero
     multiviewer-for-f1
     streamdeck-ui
+    freecad
 
     # CMD UTILS
     wl-clipboard
@@ -61,6 +62,7 @@ in
     ./configs/posting.nix
     ./configs/streamdeck_ui.nix
     ./configs/swaync.nix
+    ./configs/bambu_studio.nix
   ];
 
   wayland.windowManager.hyprland = {

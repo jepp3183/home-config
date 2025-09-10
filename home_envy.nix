@@ -1,30 +1,6 @@
 {inputs, config, pkgs, ...}:
 let
   nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
-
-  bambu-studio-appimage = pkgs.appimageTools.wrapType2 rec {
-    name = "BambuStudio";
-    pname = "bambustudio";
-    version = "02.00.01.50";
-    src = pkgs.fetchurl {
-      url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_ubuntu-24.04_v${version}.AppImage";
-      sha256 = "sha256-wB14wr3akLPmi5jVqiVFkGGHVjZeR6BeAYgvdGuhsSw=";
-    };
-    profile = ''
-      export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      export GIO_MODULE_DIR="${pkgs.glib-networking}/lib/gio/modules/"
-    '';
-    extraPkgs = pkgs: with pkgs; [
-      cacert
-      curl
-      glib
-      glib-networking
-      gst_all_1.gst-plugins-bad
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-good
-      webkitgtk_4_1
-    ];
-  };
 in
 {
 
@@ -57,9 +33,6 @@ in
     gimp
     freecad
 
-    # 3D PRINTING
-    bambu-studio-appimage
-
     # CMD UTILS
     wl-clipboard
     ansible
@@ -89,6 +62,7 @@ in
     ./configs/zellij.nix
     ./configs/posting.nix
     ./configs/swaync.nix
+    ./configs/bambu_studio.nix
   ];
   wayland.windowManager.hyprland = {
     settings = {
