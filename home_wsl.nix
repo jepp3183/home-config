@@ -1,7 +1,4 @@
 {inputs, config, pkgs, ...}:
-let
-  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
-in
 {
   nixpkgs.config = {
     allowUnfree = true;

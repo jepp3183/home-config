@@ -84,9 +84,11 @@ in
       set -x ANSIBLE_STDOUT_CALLBACK yaml
       set -x NIXPKGS_ALLOW_UNFREE 1
 
-      set -x AIDER_MODEL claude-3-7-sonnet-latest
       if [ -e ~/.anthropic_api_key ] 
         set -x ANTHROPIC_API_KEY (cat ~/.anthropic_api_key)
+      end
+      if [ -e ~/.openrouter_api_key ] 
+        set -x OPENROUTER_API_KEY (cat ~/.openrouter_api_key)
       end
 
 
