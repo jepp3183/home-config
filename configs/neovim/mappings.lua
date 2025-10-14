@@ -1,24 +1,24 @@
 vim.g.mapleader = ' '
 vim.keymap.set('n', 'q:', '<Nop>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
-vim.keymap.set('n', '<C-b>', function()
-  require('neo-tree.command').execute({
-    toggle = true,
-    source = 'last',
-    position = 'left',
-  })
+vim.keymap.set('n', '<leader>e', function()
+  Snacks.explorer()
 end)
 vim.keymap.set('n', '-', MiniFiles.open, {desc = "Open mini.files"})
 
 local yazi = require('yazi')
 vim.keymap.set('n', '<C-y>', yazi.yazi, {desc = "Open yazi"})
 
-vim.keymap.set('', '<C-j>', '5j')
-vim.keymap.set('', '<C-k>', '5k')
-vim.keymap.set('n', '<C-h>', vim.cmd.bprev)
-vim.keymap.set('n', '<C-l>', vim.cmd.bnext)
+vim.keymap.set('n', 'H', vim.cmd.bprev)
+vim.keymap.set('n', 'L', vim.cmd.bnext)
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
+
+vim.keymap.set({"n", "t"}, "<C-/>",function() Snacks.terminal.toggle(nil, {win={position="float"}}) end, {desc="Toggle terminal"})
 
 -- Harpoon
 local harpoon = require('harpoon')
@@ -95,12 +95,6 @@ vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = tru
 vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true, desc = "Next hunk"})
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true, desc = "Previous hunk"})
 
--- AI Tools
---- Avante
-vim.keymap.set({ "n", "v" }, '<leader>aa', function() require("avante.api").ask() end, {desc = "avante: ask"})
-vim.keymap.set("v", '<leader>ar', function() require("avante.api").refresh() end, {desc = "avante: refresh"})
-vim.keymap.set("v", '<leader>ae', function() require("avante.api").edit() end, {desc = "avante: edit"})
-
 -- Telescope
 local fl = require('fzf-lua')
 local function lg(search)
@@ -123,7 +117,7 @@ vim.keymap.set('n', '<Leader>ff', function() fl.files({
     }
   }) end, {desc="Find files"})
 vim.keymap.set('n', '<Leader>fg', function() lg("") end, {desc="Live grep"})
-vim.keymap.set('n', '<Leader>fb', fl.buffers, {desc="Buffers"})
+vim.keymap.set('n', '<Leader>fb', function() fl.buffers({winopts={preview={horizontal='right:40%'}}}) end, {desc="Buffers"})
 vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
 vim.keymap.set('n', '<leader>fm', function() fl.marks({marks="%a"}) end, {desc="Marks"})
 vim.keymap.set('n', '<Leader>fk', fl.keymaps, {desc="Keymaps"})

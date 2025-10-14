@@ -1,5 +1,4 @@
 -- Options:
-vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.relativenumber = true
@@ -20,9 +19,10 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 8
 vim.opt.mouse = "a"
+vim.opt.shell = "fish"
 -- For which-key:
-vim.o.timeout = true
-vim.o.timeoutlen = 300
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
 
 -- Causes slow startup time!
 vim.g.editorconfig = false

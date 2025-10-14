@@ -14,7 +14,7 @@ in
     ansible-lint
     yaml-language-server
     docker-compose-language-service
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     ccls
     elixir-ls
     lldb
@@ -50,12 +50,10 @@ in
     ansible-vim
     diffview-nvim
     nvim-notify
-    blink-cmp-avante
     blink-cmp
 
     { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
-    { plugin = which-key-nvim; config = toLua /* lua */ ''require("which-key").setup()'';}
     { plugin = guess-indent-nvim; config = toLua /* lua */ ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua /* lua */ ''require("colorizer").setup()''; }
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
@@ -78,33 +76,18 @@ in
       })
     '';}
 
+    { plugin = which-key-nvim; config = toLua /* lua */ ''
+      require("which-key").setup {
+          preset = "modern",
+          delay = 100,
+      }
+    '';}
+
     { plugin = auto-session; config = toLua /* lua */ ''
         require("auto-session").setup {
           suppressed_dirs = { "~/", "~/proj", "~/Downloads", "/"},
         }
     '';}
-
-    { plugin = avante-nvim; config = toLua /* lua */ ''
-      vim.opt.laststatus = 3
-      require('avante_lib').load()
-      require('avante').setup({
-        windows = {
-            ask = {
-                start_insert = false
-            }
-        },
-        provider = "openrouter",
-        providers = {
-          openrouter = {
-            __inherited_from = 'openai',
-            endpoint = 'https://openrouter.ai/api/v1',
-            api_key_name = 'OPENROUTER_API_KEY',
-            model = 'anthropic/claude-sonnet-4',
-          },
-        },
-      })
-    ''; }
-
 
     { plugin = fzf-lua; config = toLua /* lua */ ''
       local actions = require("fzf-lua").actions
@@ -129,6 +112,26 @@ in
       require("snacks").setup({
         gitbrowse = {enabled = true},
         lazygit = {enabled = true},
+        input = {enabled = true},
+        explorer = {enabled = true},
+        indent = {
+          enabled = true,
+          animate = {
+            duration = {
+              step = 10,
+              total = 250,
+            }
+          }
+        },
+        scroll = {
+          enabled = true,
+          animate = {
+            duration = {
+              step = 7,
+              total = 150,
+            }
+          }
+        },
         dashboard = {
             enabled = true,
             keys = {
@@ -256,6 +259,7 @@ in
               ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
             },
           },
+          view = "mini",
           -- you can enable a preset for easier configuration
           presets = {
             bottom_search = true, -- use a classic bottom cmdline for search
@@ -347,12 +351,6 @@ in
         } 
     '';}
 
-    { plugin = render-markdown-nvim; config = toLua /* lua */ ''
-        require("render-markdown").setup({
-          file_types = { 'Avante' },
-        })
-    ''; }
-
     { plugin = markview-nvim; config = toLua /* lua */ ''
         require("markview").setup({
             preview = {
@@ -437,18 +435,11 @@ in
         require("bufferline").setup {
             options = {
                 diagnostics = "nvim_lsp",
+                close_command = function(n) Snacks.bufdelete(n) end,
                 diagnostics_indicator = function(count, level, diagnostics_dict, context)
                   local icon = level:match("error") and " " or " "
                   return " " .. icon .. count
-                end,
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "Neo-tree",
-                        highlight = "Directory",
-                        text_align = "left",
-                    },
-                }
+                end
             }
         }
         '';
@@ -458,11 +449,12 @@ in
       plugin = lualine-nvim;
       config = toLua /* lua */ ''
         require('lualine').setup {
-            extensions = {'fzf', 'neo-tree'},
+            extensions = {'fzf'},
             options = {
                 theme = 'base16',
                 component_separators = { left = "|", right = "|" },
                 section_separators = { left = "", right = "" },
+                globalstatus = true,
             },
             sections = {
                 lualine_a = {'mode'},
@@ -484,23 +476,7 @@ in
         }
         '';
     }
-    {
-      plugin = neo-tree-nvim;
-      config = toLua /* lua */ ''
-        require("neo-tree").setup({
-            source_selector = {
-                winbar = true
-            },
-            window = {
-                mappings = {
-                    ["l"] = "toggle_node",
-                    ["h"] = "close_node",
-                    ["<c-b>"] = "close_window"
-                },
-            }
-        })
-      '';
-    }
+    
     {
       plugin = nvim-treesitter.withAllGrammars;
       config = toLua /* lua */ ''

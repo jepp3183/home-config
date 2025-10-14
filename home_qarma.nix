@@ -41,7 +41,7 @@
     };
   };
 
-  colorScheme = inputs.nix-colors.colorSchemes.onedark;
+  colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-storm;
 
   fonts.fontconfig.enable = true;
 
