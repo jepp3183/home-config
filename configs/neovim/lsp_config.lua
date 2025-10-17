@@ -79,13 +79,7 @@ require 'lspconfig'.lua_ls.setup {
 
 require('blink.cmp').setup({
   sources = {
-    default = { 'avante', 'lsp', 'path', 'snippets', 'buffer' },
-    providers = {
-      avante = {
-        module = 'blink-cmp-avante',
-        name = 'Avante',
-      }
-    }
+    default = {'lsp', 'path', 'snippets', 'buffer' },
   },
   keymap = {
     preset = 'super-tab',

@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 let
   toLua = str: "lua << EOF\n${str}\nEOF\n";
-  toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  # toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
 in
 {
   home.packages = with pkgs; [
@@ -51,6 +51,7 @@ in
     diffview-nvim
     nvim-notify
     blink-cmp
+    cellular-automaton-nvim
 
     { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
     { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
@@ -451,7 +452,6 @@ in
         require('lualine').setup {
             extensions = {'fzf'},
             options = {
-                theme = 'base16',
                 component_separators = { left = "|", right = "|" },
                 section_separators = { left = "", right = "" },
                 globalstatus = true,
