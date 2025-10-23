@@ -151,9 +151,9 @@ with config.colorScheme.palette; {
         ];
       };
       
-      gestures = {
-        workspace_swipe = true;
-      };
+      gesture = [
+        "3, horizontal, workspace"
+      ]; 
       
       # Workspace configurations
       workspace = [
