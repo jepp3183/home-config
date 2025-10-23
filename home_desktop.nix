@@ -1,7 +1,4 @@
-{inputs, config, pkgs, ...}:
-let
-  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
-in
+{inputs, pkgs, ...}:
 {
 
   nixpkgs.config = {
@@ -88,12 +85,7 @@ in
   };
 
   # https://tinted-theming.github.io/tinted-gallery/
-  # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   colorScheme = inputs.nix-colors.colorSchemes.onedark;
-  # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./files/dune.jpg;
-  #   kind = "dark";
-  # };
   
   # Wallpaper path that can be used by other modules
   custom.wallpaper = ./files/dune.jpg;

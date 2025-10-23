@@ -1,4 +1,4 @@
-{inputs, config, pkgs, ...}:
+{inputs, pkgs, ...}:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -23,11 +23,8 @@
     ./configs/zellij.nix
   ];
 
+  # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
-  # colorScheme = nix-colors-lib.colorSchemeFromPicture {
-  #   path = ./files/lake.jpeg;
-  #   kind = "dark";
-  # };
 
   fonts.fontconfig.enable = true;
   programs.git = {

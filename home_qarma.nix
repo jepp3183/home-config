@@ -1,4 +1,4 @@
-{inputs, config, pkgs, ...}:
+{inputs, pkgs, ...}:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -41,6 +41,8 @@
     };
   };
 
+  
+  # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
 
   fonts.fontconfig.enable = true;

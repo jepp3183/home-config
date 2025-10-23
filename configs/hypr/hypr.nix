@@ -1,4 +1,4 @@
-{pkgs, config, inputs,...}:
+{pkgs, config, ...}:
 let 
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
