@@ -86,7 +86,7 @@ in
             interval = 5;
         };
         memory = {
-            format = "{icon} {:2}%";
+            format = "{1} {0:2}%";
             format-icons = [(icon "")];
             on-click = "kitty -e btop";
             interval = 5;
