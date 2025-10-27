@@ -33,6 +33,7 @@
     # CMD UTILS
     wl-clipboard
     ansible
+    claude-code
 
     # PYTHON
     (python3.withPackages(ps: with ps; [ 
