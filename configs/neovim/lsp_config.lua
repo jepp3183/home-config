@@ -1,8 +1,6 @@
 vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
 vim.diagnostic.config({
   signs = true,
-  virtual_text = true,
-  virtual_lines = false
 })
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()

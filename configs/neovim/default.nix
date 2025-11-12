@@ -54,7 +54,6 @@ in
     cellular-automaton-nvim
 
     { plugin = typst-preview-nvim; config = toLua /* lua */ ''require('typst-preview').setup()''; }
-    { plugin = lsp_lines-nvim; config = toLua /* lua */ ''require('lsp_lines').setup()'';}
     { plugin = guess-indent-nvim; config = toLua /* lua */ ''require("guess-indent").setup()''; }
     { plugin = nvim-colorizer-lua; config = toLua /* lua */ ''require("colorizer").setup()''; }
     { plugin = gitsigns-nvim; config = toLua /* lua */ ''require("gitsigns").setup()''; }
@@ -455,6 +454,21 @@ in
         }
         '';
     }
+
+    { plugin = tiny-inline-diagnostic-nvim; config = toLua /* lua */ ''
+      require("tiny-inline-diagnostic").setup({
+          preset = "amongus",
+          transparent_bg = false,
+          options = {
+            multilines = {
+              enabled = true
+            } 
+          }
+      })
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+    '';}
 
     {
       plugin = lualine-nvim;

@@ -173,21 +173,6 @@ vim.keymap.set('n', '<space>q', '<cmd>Trouble diagnostics toggle<cr>', {desc="Se
 vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float, {desc="Open diagnostic float"})
 
 -- LSP Shit
-local lsp_lines = false
-local _lsp_lines_toggle = function()
-  lsp_lines = not lsp_lines
-  if lsp_lines then
-    vim.diagnostic.config({
-      virtual_text = false,
-      virtual_lines = true,
-    })
-  else
-    vim.diagnostic.config({
-      virtual_text = true,
-      virtual_lines = false,
-    })
-  end
-end
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
@@ -202,7 +187,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, mkopts("Rename in buffer"))
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, mkopts("Signature help"))
     vim.keymap.set({ 'n', 'v' }, '<leader>la', fl.lsp_code_actions, mkopts("Code action"))
-    vim.keymap.set('n', '<leader>ll', _lsp_lines_toggle, mkopts("Toggle lsp_lines"))
     vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
     end, mkopts("Format buffer"))
