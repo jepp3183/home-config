@@ -306,6 +306,16 @@ in
             }
     '';}
 
+    { plugin = nvim-treesitter-context; config = toLua /* lua */ ''
+      require("treesitter-context").setup{
+        line_numbers = false,
+        multiwindow = true,
+        mode = 'cursor',
+        separator = nil,
+        multiline_threshold = 1,
+      }
+    '';}
+
     { plugin = nvim-treesitter-textobjects; config = toLua /* lua */ ''
         require'nvim-treesitter.configs'.setup {
           incremental_selection = {  
