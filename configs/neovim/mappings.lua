@@ -28,21 +28,6 @@ vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { des
 vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Harpoon: Go to file 3" })
 vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Harpoon: Go to file 4" })
 
--- -- Folding
--- local function cond_fold()
---   if not vim.opt.foldenable then
---     vim.api.nvim_set_option_value('foldenable', true, {scope='local'})
---   end
---
---   vim.api.nvim_feedkeys('za', 'n', false)
--- end
--- vim.opt.foldenable = false
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldtext = ""
--- vim.opt.foldlevel = 99
--- vim.keymap.set('n', '<tab>',cond_fold)
-
 -- yank to system clipboard!
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
