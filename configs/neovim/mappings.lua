@@ -18,7 +18,6 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
-vim.keymap.set({"n", "t"}, "<C-/>",function() Snacks.terminal.toggle(nil, {win={position="float"}}) end, {desc="Toggle terminal"})
 
 -- Harpoon
 local harpoon = require('harpoon')
