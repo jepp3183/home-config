@@ -89,31 +89,35 @@ in
         }
     '';}
 
-    { plugin = fzf-lua; config = toLua /* lua */ ''
-      local actions = require("fzf-lua").actions
-      require("fzf-lua").setup({
-          winopts = {
-              preview = {
-                  delay = 0,
-              }
-          },
-          actions = {
-            files = {
-              ["enter"] = actions.file_edit,
-              ["alt-q"] = actions.file_sel_to_qf,
-              ["ctrl-s"] = actions.file_split,
-              ["ctrl-v"] = actions.file_vsplit,
-            }
-          }
-      })
-    ''; }
-
     { plugin = snacks-nvim; config = toLua /* lua */ ''
       require("snacks").setup({
         gitbrowse = {enabled = true},
         lazygit = {enabled = true},
         input = {enabled = true},
         explorer = {enabled = true},
+        picker = {
+          enabled = true,
+          win = {
+            input = {
+              keys = {
+                ["<Esc>"] = { "close", mode = { "n", "i" } },
+              },
+            },
+          },
+          layouts = {
+            telescope = {
+              layout = {
+                box = "vertical",
+                { win = "input", height = 1, border = "bottom" },
+                {
+                  box = "horizontal",
+                  { win = "list", width = 0.4, border = "right" },
+                  { win = "preview", title = "{preview}", border = "none" },
+                },
+              },
+            },
+          },
+        },
         indent = {
           enabled = true,
           animate = {
@@ -139,7 +143,7 @@ in
               { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
               { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
               { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-              { icon = " ", key = "h", desc = "Config", action = ":lua require('fzf-lua').files({cwd = '~/.config/home-manager})" },
+              { icon = " ", key = "h", desc = "Config", action = ":lua Snacks.picker.pick('files', {cwd = '~/.config/home-manager'})" },
               { icon = " ", key = "q", desc = "Quit", action = ":qa" },
             },
             sections = {
@@ -474,7 +478,6 @@ in
       plugin = lualine-nvim;
       config = toLua /* lua */ ''
         require('lualine').setup {
-            extensions = {'fzf'},
             options = {
                 component_separators = { left = "|", right = "|" },
                 section_separators = { left = "", right = "" },

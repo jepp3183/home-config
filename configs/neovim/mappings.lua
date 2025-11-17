@@ -1,4 +1,7 @@
 vim.g.mapleader = ' '
+
+local Snacks = require("snacks")
+
 vim.keymap.set('n', 'q:', '<Nop>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
 vim.keymap.set('n', '<leader>e', function()
@@ -80,41 +83,39 @@ vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true, desc = "Previous hunk"})
 
 -- Telescope
-local fl = require('fzf-lua')
 local function lg(search)
-  fl.live_grep({
+  Snacks.picker.pick("grep", {
     search = search,
-    winopts={
-      preview={
-        layout='vertical',
-        vertical='up:50%',
+    layout = {
+      preset = "vertical",
+      layout = {
+        width = 0.75,
+        height = 0.9
       }
     }
   })
 end
-vim.keymap.set('n', '<Leader>ff', function() fl.files({
-    winopts={
-      preview={
-        layout='vertical',
-        vertical='down:60%',
-      }
-    }
-  }) end, {desc="Find files"})
-vim.keymap.set('n', '<Leader>fg', function() lg("") end, {desc="Live grep"})
-vim.keymap.set('n', '<Leader>fb', function() fl.buffers({winopts={preview={horizontal='right:40%'}}}) end, {desc="Buffers"})
-vim.keymap.set('n', '<Leader>fh', fl.help_tags, {desc="Help tags"})
-vim.keymap.set('n', '<leader>fm', function() fl.marks({marks="%a"}) end, {desc="Marks"})
-vim.keymap.set('n', '<Leader>fk', fl.keymaps, {desc="Keymaps"})
-vim.keymap.set('n', '<Leader>fc', fl.commands, {desc="Commands"})
-vim.keymap.set('n', '<Leader>fC', fl.command_history, {desc="Command history"})
-vim.keymap.set('n', '<Leader>fs', fl.lsp_document_symbols, {desc="Document symbols"})
-vim.keymap.set('n', '<Leader>fS', fl.lsp_workspace_symbols, {desc="Workspace symbols"})
-vim.keymap.set('n', '<Leader>fr', fl.lsp_references, {desc="References"})
-vim.keymap.set('n', '<Leader>fd', fl.diagnostics_document, {desc="Diagnostics"})
-vim.keymap.set('n', 'z=', fl.spell_suggest, {desc="Spell suggest"})
+vim.keymap.set('n', '<Leader>p', function()
+  Snacks.picker.pick("files", {
+    layout = "select",
+  })
+end, { desc = "Find files" })
+vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
+vim.keymap.set('n', '<Leader>fb', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
+vim.keymap.set('n', '<Leader>fh', function() Snacks.picker.pick("help", {layout="telescope"}) end, { desc = "Help tags" })
+vim.keymap.set('n', '<leader>fm', function() Snacks.picker.pick("marks") end, { desc = "Marks" })
+vim.keymap.set('n', '<Leader>fk', function() Snacks.picker.pick("keymaps") end, { desc = "Keymaps" })
+vim.keymap.set('n', '<Leader>fc', function() Snacks.picker.pick("commands", {layout="select"}) end, { desc = "Commands" })
+vim.keymap.set('n', '<Leader>fC', function() Snacks.picker.pick("command_history", {layout="select"}) end, { desc = "Command history" })
+vim.keymap.set('n', '<Leader>fs', function() Snacks.picker.pick("lsp_symbols") end, { desc = "Document symbols" })
+vim.keymap.set('n', '<Leader>fg', function() Snacks.picker.pick("git_status") end, { desc = "Git files" })
+vim.keymap.set('n', '<Leader>fS', function() Snacks.picker.pick("lsp_workspace_symbols") end, { desc = "Workspace symbols" })
+vim.keymap.set('n', '<Leader>fr', function() Snacks.picker.pick("lsp_references") end, { desc = "References" })
+vim.keymap.set('n', '<Leader>fd', function() Snacks.picker.pick("diagnostics") end, { desc = "Diagnostics" })
+vim.keymap.set('n', 'z=', function() Snacks.picker.pick("spelling") end, { desc = "Spell suggest" })
 
 vim.api.nvim_create_user_command('ConfigFind', function()
-  fl.files({ cwd = "~/.config/home-manager" })
+  Snacks.picker.pick("files", { cwd = "~/.config/home-manager" })
 end, { desc = "Find files in config directory" })
 
 -- Grep for selection / operator-pending
@@ -170,7 +171,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, mkopts("Hover info"))
     vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, mkopts("Rename in buffer"))
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, mkopts("Signature help"))
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', fl.lsp_code_actions, mkopts("Code action"))
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', function() Snacks.picker.pick("lsp_code_actions") end,
+      mkopts("Code action"))
     vim.keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
     end, mkopts("Format buffer"))
@@ -179,17 +181,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- DAP
 local dap = require('dap')
-vim.keymap.set('n', '<Leader>rr', function ()
-  fl.dap_configurations({
-    winopts={
-      preview={
-        layout='vertical',
-        vertical='up:50%',
-      }
-    }
+vim.keymap.set('n', '<Leader>rr', function()
+  Snacks.picker.pick("dap_configurations", {
+    layout = "vertical",
   })
-end, {desc="DAP configurations"})
-vim.keymap.set('n', '<Leader>rf', fl.dap_commands, {desc="DAP commands"})
+end, { desc = "DAP configurations" })
+vim.keymap.set('n', '<Leader>rf', function() Snacks.picker.pick("dap_commands") end, { desc = "DAP commands" })
 vim.keymap.set('n', '<Leader>rb', dap.toggle_breakpoint)
 vim.keymap.set("n", "<space>rc", dap.run_to_cursor)
 vim.keymap.set("n", "<space>?", function()
