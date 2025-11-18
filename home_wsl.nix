@@ -12,6 +12,7 @@
     wl-clipboard
     wireguard-tools
     ansible
+    claude-code
   ];
 
   imports = [
