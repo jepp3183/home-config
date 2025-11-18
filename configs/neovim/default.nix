@@ -97,6 +97,9 @@ in
         explorer = {enabled = true},
         picker = {
           enabled = true,
+          matcher = {
+            frecency = true
+          },
           win = {
             input = {
               keys = {

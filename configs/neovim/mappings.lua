@@ -96,9 +96,15 @@ local function lg(search)
   })
 end
 vim.keymap.set('n', '<Leader>p', function()
-  Snacks.picker.pick("files", {
+  local truncate_width = vim.api.nvim_win_get_width(0) * 0.5
+  Snacks.picker.files {
+    formatters = {
+      file = {
+        truncate = truncate_width,
+      },
+    },
     layout = "select",
-  })
+  }
 end, { desc = "Find files" })
 vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
 vim.keymap.set('n', '<Leader>fb', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
