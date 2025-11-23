@@ -1,11 +1,11 @@
-{config, ...}:
+{ config, ... }:
 {
   programs.zellij = {
-      enable = true;
-      enableFishIntegration = false;
+    enable = true;
+    enableFishIntegration = false;
   };
 
-  home.file.".config/zellij/config.kdl".text = with config.colorScheme.palette; /* KDL */''
+  home.file.".config/zellij/config.kdl".text = with config.colorScheme.palette; /* KDL */ ''
     show_startup_tips false
     pane_frames false
     // default_layout "compact"

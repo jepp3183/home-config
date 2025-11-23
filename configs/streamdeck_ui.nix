@@ -1,6 +1,11 @@
-{ pkgs, config, input, ...}:
 {
-  home.file.".streamdeck_ui.json".text = /* json */''
+  pkgs,
+  config,
+  input,
+  ...
+}:
+{
+  home.file.".streamdeck_ui.json".text = /* json */ ''
      {
         "state": {
             "AL49J2C03127": {

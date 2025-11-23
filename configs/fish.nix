@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 let
   dev_shell = pkgs.writeShellScriptBin "devshell" ''
     if [ -z "$1" ]
@@ -38,18 +38,27 @@ in
     ];
   };
   programs.atuin = {
-      enable = true;
-      enableFishIntegration = true;
-      flags = [
-        "--disable-up-arrow"
-      ];
+    enable = true;
+    enableFishIntegration = true;
+    flags = [
+      "--disable-up-arrow"
+    ];
   };
   programs.fish = {
     enable = true;
     plugins = [
-      { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-      { name = "plugin-git"; src = pkgs.fishPlugins.plugin-git.src; }
-      { name = "fzf"; src = pkgs.fishPlugins.fzf.src; }
+      {
+        name = "tide";
+        src = pkgs.fishPlugins.tide.src;
+      }
+      {
+        name = "plugin-git";
+        src = pkgs.fishPlugins.plugin-git.src;
+      }
+      {
+        name = "fzf";
+        src = pkgs.fishPlugins.fzf.src;
+      }
     ];
     shellAliases = {
       gg = "${pkgs.lazygit}/bin/lazygit";
@@ -78,63 +87,63 @@ in
       mc = "mix compile";
       stp = "kdeconnect-cli -n 'Galaxy Z Fold5' --share ";
     };
-    interactiveShellInit = /*fish*/''
-      set fish_greeting
+    interactiveShellInit = /* fish */ ''
+        set fish_greeting
 
-      set -x ANSIBLE_STDOUT_CALLBACK yaml
-      set -x NIXPKGS_ALLOW_UNFREE 1
+        set -x ANSIBLE_STDOUT_CALLBACK yaml
+        set -x NIXPKGS_ALLOW_UNFREE 1
 
-      if [ -e ~/.openrouter_api_key ] 
-        set -x OPENROUTER_API_KEY (cat ~/.openrouter_api_key)
+        if [ -e ~/.openrouter_api_key ] 
+          set -x OPENROUTER_API_KEY (cat ~/.openrouter_api_key)
+        end
+
+
+        bind \ck up-or-search
+
+        function yy
+          set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          yazi $argv --cwd-file="$tmp"
+          if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            cd "$cwd"
+          end
+          rm -f -- "$tmp"
+        end
+
+        function wt
+          set -l choice (git worktree list | awk '{print $1}' | fzf --with-nth -1 -d /)
+          if [ -n "$choice" ]
+            cd $choice
+          end
+        end
+
+       function cdl
+          set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
+          set -a dirs ~/proj/qarmainspect/backend/
+          set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
+          if [ -n "$choice" ]
+            cd $choice
+          end
+        end
+
+      function zellij_update_tabname
+          if set -q ZELLIJ
+              set current_dir $PWD
+              if test $current_dir = $HOME
+                  set current_dir "~"
+              else
+                  set current_dir (basename $current_dir)
+              end
+              nohup zellij action rename-tab $current_dir >/dev/null 2>&1
+          end
       end
 
-
-      bind \ck up-or-search
-
-      function yy
-        set tmp (mktemp -t "yazi-cwd.XXXXXX")
-        yazi $argv --cwd-file="$tmp"
-        if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-          cd "$cwd"
-        end
-        rm -f -- "$tmp"
+      # auto update tab name on directory change
+      function __auto_zellij_update_tabname --on-variable PWD --description "Update zellij tab name on directory change"
+          zellij_update_tabname
       end
 
-      function wt
-        set -l choice (git worktree list | awk '{print $1}' | fzf --with-nth -1 -d /)
-        if [ -n "$choice" ]
-          cd $choice
-        end
-      end
-
-     function cdl
-        set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
-        set -a dirs ~/proj/qarmainspect/backend/
-        set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
-        if [ -n "$choice" ]
-          cd $choice
-        end
-      end
-
-    function zellij_update_tabname
-        if set -q ZELLIJ
-            set current_dir $PWD
-            if test $current_dir = $HOME
-                set current_dir "~"
-            else
-                set current_dir (basename $current_dir)
-            end
-            nohup zellij action rename-tab $current_dir >/dev/null 2>&1
-        end
-    end
-
-    # auto update tab name on directory change
-    function __auto_zellij_update_tabname --on-variable PWD --description "Update zellij tab name on directory change"
-        zellij_update_tabname
-    end
-    
-    # Update on start as well
-    zellij_update_tabname
+      # Update on start as well
+      zellij_update_tabname
     '';
   };
 }

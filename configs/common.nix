@@ -1,4 +1,9 @@
-{inputs, config, pkgs, ...}:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 {
 
   nixpkgs.config = {
@@ -7,10 +12,10 @@
   };
 
   programs = {
-      direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   home.packages = with pkgs; [

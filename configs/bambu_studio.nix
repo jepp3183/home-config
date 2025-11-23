@@ -12,16 +12,17 @@ let
       export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
       export GIO_MODULE_DIR="${pkgs.glib-networking}/lib/gio/modules/"
     '';
-    extraPkgs = pkgs: with pkgs; [
-      cacert
-      curl
-      glib
-      glib-networking
-      gst_all_1.gst-plugins-bad
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-good
-      webkitgtk_4_1
-    ];
+    extraPkgs =
+      pkgs: with pkgs; [
+        cacert
+        curl
+        glib
+        glib-networking
+        gst_all_1.gst-plugins-bad
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-good
+        webkitgtk_4_1
+      ];
   };
 in
 {
@@ -34,9 +35,9 @@ in
     exec = "${bambu-studio-appimage}/bin/bambustudio -- %u";
     terminal = false;
     type = "Application";
-    categories = ["Science"];
+    categories = [ "Science" ];
     mimeType = [
-      "x-scheme-handler/bambustudio" 
+      "x-scheme-handler/bambustudio"
       "application/x-bambustudio"
       "application/bambustudio"
     ];

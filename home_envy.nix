@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{ inputs, pkgs, ... }:
 {
 
   nixpkgs.config = {
@@ -35,11 +35,13 @@
     claude-code
 
     # PYTHON
-    (python3.withPackages(ps: with ps; [ 
-      numpy
-      matplotlib
-      ipython
-    ]))
+    (python3.withPackages (
+      ps: with ps; [
+        numpy
+        matplotlib
+        ipython
+      ]
+    ))
   ];
 
   imports = [
@@ -72,7 +74,7 @@
       ];
 
       env = [
-        "GSK_RENDERER,ngl" 
+        "GSK_RENDERER,ngl"
       ];
 
       device = {
@@ -84,7 +86,7 @@
 
   # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.onedark;
-  
+
   # Wallpaper path that can be used by other modules
   custom.wallpaper = ./files/lake.jpeg;
 
@@ -97,7 +99,7 @@
     "image/png" = "qimgv.desktop";
     "image/gif" = "qimgv.desktop";
   };
-  
+
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
 }

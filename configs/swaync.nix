@@ -1,98 +1,103 @@
-{ pkgs, config, inputs, ...}:
 {
-    services.swaync.enable = true;
-    services.swaync.settings = {
-      "$schema" = "/etc/xdg/swaync/configSchema.json";
-      positionX = "center";
-      positionY = "top";
-      control-center-margin-top = 10;
-      control-center-margin-bottom = 10;
-      control-center-margin-right = 10;
-      notification-icon-size = 64;
-      notification-body-image-height = 100;
-      notification-body-image-width = 200;
-      timeout = 5;
-      timeout-low = 2;
-      timeout-critical = 0;
-      fit-to-screen = false;
-      control-center-width = 500;
-      control-center-height = 1000;
-      notification-window-width = 500;
-      keyboard-shortcuts = true;
-      image-visibility = "when-available";
-      transition-time = 200;
-      hide-on-clear = false;
-      hide-on-action = true;
-      script-fail-notify = true;
-      widgets = [
-        "buttons-grid"
-        "volume"
-        "dnd"
-        "backlight"
-        "mpris"
-      ];
-      widget-config = {
-        title = {
-          text = "Notification Center";
-          clear-all-button = true;
-          button-text = "󰆴 Clear";
-        };
-        dnd = {
-          text = "Do Not Disturb";
-        };
-        label = {
-          max-lines = 1;
-          text = "Notification Center";
-        };
-        mpris = {
-          image-size = 100;
-          image-radius = 0;
-          blacklist = [];
-        };
-        volume = {
-          label = "󰕾";
-        };
-        backlight = {
-          label = "󰃟";
-        };
-        buttons-grid = {
-          actions = [
-            {
-              label = "󰐥";
-              command = "systemctl poweroff";
-            }
-            {
-              label = "󰜉";
-              command = "systemctl reboot";
-            }
-            {
-              label = "󰌾";
-              command = "swaylock -i ${config.custom.wallpaper}";
-            }
-            {
-              label = "󰍃";
-              command = "hyprctl dispatch exit";
-            }
-            {
-              label = "󰆴";
-              command = "swaync-client -C";
-            }
-            {
-              label = "󰕾";
-              command = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-              type = "toggle";
-            }
-            {
-              label = "󰍬";
-              command = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-              type = "toggle";
-            }
-          ];
-        };
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
+{
+  services.swaync.enable = true;
+  services.swaync.settings = {
+    "$schema" = "/etc/xdg/swaync/configSchema.json";
+    positionX = "center";
+    positionY = "top";
+    control-center-margin-top = 10;
+    control-center-margin-bottom = 10;
+    control-center-margin-right = 10;
+    notification-icon-size = 64;
+    notification-body-image-height = 100;
+    notification-body-image-width = 200;
+    timeout = 5;
+    timeout-low = 2;
+    timeout-critical = 0;
+    fit-to-screen = false;
+    control-center-width = 500;
+    control-center-height = 1000;
+    notification-window-width = 500;
+    keyboard-shortcuts = true;
+    image-visibility = "when-available";
+    transition-time = 200;
+    hide-on-clear = false;
+    hide-on-action = true;
+    script-fail-notify = true;
+    widgets = [
+      "buttons-grid"
+      "volume"
+      "dnd"
+      "backlight"
+      "mpris"
+    ];
+    widget-config = {
+      title = {
+        text = "Notification Center";
+        clear-all-button = true;
+        button-text = "󰆴 Clear";
+      };
+      dnd = {
+        text = "Do Not Disturb";
+      };
+      label = {
+        max-lines = 1;
+        text = "Notification Center";
+      };
+      mpris = {
+        image-size = 100;
+        image-radius = 0;
+        blacklist = [ ];
+      };
+      volume = {
+        label = "󰕾";
+      };
+      backlight = {
+        label = "󰃟";
+      };
+      buttons-grid = {
+        actions = [
+          {
+            label = "󰐥";
+            command = "systemctl poweroff";
+          }
+          {
+            label = "󰜉";
+            command = "systemctl reboot";
+          }
+          {
+            label = "󰌾";
+            command = "swaylock -i ${config.custom.wallpaper}";
+          }
+          {
+            label = "󰍃";
+            command = "hyprctl dispatch exit";
+          }
+          {
+            label = "󰆴";
+            command = "swaync-client -C";
+          }
+          {
+            label = "󰕾";
+            command = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            type = "toggle";
+          }
+          {
+            label = "󰍬";
+            command = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            type = "toggle";
+          }
+        ];
       };
     };
+  };
 
-    services.swaync.style = /*css*/''
+  services.swaync.style = /* css */ ''
     @define-color cc-bg rgba(26, 27, 38, 1);
     @define-color noti-border-color rgba(255, 255, 255, 0.15);
     @define-color noti-bg rgb(17, 17, 27);
@@ -406,5 +411,5 @@
       font-size: 2rem;
       color: #7aa2f7;
     }
-    '';
+  '';
 }

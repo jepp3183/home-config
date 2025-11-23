@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{ inputs, pkgs, ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -29,7 +29,7 @@
   ];
 
   programs.fish.interactiveShellInit = ''
-      source ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
   '';
 
   programs.git = {
@@ -41,7 +41,6 @@
     };
   };
 
-  
   # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
 

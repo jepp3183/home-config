@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{ inputs, pkgs, ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -33,7 +33,7 @@
     userName = "Jeppe Allerslev";
     userEmail = "jeppeallerslev@gmail.com";
   };
-  
+
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
 }

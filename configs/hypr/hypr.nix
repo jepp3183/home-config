@@ -1,5 +1,5 @@
-{pkgs, config, ...}:
-let 
+{ pkgs, config, ... }:
+let
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
     file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
@@ -44,16 +44,17 @@ let
 
   wallpaper = "${config.custom.wallpaper}";
 in
-with config.colorScheme.palette; {
+with config.colorScheme.palette;
+{
 
   services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [
-          wallpaper
-        ];
-        wallpaper = ", ${wallpaper}";
-      };
+    enable = true;
+    settings = {
+      preload = [
+        wallpaper
+      ];
+      wallpaper = ", ${wallpaper}";
+    };
   };
 
   services.kdeconnect.enable = true;
@@ -106,7 +107,7 @@ with config.colorScheme.palette; {
         font_family = "FiraCode Nerd Font Mono";
         vfr = true;
       };
-      
+
       decoration = {
         blur = {
           enabled = true;
@@ -127,7 +128,7 @@ with config.colorScheme.palette; {
         "blur, waybar"
         "ignorezero, waybar"
       ];
-      
+
       input = {
         touchpad = {
           natural_scroll = true;
@@ -139,7 +140,7 @@ with config.colorScheme.palette; {
         repeat_rate = 40;
         sensitivity = -0.6;
       };
-      
+
       animations = {
         enabled = 0;
         bezier = "overshot,0.13,0.99,0.29,1.1";
@@ -150,17 +151,17 @@ with config.colorScheme.palette; {
           "workspaces,1,6,overshot,slidefade 20%"
         ];
       };
-      
+
       gesture = [
         "3, horizontal, workspace"
-      ]; 
-      
+      ];
+
       # Workspace configurations
       workspace = [
         "w[tv1], gapsout:0, gapsin:0"
         "f[1], gapsout:0, gapsin:0"
       ];
-      
+
       # Window rules
       windowrulev2 = [
         "bordersize 0, floating:0, onworkspace:w[tv1]"
@@ -177,36 +178,36 @@ with config.colorScheme.palette; {
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
       ];
-      
+
       # Environment variables
       env = [
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
         "HYPRCURSOR_SIZE,28"
         "NVD_BACKEND,direct"
       ];
-      
+
       # Key bindings
       "$mainMod" = "SUPER";
-      
+
       bind = [
         "$mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area\""
         "ALT, SPACE, exec, ${file_opener}/bin/open.sh"
         "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
         "$mainMod, N, exec, swaync-client -t"
-        
+
         # Workspaces
         "$mainMod+SHIFT, 0, movetoworkspace, special"
         "$mainMod, 0, togglespecialworkspace, "
         "$mainMod, U, togglespecialworkspace, terminal"
         "$mainMod, Y, togglespecialworkspace, qalc"
         "$mainMod, F12, togglespecialworkspace, discord"
-        
+
         # Run applications
         "$mainMod, Return, exec, kitty"
         "$mainMod, B, exec, zen"
         "$mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh"
         "$mainMod, SPACE, exec, ${launcher}/bin/launcher.sh"
-        
+
         # Brightness and volume controls
         ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
         ", XF86MonBrightnessUp, exec, brightnessctl s +10%"
@@ -217,7 +218,7 @@ with config.colorScheme.palette; {
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
-        
+
         # Window controls
         "$mainMod, F, fullscreen, 0"
         "$mainMod, Q, killactive, "
@@ -228,25 +229,25 @@ with config.colorScheme.palette; {
         "$mainMod, G, togglegroup"
         "$mainMod, O, changegroupactive, f"
         "$mainMod, I, changegroupactive, b"
-        
+
         # Resize window
         "$mainMod, left, resizeactive, -50 0"
         "$mainMod, right, resizeactive, 50 0"
         "$mainMod, up, resizeactive, 0 -50"
         "$mainMod, down, resizeactive, 0 50"
-        
+
         # Move focus
         "$mainMod, H, movefocus, l"
         "$mainMod, L, movefocus, r"
         "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
-        
+
         # Move windows
         "$mainMod+SHIFT, H, movewindoworgroup, l"
         "$mainMod+SHIFT, L, movewindoworgroup, r"
         "$mainMod+SHIFT, K, movewindoworgroup, u"
         "$mainMod+SHIFT, J, movewindoworgroup, d"
-        
+
         # Switch workspaces
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
@@ -259,7 +260,7 @@ with config.colorScheme.palette; {
         "$mainMod, 9, workspace, 9"
         "$mainMod+CTRL, h, workspace, r-1"
         "$mainMod+CTRL, l, workspace, r+1"
-        
+
         # Move active window to workspace
         "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
         "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
@@ -271,22 +272,22 @@ with config.colorScheme.palette; {
         "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
         "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
       ];
-      
+
       bindl = [
         ",switch:Lid Switch, exec, swaylock -i ${wallpaper}"
       ];
-      
+
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-      
+
       # Startup applications
       exec = [
         "blueman-applet"
         ''hyprctl hyprpaper reload ,"${wallpaper}"''
       ];
-      
+
       "exec-once" = [
         "waybar"
         "${pkgs.hyprpaper}/bin/hyprpaper"

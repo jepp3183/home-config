@@ -9,10 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-   hyprland = {
+    hyprland = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
-   };
+    };
 
     nix-colors.url = "github:misterio77/nix-colors";
 
@@ -25,7 +25,8 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs:
+  outputs =
+    { nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -33,31 +34,37 @@
         inherit system;
         overlays = [ ];
       };
-      
+
       # Helper function to create home manager configurations
-      mkHome = { modules, includeSystem ? true }:
+      mkHome =
+        {
+          modules,
+          includeSystem ? true,
+        }:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
             inherit inputs;
-          } // (if includeSystem then { inherit system; } else {});
+          }
+          // (if includeSystem then { inherit system; } else { });
           inherit modules;
         };
-    in {
+    in
+    {
       homeConfigurations = {
         "jeppe@nixos-envy" = mkHome {
           modules = [ ./home_envy.nix ];
         };
-        
+
         "jeppe@nixos-desktop" = mkHome {
           modules = [ ./home_desktop.nix ];
         };
-        
+
         "jeppe_wsl" = mkHome {
           modules = [ ./home_wsl.nix ];
           includeSystem = false;
         };
-        
+
         "jeppe@jeppe-qarma-ThinkPad" = mkHome {
           modules = [ ./home_qarma.nix ];
           includeSystem = false;

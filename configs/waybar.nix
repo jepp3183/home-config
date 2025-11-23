@@ -1,9 +1,14 @@
-{pkgs,config, inputs,...}:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 
 let
-    icon = i: "<span size='x-large' rise='-1800'>${i}</span>";
-    hexToRGBString = inputs.nix-colors.lib.conversions.hexToRGBString;
-    hexToRGBA = alpha: hex: "rgba(${hexToRGBString "," hex}, ${builtins.toString alpha})";
+  icon = i: "<span size='x-large' rise='-1800'>${i}</span>";
+  hexToRGBString = inputs.nix-colors.lib.conversions.hexToRGBString;
+  hexToRGBA = alpha: hex: "rgba(${hexToRGBString "," hex}, ${builtins.toString alpha})";
 in
 {
   programs.waybar = {
@@ -17,54 +22,63 @@ in
         spacing = 5;
 
         "custom/notification" = {
-            tooltip = false;
-            format = "{}{icon}";
-            "format-icons" = {
-                notification = icon "󱅫";
-                none = icon "";
-                "dnd-notification" = icon "";
-                "dnd-none" = icon "󰂛";
-                "inhibited-notification" = icon "";
-                "inhibited-none" = icon "";
-                "dnd-inhibited-notification" = icon "";
-                "dnd-inhibited-none" = icon "";
-            };
-            "return-type" = "json";
-            "exec-if" = "which swaync-client";
-            exec = "swaync-client -swb";
-            "on-click" = "sleep 0.1 && swaync-client -t -sw";
-            "on-click-right" = "sleep 0.1 && swaync-client -d -sw";
-            escape = true;
+          tooltip = false;
+          format = "{}{icon}";
+          "format-icons" = {
+            notification = icon "󱅫";
+            none = icon "";
+            "dnd-notification" = icon "";
+            "dnd-none" = icon "󰂛";
+            "inhibited-notification" = icon "";
+            "inhibited-none" = icon "";
+            "dnd-inhibited-notification" = icon "";
+            "dnd-inhibited-none" = icon "";
+          };
+          "return-type" = "json";
+          "exec-if" = "which swaync-client";
+          exec = "swaync-client -swb";
+          "on-click" = "sleep 0.1 && swaync-client -t -sw";
+          "on-click-right" = "sleep 0.1 && swaync-client -d -sw";
+          escape = true;
         };
 
-
-        modules-left = ["hyprland/workspaces"];
-        modules-center = ["clock"  "custom/notification"];
-        modules-right = ["pulseaudio" "network" "cpu" "memory" "battery" "tray"];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [
+          "clock"
+          "custom/notification"
+        ];
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "cpu"
+          "memory"
+          "battery"
+          "tray"
+        ];
 
         tray = {
-            icon-size = 21;
-            spacing = 10;
+          icon-size = 21;
+          spacing = 10;
         };
         "hyprland/workspaces" = {
-            format-icons = {
-                "1" = "1";
-                "2" = "2";
-                "3" = "3";
-                "4" = "4";
-                "5" = "5";
-                "6" = "6";
-                "7" = "7";
-                "8" = "8";
-                "9" = "9";
-                "10" = "10";
-            };
-            format = "{icon}";
+          format-icons = {
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
+            "5" = "5";
+            "6" = "6";
+            "7" = "7";
+            "8" = "8";
+            "9" = "9";
+            "10" = "10";
+          };
+          format = "{icon}";
         };
         clock = {
-        format = "${icon ""} {:%A,%e.%B ${icon "󰥔"} %R}";
-        tooltip-format = "<tt><small>{calendar}</small></tt>";
-        calendar = {
+          format = "${icon ""} {:%A,%e.%B ${icon "󰥔"} %R}";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          calendar = {
             mode = "year";
             mode-mon-col = 3;
             weeks-pos = "right";
@@ -76,70 +90,80 @@ in
               weekdays = "<span color='#ffcc66'><b>{}</b></span>";
               today = "<span color='#ff6699'><b><u>{}</u></b></span>";
             };
-        };
+          };
         };
         cpu = {
-            format = "{icon} {usage:2}%";
-            format-icons =[(icon "")];
-            tooltip = true;
-            on-click = "kitty -e btop";
-            interval = 5;
+          format = "{icon} {usage:2}%";
+          format-icons = [ (icon "") ];
+          tooltip = true;
+          on-click = "kitty -e btop";
+          interval = 5;
         };
         memory = {
-            format = "{1} {0:2}%";
-            format-icons = [(icon "")];
-            on-click = "kitty -e btop";
-            interval = 5;
+          format = "{1} {0:2}%";
+          format-icons = [ (icon "") ];
+          on-click = "kitty -e btop";
+          interval = 5;
         };
         battery = {
-            states = {
-                good = 80;
-                warning = 30;
-                critical = 15;
-            };
-            interval = 30;
-            format = "{capacity}% {icon}";
-            format-charging = "{capacity}% 󰂄";
-            format-plugged = "{capacity}% ";
-            format-alt = "{time} {icon}";
-            format-icons = map (x: (icon x)) ["" "" "" "" ""];
+          states = {
+            good = 80;
+            warning = 30;
+            critical = 15;
+          };
+          interval = 30;
+          format = "{capacity}% {icon}";
+          format-charging = "{capacity}% 󰂄";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time} {icon}";
+          format-icons = map (x: (icon x)) [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         network = {
-            format-wifi = "{essid}-{signalStrength}%";
-            format-icons = [(icon "⇅")];
-            format-ethernet = "{ifname}";
-            tooltip-format = ''
+          format-wifi = "{essid}-{signalStrength}%";
+          format-icons = [ (icon "⇅") ];
+          format-ethernet = "{ifname}";
+          tooltip-format = ''
             {ifname} = {ipaddr}/{cidr}
             gateway: {gwaddr}
             {bandwidthUpBytes} {icon} {bandwidthDownBytes}'';
-            format-linked = "{ifname} (No IP)";
-            format-disconnected = "⚠";
-            format-alt = "{bandwidthUpBytes} {icon} {bandwidthDownBytes}";
-            interval = 5;
-            max-length = 20;
+          format-linked = "{ifname} (No IP)";
+          format-disconnected = "⚠";
+          format-alt = "{bandwidthUpBytes} {icon} {bandwidthDownBytes}";
+          interval = 5;
+          max-length = 20;
         };
         pulseaudio = {
-            format = "{volume}% {icon} {format_source}";
-            format-muted = "{volume}% ${icon "󰝟"} {format_source}";
-            format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = "󰗿 {icon} {format_source}";
-            format-source = icon "";
-            format-source-muted = icon "";
-            format-icons = {
-                headphone = icon "";
-                hands-free = icon "";
-                headset = icon "";
-                phone = icon "";
-                portable = icon "";
-                car = icon "";
-                default = map (x: (icon x)) ["" "" ""];
-            };
-            on-click = "pavucontrol";
+          format = "{volume}% {icon} {format_source}";
+          format-muted = "{volume}% ${icon "󰝟"} {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source}";
+          format-bluetooth-muted = "󰗿 {icon} {format_source}";
+          format-source = icon "";
+          format-source-muted = icon "";
+          format-icons = {
+            headphone = icon "";
+            hands-free = icon "";
+            headset = icon "";
+            phone = icon "";
+            portable = icon "";
+            car = icon "";
+            default = map (x: (icon x)) [
+              ""
+              ""
+              ""
+            ];
+          };
+          on-click = "pavucontrol";
         };
-      }; 
+      };
     };
 
-    style = with config.colorScheme.palette; /*css*/''
+    style = with config.colorScheme.palette; /* css */ ''
       @define-color bg ${hexToRGBA 0 base00};
       @define-color module-bg ${hexToRGBA 0.6 base00};
       /* @define-color text-color #${base01}; */
