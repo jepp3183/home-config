@@ -203,7 +203,7 @@ with config.colorScheme.palette; {
         
         # Run applications
         "$mainMod, Return, exec, kitty"
-        "$mainMod, B, exec, firefox"
+        "$mainMod, B, exec, zen"
         "$mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh"
         "$mainMod, SPACE, exec, ${launcher}/bin/launcher.sh"
         

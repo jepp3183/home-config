@@ -24,7 +24,6 @@
     parsec-bin
     qpdfview
     zed-editor
-    firefox
     zotero
     multiviewer-for-f1
     gimp
@@ -45,6 +44,7 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/zen.nix
     ./configs/options.nix
     ./configs/common.nix
     ./configs/git.nix
@@ -62,6 +62,7 @@
     ./configs/swaync.nix
     ./configs/bambu_studio.nix
   ];
+
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
@@ -91,12 +92,6 @@
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
-    "default-web-browser"           = "firefox.desktop" ;
-    "text/html"                     = "firefox.desktop" ;
-    "x-scheme-handler/http"         = "firefox.desktop" ;
-    "x-scheme-handler/https"        = "firefox.desktop" ;
-    "x-scheme-handler/about"        = "firefox.desktop" ;
-    "x-scheme-handler/unknown"      = "firefox.desktop" ;
     "application/pdf" = "org.pwmt.zathura.desktop";
     "image/jpeg" = "qimgv.desktop";
     "image/png" = "qimgv.desktop";
