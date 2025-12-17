@@ -107,7 +107,7 @@ vim.keymap.set('n', '<Leader>p', function()
   }
 end, { desc = "Find files" })
 vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
-vim.keymap.set('n', '<Leader>fb', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
+vim.keymap.set('n', '<Leader>b', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
 vim.keymap.set('n', '<Leader>fh', function() Snacks.picker.pick("help", {layout="telescope"}) end, { desc = "Help tags" })
 vim.keymap.set('n', '<leader>fm', function() Snacks.picker.pick("marks") end, { desc = "Marks" })
 vim.keymap.set('n', '<Leader>fk', function() Snacks.picker.pick("keymaps") end, { desc = "Keymaps" })

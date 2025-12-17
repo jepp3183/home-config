@@ -38,6 +38,7 @@
     aider-chat
     jnv
     ripgrep-all
+    tldr
 
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
