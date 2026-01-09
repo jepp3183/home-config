@@ -47,16 +47,6 @@ in
 with config.colorScheme.palette;
 {
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [
-        wallpaper
-      ];
-      wallpaper = ", ${wallpaper}";
-    };
-  };
-
   services.kdeconnect.enable = true;
 
   home.packages = [
@@ -125,8 +115,8 @@ with config.colorScheme.palette;
       };
 
       layerrule = [
-        "blur, waybar"
-        "ignorezero, waybar"
+        "blur on, match:namespace waybar"
+        "ignore_alpha 0, match:namespace waybar"
       ];
 
       input = {
@@ -163,20 +153,13 @@ with config.colorScheme.palette;
       ];
 
       # Window rules
-      windowrulev2 = [
-        "bordersize 0, floating:0, onworkspace:w[tv1]"
-        "rounding 0, floating:0, onworkspace:w[tv1]"
-        "bordersize 0, floating:0, onworkspace:f[1]"
-        "rounding 0, floating:0, onworkspace:f[1]"
-        "workspace special:discord silent, class:^(discord)$"
-        "float, class:^(xdg-desktop-portal-gtk)$"
-        "float, class:(.blueman-manager-wrapped)"
-        "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-        "noanim, class:^(xwaylandvideobridge)$"
-        "noinitialfocus, class:^(xwaylandvideobridge)$"
-        "maxsize 1 1, class:^(xwaylandvideobridge)$"
-        "noblur, class:^(xwaylandvideobridge)$"
-        "nofocus, class:^(xwaylandvideobridge)$"
+      windowrule = [
+        "match:float 0 match:workspace w[tv1], border_size 0, rounding 0"
+        "match:float 0 match:workspace f[1], border_size 0, rounding 0"
+        "match:class ^(discord)$, workspace special:discord silent"
+        "match:class ^(xdg-desktop-portal-gtk)$, float on"
+        "match:class (.blueman-manager-wrapped), float on"
+        "match:class ^(xwaylandvideobridge)$, opacity 0.0 override, no_anim on, no_initial_focus on, max_size 1 1, no_blur on, no_focus on"
       ];
 
       # Environment variables
@@ -285,12 +268,10 @@ with config.colorScheme.palette;
       # Startup applications
       exec = [
         "blueman-applet"
-        ''hyprctl hyprpaper reload ,"${wallpaper}"''
       ];
 
       "exec-once" = [
         "waybar"
-        "${pkgs.hyprpaper}/bin/hyprpaper"
         "nm-applet --indicator"
         "swaync"
         "systemctl --user start hyprpolkitagent"
