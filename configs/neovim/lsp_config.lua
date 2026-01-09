@@ -1,4 +1,4 @@
-vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
+-- vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
 vim.diagnostic.config({
   signs = true,
 })
@@ -19,12 +19,13 @@ local standard_servers = {
 }
 
 for i = 1, #standard_servers do
-  require('lspconfig')[standard_servers[i]].setup({
+  vim.lsp.config(standard_servers[i], {
     capabilities = lsp_capabilities,
   })
+  vim.lsp.enable(standard_servers[i])
 end
 
-require 'lspconfig'.harper_ls.setup {
+vim.lsp.config('harper_ls', {
   capabilities = lsp_capabilities,
   filetypes = { "typst", "markdown" },
   settings = {
@@ -35,25 +36,28 @@ require 'lspconfig'.harper_ls.setup {
       }
     }
   }
-}
+})
+vim.lsp.enable('harper_ls')
 
-require 'lspconfig'.elixirls.setup {
+vim.lsp.config('elixirls', {
   capabilities = lsp_capabilities,
   cmd = { "/home/jeppe/.nix-profile/bin/elixir-ls" },
   root_dir = function()
     return vim.fn.getcwd()
   end,
-}
+})
+vim.lsp.enable('elixirls')
 
-require 'lspconfig'.tinymist.setup {
+vim.lsp.config('tinymist', {
   capabilities = lsp_capabilities,
   settings = {
     exportPdf = 'onType',
     formatterMode = 'typstfmt',
   }
-}
+})
+vim.lsp.enable('tinymist')
 
-require 'lspconfig'.lua_ls.setup {
+vim.lsp.config('lua_ls', {
   capabilities = lsp_capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
@@ -73,7 +77,10 @@ require 'lspconfig'.lua_ls.setup {
     end
     return true
   end
-}
+})
+vim.lsp.enable('lua_ls')
+
+require'nvim-treesitter'.install "all"
 
 require('blink.cmp').setup({
   sources = {
