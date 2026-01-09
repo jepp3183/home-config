@@ -21,6 +21,9 @@ in
     fish-lsp
     tinymist
     harper
+
+    tree-sitter
+    gcc
   ];
 
   programs.neovim = {
@@ -378,54 +381,54 @@ in
         '';
       }
 
-      {
-        plugin = nvim-treesitter-textobjects;
-        config = toLua /* lua */ ''
-          require'nvim-treesitter.configs'.setup {
-            incremental_selection = {  
-              enable = true,  
-              keymaps = {  
-                node_incremental = "v",  
-                node_decremental = "V",  
-              },  
-            },
-              textobjects = {
-                  select = {
-                          enable = true,
-                          lookahead = true,
-                          keymaps = {
-                              ["af"] = "@function.outer",
-                              ["if"] = "@function.inner",
-                              ["aa"] = "@parameter.outer",
-                              ["ia"] = "@parameter.inner",
-                          },
-                          selection_modes = {
-                              ['@parameter.outer'] = 'v', -- charwise
-                              ['@function.outer'] = 'V', -- linewise
-                          },
-                  },
-                  move = {
-                      enable = true,
-                      set_jumps = true,
-                      goto_next_start = {
-                          ["]f"] = "@function.outer",
-                      },
-                      goto_previous_start = {
-                          ["[f"] = "@function.outer",
-                      },
-                  },
-                  lsp_interop = {
-                    enable = true,
-                    border = 'rounded',
-                    floating_preview_opts = {},
-                    peek_definition_code = {
-                      ["<leader>df"] = "@function.outer",
-                    },
-                  },
-              }
-          } 
-        '';
-      }
+      # {
+      #   plugin = nvim-treesitter-textobjects;
+      #   config = toLua /* lua */ ''
+      #     require'nvim-treesitter-textobjects'.setup {
+      #       incremental_selection = {  
+      #         enable = true,  
+      #         keymaps = {  
+      #           node_incremental = "v",  
+      #           node_decremental = "V",  
+      #         },  
+      #       },
+      #         textobjects = {
+      #             select = {
+      #                     enable = true,
+      #                     lookahead = true,
+      #                     keymaps = {
+      #                         ["af"] = "@function.outer",
+      #                         ["if"] = "@function.inner",
+      #                         ["aa"] = "@parameter.outer",
+      #                         ["ia"] = "@parameter.inner",
+      #                     },
+      #                     selection_modes = {
+      #                         ['@parameter.outer'] = 'v', -- charwise
+      #                         ['@function.outer'] = 'V', -- linewise
+      #                     },
+      #             },
+      #             move = {
+      #                 enable = true,
+      #                 set_jumps = true,
+      #                 goto_next_start = {
+      #                     ["]f"] = "@function.outer",
+      #                 },
+      #                 goto_previous_start = {
+      #                     ["[f"] = "@function.outer",
+      #                 },
+      #             },
+      #             lsp_interop = {
+      #               enable = true,
+      #               border = 'rounded',
+      #               floating_preview_opts = {},
+      #               peek_definition_code = {
+      #                 ["<leader>df"] = "@function.outer",
+      #               },
+      #             },
+      #         }
+      #     } 
+      #   '';
+      # }
 
       {
         plugin = markview-nvim;
@@ -585,9 +588,9 @@ in
       }
 
       {
-        plugin = nvim-treesitter.withAllGrammars;
+        plugin = nvim-treesitter;
         config = toLua /* lua */ ''
-          require'nvim-treesitter.configs'.setup {
+          require'nvim-treesitter'.setup {
             autotag = {
               enable = true,
             },
