@@ -30,8 +30,13 @@
   fonts.fontconfig.enable = true;
   programs.git = {
     enable = true;
-    userName = "Jeppe Allerslev";
-    userEmail = "jeppeallerslev@gmail.com";
+    settings = {
+      init.defaultBranch = "main";
+      user = {
+        name = "Jeppe Allerslev";
+        email = "jeppeallerslev@gmail.com";
+      };
+    };
   };
 
   home.stateVersion = "23.05";

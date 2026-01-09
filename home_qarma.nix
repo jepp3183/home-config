@@ -34,10 +34,12 @@
 
   programs.git = {
     enable = true;
-    userName = "Jeppe Allerslev";
-    userEmail = "jeppe.allerslev@qarmainspect.com";
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
+      user = {
+        name = "Jeppe Allerslev";
+        email = "jeppe.allerslev@qarmainspect.com";
+      };
     };
   };
 
