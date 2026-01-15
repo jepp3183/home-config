@@ -21,6 +21,13 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
 
+vim.keymap.set('n', '<leader>yl', function()
+  local path = vim.fn.expand('%:p')
+  local line = vim.fn.line('.')
+  local result = path .. ':' .. line
+  vim.fn.setreg('+', result)
+  vim.notify('Copied: ' .. result)
+end, { desc = 'Copy absolute path:line to clipboard' })
 
 -- Harpoon
 local harpoon = require('harpoon')
