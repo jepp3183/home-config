@@ -99,11 +99,16 @@ local function lg(search)
         width = 0.75,
         height = 0.9
       }
+    },
+    formatters = {
+      file = {
+        truncate = vim.o.columns * 0.6,
+      },
     }
   })
 end
 vim.keymap.set('n', '<Leader>p', function()
-  local truncate_width = vim.api.nvim_win_get_width(0) * 0.5
+  local truncate_width = vim.o.columns * 0.6
   Snacks.picker.files {
     formatters = {
       file = {
