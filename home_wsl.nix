@@ -5,8 +5,8 @@
     allowUnfreePredicate = (_: true);
   };
 
-  home.username = "jeppe_wsl";
-  home.homeDirectory = "/home/jeppe_wsl";
+  home.username = "jeppe-wsl";
+  home.homeDirectory = "/home/jeppe-wsl";
   home.packages = with pkgs; [
     # CMD UTILS
     wl-clipboard

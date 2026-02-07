@@ -60,7 +60,7 @@
           modules = [ ./home_desktop.nix ];
         };
 
-        "jeppe_wsl" = mkHome {
+        "jeppe-wsl" = mkHome {
           modules = [ ./home_wsl.nix ];
           includeSystem = false;
         };
