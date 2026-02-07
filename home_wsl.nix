@@ -25,7 +25,7 @@
   ];
 
   # https://tinted-theming.github.io/tinted-gallery/
-  colorScheme = inputs.nix-colors.colorSchemes.gigavolt;
+  colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
 
   fonts.fontconfig.enable = true;
   programs.git = {
