@@ -478,27 +478,6 @@ in
       }
 
       {
-        plugin = copilot-lua;
-        config = toLua /* lua */ ''
-          require('copilot').setup({
-              suggestion = {
-                  auto_trigger = true,
-                  keymap = {
-                      accept = '<C-l>',
-                  },
-              },
-              panel = {
-                  auto_refresh = true,
-                  layout = {
-                      position = 'right',
-                  },
-              },
-              copilot_node_command = '${pkgs.nodejs}/bin/node',
-          })
-        '';
-      }
-
-      {
         plugin = base16-nvim;
         config =
           with config.colorScheme.palette;

@@ -17,8 +17,6 @@
     };
     profiles.default.extensions = with pkgs.vscode-extensions; [
       ms-vsliveshare.vsliveshare
-      github.copilot
-      github.copilot-chat
       rust-lang.rust-analyzer
       teabyii.ayu
     ];
