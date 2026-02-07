@@ -32,7 +32,7 @@ in
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    extraLuaConfig = ''
+    initLua = ''
       ${builtins.readFile ./basics.lua}
       ${builtins.readFile ./lsp_config.lua}
       ${builtins.readFile ./mappings.lua}
