@@ -187,7 +187,7 @@ with config.colorScheme.palette;
 
         # Run applications
         "$mainMod, Return, exec, kitty"
-        "$mainMod, B, exec, zen"
+        "$mainMod, B, exec, firefox"
         "$mainMod+SHIFT, P, exec, ${power_menu}/bin/power_menu.sh"
         "$mainMod, SPACE, exec, ${launcher}/bin/launcher.sh"
 

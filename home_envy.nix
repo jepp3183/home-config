@@ -27,7 +27,7 @@
     zotero
     multiviewer-for-f1
     gimp
-    freecad
+    # freecad
 
     # CMD UTILS
     wl-clipboard
@@ -46,7 +46,7 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
-    ./configs/zen.nix
+    ./configs/firefox.nix
     ./configs/options.nix
     ./configs/common.nix
     ./configs/git.nix
