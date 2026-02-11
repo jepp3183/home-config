@@ -9,6 +9,7 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.cinkeys:remove("0#") -- Fix comments outdenting in elixir
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.hidden = true
