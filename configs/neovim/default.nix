@@ -58,7 +58,7 @@ in
 
       {
         plugin = typst-preview-nvim;
-        config = toLua /* lua */ ''require('typst-preview').setup()'';
+        config = toLua /* lua */ "require('typst-preview').setup()";
       }
       {
         plugin = guess-indent-nvim;
@@ -225,11 +225,11 @@ in
 
       {
         plugin = nvim-dap-ui;
-        config = toLua /* lua */ ''require('dapui').setup()'';
+        config = toLua /* lua */ "require('dapui').setup()";
       }
       {
         plugin = nvim-dap-virtual-text;
-        config = toLua /* lua */ ''require('nvim-dap-virtual-text').setup()'';
+        config = toLua /* lua */ "require('nvim-dap-virtual-text').setup()";
       }
       {
         plugin = nvim-dap;
@@ -385,12 +385,12 @@ in
       #   plugin = nvim-treesitter-textobjects;
       #   config = toLua /* lua */ ''
       #     require'nvim-treesitter-textobjects'.setup {
-      #       incremental_selection = {  
-      #         enable = true,  
-      #         keymaps = {  
-      #           node_incremental = "v",  
-      #           node_decremental = "V",  
-      #         },  
+      #       incremental_selection = {
+      #         enable = true,
+      #         keymaps = {
+      #           node_incremental = "v",
+      #           node_decremental = "V",
+      #         },
       #       },
       #         textobjects = {
       #             select = {
@@ -426,7 +426,7 @@ in
       #               },
       #             },
       #         }
-      #     } 
+      #     }
       #   '';
       # }
 
@@ -567,8 +567,15 @@ in
       }
 
       {
-        plugin = nvim-treesitter;
+        # plugin = nvim-treesitter;
+        plugin = nvim-treesitter.withAllGrammars;
         config = toLua /* lua */ ''
+           vim.api.nvim_create_autocmd('FileType', {
+            pattern = '*',
+            callback = function()
+              pcall(vim.treesitter.start)
+            end,
+          })
           require'nvim-treesitter'.setup {
             autotag = {
               enable = true,
