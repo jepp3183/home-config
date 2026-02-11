@@ -1,11 +1,21 @@
 {
-  pkgs,
   config,
-  inputs,
+  lib,
+  pkgs,
   ...
 }:
 {
   services.swaync.enable = true;
+  # Prevent swaync from auto-starting via D-Bus activation
+  systemd.user.services.swaync = {
+    Unit.Description = lib.mkForce "Disabled swaync";
+    Service = {
+      Type = lib.mkForce "oneshot";
+      ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
+      BusName = lib.mkForce "";
+    };
+    Install.WantedBy = lib.mkForce [];
+  };
   services.swaync.settings = {
     "$schema" = "/etc/xdg/swaync/configSchema.json";
     positionX = "center";
