@@ -8,8 +8,7 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 -- See :help c-indenting
-vim.opt.cindent = true
-vim.opt.cinkeys:remove("0#") -- Fix comments outdenting in elixir
+vim.opt.autoindent = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.hidden = true
@@ -27,6 +26,13 @@ vim.opt.timeoutlen = 300
 
 -- Causes slow startup time!
 vim.g.editorconfig = false
+
+vim.api.nvim_create_autocmd("BufRead", {
+    pattern = "*.c",
+    callback = function()
+        vim.opt_local.cindent = true
+    end
+})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern ={"typst", "markdown"},
