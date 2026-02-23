@@ -121,7 +121,13 @@ vim.keymap.set('n', '<Leader>p', function()
         truncate = truncate_width,
       },
     },
-    layout = "select",
+    layout = {
+      preset = "vertical",
+      layout = {
+        width = 0.75,
+        height = 0.6,
+      },
+    },
   }
 end, { desc = "Find files" })
 vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
