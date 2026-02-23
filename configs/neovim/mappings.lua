@@ -7,10 +7,10 @@ vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
 vim.keymap.set('n', '<leader>e', function()
   Snacks.explorer()
 end)
-vim.keymap.set('n', '-', MiniFiles.open, {desc = "Open mini.files"})
+vim.keymap.set('n', '-', MiniFiles.open, { desc = "Open mini.files" })
 
 local yazi = require('yazi')
-vim.keymap.set('n', '<C-y>', yazi.yazi, {desc = "Open yazi"})
+vim.keymap.set('n', '<C-y>', yazi.yazi, { desc = "Open yazi" })
 
 vim.keymap.set('n', 'H', vim.cmd.bprev)
 vim.keymap.set('n', 'L', vim.cmd.bnext)
@@ -19,7 +19,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
-vim.keymap.set('n', '<C-q>', MiniBufremove.delete, {desc="Close buffer"})
+vim.keymap.set('n', '<C-q>', MiniBufremove.delete, { desc = "Close buffer" })
 
 vim.keymap.set('n', '<leader>yl', function()
   local path = vim.fn.expand('%:p')
@@ -32,21 +32,22 @@ end, { desc = 'Copy absolute path:line to clipboard' })
 -- Harpoon
 local harpoon = require('harpoon')
 vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon: Add file" })
-vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Toggle menu" })
+vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  { desc = "Harpoon: Toggle menu" })
 vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Harpoon: Go to file 1" })
 vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Harpoon: Go to file 2" })
 vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Harpoon: Go to file 3" })
 vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Harpoon: Go to file 4" })
 
 -- yank to system clipboard!
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Intuitive directional resizing with Ctrl+Arrow
 local opts = { noremap = true, silent = true }
 
 local function smart_resize(dir)
-  local amount = vim.v.count1 * 3  -- default step = 2 cols/rows; use a count to change it
+  local amount = vim.v.count1 * 3 -- default step = 2 cols/rows; use a count to change it
   local cur = vim.api.nvim_get_current_win()
   local neighbor = vim.fn.winnr(dir)
   local has_neighbor = neighbor ~= 0
@@ -70,24 +71,29 @@ local function smart_resize(dir)
   end
 end
 
-vim.keymap.set('n', '<C-Left>',  function() smart_resize('h') end, opts)
+vim.keymap.set('n', '<C-Left>', function() smart_resize('h') end, opts)
 vim.keymap.set('n', '<C-Right>', function() smart_resize('l') end, opts)
-vim.keymap.set('n', '<C-Up>',    function() smart_resize('k') end, opts)
-vim.keymap.set('n', '<C-Down>',  function() smart_resize('j') end, opts)
+vim.keymap.set('n', '<C-Up>', function() smart_resize('k') end, opts)
+vim.keymap.set('n', '<C-Down>', function() smart_resize('j') end, opts)
 
 -- Git
-vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", {noremap = true, silent = true, desc = "Open Neogit"})
-vim.keymap.set("n", "<leader>gg", function () require('snacks').lazygit() end, {noremap = true, silent = true, desc = "Lazygit"})
-vim.keymap.set("n", "<leader>go", function () require('snacks').gitbrowse() end, {noremap = true, silent = true, desc = "Git Browse"})
-vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", {noremap = true, silent = true, desc = "Neogit commit"})
-vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({full = true}) end, {desc = "Blame line"})
-vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", {noremap = true, silent = true, desc = "Gitsigns blame"})
-vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true, desc = "Toggle current line blame"})
-vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", {noremap = true, silent = true, desc = "Stage buffer"})
-vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true, silent = true, desc = "Preview hunk"})
-vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true, silent = true, desc = "Reset hunk"})
-vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", {noremap = true, silent = true, desc = "Next hunk"})
-vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", {noremap = true, silent = true, desc = "Previous hunk"})
+vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", { noremap = true, silent = true, desc = "Open Neogit" })
+vim.keymap.set("n", "<leader>gg", function() require('snacks').lazygit() end,
+  { noremap = true, silent = true, desc = "Lazygit" })
+vim.keymap.set("n", "<leader>go", function() require('snacks').gitbrowse() end,
+  { noremap = true, silent = true, desc = "Git Browse" })
+vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", { noremap = true, silent = true, desc = "Neogit commit" })
+vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({ full = true }) end, { desc = "Blame line" })
+vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", { noremap = true, silent = true, desc = "Gitsigns blame" })
+vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>",
+  { noremap = true, silent = true, desc = "Toggle current line blame" })
+vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>",
+  { noremap = true, silent = true, desc = "Stage buffer" })
+vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>",
+  { noremap = true, silent = true, desc = "Preview hunk" })
+vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", { noremap = true, silent = true, desc = "Reset hunk" })
+vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", { noremap = true, silent = true, desc = "Next hunk" })
+vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", { noremap = true, silent = true, desc = "Previous hunk" })
 
 -- Telescope
 local function lg(search)
@@ -120,14 +126,18 @@ vim.keymap.set('n', '<Leader>p', function()
 end, { desc = "Find files" })
 vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
 vim.keymap.set('n', '<Leader>o', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
-vim.keymap.set('n', '<Leader>fh', function() Snacks.picker.pick("help", {layout="telescope"}) end, { desc = "Help tags" })
+vim.keymap.set('n', '<Leader>fh', function() Snacks.picker.pick("help", { layout = "telescope" }) end,
+  { desc = "Help tags" })
 vim.keymap.set('n', '<leader>fm', function() Snacks.picker.pick("marks") end, { desc = "Marks" })
 vim.keymap.set('n', '<Leader>fk', function() Snacks.picker.pick("keymaps") end, { desc = "Keymaps" })
-vim.keymap.set('n', '<Leader>fc', function() Snacks.picker.pick("commands", {layout="select"}) end, { desc = "Commands" })
-vim.keymap.set('n', '<Leader>fC', function() Snacks.picker.pick("command_history", {layout="select"}) end, { desc = "Command history" })
+vim.keymap.set('n', '<Leader>fc', function() Snacks.picker.pick("commands", { layout = "select" }) end,
+  { desc = "Commands" })
+vim.keymap.set('n', '<Leader>fC', function() Snacks.picker.pick("command_history", { layout = "select" }) end,
+  { desc = "Command history" })
 vim.keymap.set('n', '<Leader>fs', function() Snacks.picker.pick("lsp_symbols") end, { desc = "Document symbols" })
 vim.keymap.set('n', '<Leader>fg', function() Snacks.picker.pick("git_status") end, { desc = "Git files" })
-vim.keymap.set('n', '<Leader>fS', function() Snacks.picker.pick("lsp_workspace_symbols") end, { desc = "Workspace symbols" })
+vim.keymap.set('n', '<Leader>fS', function() Snacks.picker.pick("lsp_workspace_symbols") end,
+  { desc = "Workspace symbols" })
 vim.keymap.set('n', '<Leader>fr', function() Snacks.picker.pick("lsp_references") end, { desc = "References" })
 vim.keymap.set('n', '<Leader>fd', function() Snacks.picker.pick("diagnostics") end, { desc = "Diagnostics" })
 vim.keymap.set('n', 'z=', function() Snacks.picker.pick("spelling") end, { desc = "Spell suggest" })
@@ -146,7 +156,7 @@ local function grep_visual_selection()
   vim.fn.setreg('"', old_reg, old_regtype)
   lg(selected_text)
 end
-vim.keymap.set('x', '<leader>fw', grep_visual_selection, {desc="Grep visual selection", noremap=true})
+vim.keymap.set('x', '<leader>fw', grep_visual_selection, { desc = "Grep visual selection", noremap = true })
 
 _G.grep_operator = function(motion_type)
   local old_reg = vim.fn.getreg('"')
@@ -164,24 +174,23 @@ _G.grep_operator = function(motion_type)
   lg(selected_text)
 end
 
-vim.keymap.set('n', '<leader>fw', function ()
+vim.keymap.set('n', '<leader>fw', function()
   vim.o.operatorfunc = 'v:lua.grep_operator'
   return 'g@'
-end, {desc="Grep selection", expr = true, noremap = true})
+end, { desc = "Grep selection", expr = true, noremap = true })
 
 -- Diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', '<cmd>Trouble diagnostics toggle<cr>', {desc="Set diagnostic loclist"})
-vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float, {desc="Open diagnostic float"})
+vim.keymap.set('n', '<space>q', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Set diagnostic loclist" })
+vim.keymap.set('n', '<Leader>ld', vim.diagnostic.open_float, { desc = "Open diagnostic float" })
 
 -- LSP Shit
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-
     local function mkopts(desc)
-      return { buffer = ev.buf, desc=desc }
+      return { buffer = ev.buf, desc = desc }
     end
 
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, mkopts("Go to declaration"))
@@ -213,17 +222,17 @@ end)
 
 -- Testing
 local neotest = require("neotest")
-vim.keymap.set("n", "<leader>tr", function() neotest.run.run() end, {desc = "Run nearest test"})
-vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, {desc = "Run current file"})
-vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, {desc = "Toggle test summary"})
-vim.keymap.set("n", "<leader>to", function() neotest.output.open() end, {desc = "Open test output"})
-vim.keymap.set("n", "<leader>tp", function() neotest.output_panel.toggle() end, {desc = "Toggle output panel"})
-vim.keymap.set("n", "<leader>tl", function() neotest.run.run_last() end, {desc = "Run last test"})
-vim.keymap.set("n", "<leader>td", function() neotest.run.run({strategy = "dap"}) end, {desc = "Debug nearest test"})
-vim.keymap.set("n", "<leader>ta", function() neotest.run.attach() end, {desc = "Attach to nearest test"})
-vim.keymap.set("n", "<leader>tw", function() neotest.watch.toggle() end, {desc = "Toggle test watching"})
-vim.keymap.set("n", "]t", function() neotest.jump.next() end, {desc = "Jump to next test"})
-vim.keymap.set("n", "[t", function() neotest.jump.prev() end, {desc = "Jump to previous test"})
+vim.keymap.set("n", "<leader>tr", function() neotest.run.run() end, { desc = "Run nearest test" })
+vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, { desc = "Run current file" })
+vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, { desc = "Toggle test summary" })
+vim.keymap.set("n", "<leader>to", function() neotest.output.open() end, { desc = "Open test output" })
+vim.keymap.set("n", "<leader>tp", function() neotest.output_panel.toggle() end, { desc = "Toggle output panel" })
+vim.keymap.set("n", "<leader>tl", function() neotest.run.run_last() end, { desc = "Run last test" })
+vim.keymap.set("n", "<leader>td", function() neotest.run.run({ strategy = "dap" }) end, { desc = "Debug nearest test" })
+vim.keymap.set("n", "<leader>ta", function() neotest.run.attach() end, { desc = "Attach to nearest test" })
+vim.keymap.set("n", "<leader>tw", function() neotest.watch.toggle() end, { desc = "Toggle test watching" })
+vim.keymap.set("n", "]t", function() neotest.jump.next() end, { desc = "Jump to next test" })
+vim.keymap.set("n", "[t", function() neotest.jump.prev() end, { desc = "Jump to previous test" })
 
 -- Surround remapping to fix interference with leap
 vim.g.surround_no_mappings = 1
