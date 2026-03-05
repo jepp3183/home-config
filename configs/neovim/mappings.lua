@@ -12,6 +12,9 @@ vim.keymap.set('n', '-', MiniFiles.open, { desc = "Open mini.files" })
 local yazi = require('yazi')
 vim.keymap.set('n', '<C-y>', yazi.yazi, { desc = "Open yazi" })
 
+vim.keymap.set('n', "<leader>.",  function() Snacks.scratch() end, {desc = "Toggle Scratch Buffer"})
+vim.keymap.set('n', "<leader>s",  function() Snacks.scratch.select() end, {desc = "Select scratch buffer"})
+
 vim.keymap.set('n', 'H', vim.cmd.bprev)
 vim.keymap.set('n', 'L', vim.cmd.bnext)
 vim.keymap.set('n', '<C-h>', '<C-w>h')
