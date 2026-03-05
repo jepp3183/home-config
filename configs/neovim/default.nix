@@ -1,7 +1,24 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 let
   toLua = str: "lua << EOF\n${str}\nEOF\n";
   # toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+
+  output-panel = pkgs.vimUtils.buildVimPlugin {
+    pname = "output-panel.nvim";
+    version = "1.0.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "mhanberg";
+      repo = "output-panel.nvim";
+      rev = "4773c0ed7549f7621a5c2cd1e3d3387d836cff9a";
+      hash = "sha256-Xid/2/lNS9nihs+TTlJgnffq0GNIDGv5+ku1Lu8tTGI=";
+    };
+    meta.homepage = "https://github.com/mhanberg/output-panel.nvim";
+    meta.hydraPlatforms = [ ];
+  };
 in
 {
   home.packages = with pkgs; [
@@ -56,6 +73,10 @@ in
       blink-cmp
       cellular-automaton-nvim
 
+      {
+        plugin = output-panel;
+        config = toLua /* lua */ ''require("output_panel").setup({})'';
+      }
       {
         plugin = typst-preview-nvim;
         config = toLua /* lua */ "require('typst-preview').setup()";
