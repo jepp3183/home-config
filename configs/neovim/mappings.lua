@@ -5,6 +5,14 @@ local Snacks = require("snacks")
 vim.keymap.set('n', 'q:', '<Nop>')
 vim.keymap.set('t', '<C-N>', '<C-\\><C-N>')
 vim.keymap.set('n', '<leader>e', function()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
+    if ft == 'snacks_picker_list' then
+      vim.api.nvim_set_current_win(win)
+      return
+    end
+  end
   Snacks.explorer()
 end)
 vim.keymap.set('n', '-', MiniFiles.open, { desc = "Open mini.files" })
