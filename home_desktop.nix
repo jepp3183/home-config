@@ -31,6 +31,7 @@
     # CMD UTILS
     wl-clipboard
     ansible
+    claude-code
 
     # PYTHON
     (python3.withPackages (
@@ -44,10 +45,10 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/firefox.nix
     ./configs/options.nix
     ./configs/common.nix
     ./configs/git.nix
-    ./configs/hypr/hypr.nix
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
@@ -59,37 +60,11 @@
     ./configs/zellij.nix
     ./configs/posting.nix
     ./configs/streamdeck_ui.nix
-    ./configs/swaync.nix
     ./configs/bambu_studio.nix
   ];
 
-  wayland.windowManager.hyprland = {
-    settings = {
-      exec = [
-        "xrandr --output DP-3 --primary"
-        "hyprctl dispatch workspace 1"
-      ];
-      exec-once = [
-        "streamdeck -n"
-      ];
-      monitor = [
-        "DP-3, highrr, 0x0, 1"
-        "HDMI-A-1, preferred, 2560x100, 1"
-      ];
-      workspace = [
-        "name:1, monitor:DP-3"
-      ];
-      bind = [
-        "$mainMod, code:51, togglespecialworkspace, discord"
-      ];
-    };
-  };
-
   # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.onedark;
-
-  # Wallpaper path that can be used by other modules
-  custom.wallpaper = ./files/dune.jpg;
 
   fonts.fontconfig.enable = true;
 
