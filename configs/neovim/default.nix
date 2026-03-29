@@ -9,12 +9,12 @@ let
 
   output-panel = pkgs.vimUtils.buildVimPlugin {
     pname = "output-panel.nvim";
-    version = "1.0.0";
+    version = "1.0.1";
     src = pkgs.fetchFromGitHub {
       owner = "mhanberg";
       repo = "output-panel.nvim";
       rev = "4773c0ed7549f7621a5c2cd1e3d3387d836cff9a";
-      hash = "sha256-Xid/2/lNS9nihs+TTlJgnffq0GNIDGv5+ku1Lu8tTGI=";
+      hash = "sha256-iVWbnTCPKoyTPnY+tF2BkJwOF7MyS4hiVjHCqJpmiO4=";
     };
     meta.homepage = "https://github.com/mhanberg/output-panel.nvim";
     meta.hydraPlatforms = [ ];
