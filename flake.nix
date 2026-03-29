@@ -49,7 +49,7 @@
           modules = [ ./home_envy.nix ];
         };
 
-        "jeppe@nixos-desktop" = mkHome {
+        "jeppe@nixos" = mkHome {
           modules = [ ./home_desktop.nix ];
         };
 
