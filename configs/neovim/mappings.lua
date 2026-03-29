@@ -141,6 +141,25 @@ vim.keymap.set('n', '<Leader>p', function()
     },
   }
 end, { desc = "Find files" })
+vim.keymap.set('n', '<Leader>P', function()
+  local truncate_width = vim.o.columns * 0.6
+  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+  Snacks.picker.files {
+    cwd = git_root,
+    formatters = {
+      file = {
+        truncate = truncate_width,
+      },
+    },
+    layout = {
+      preset = "vertical",
+      layout = {
+        width = 0.75,
+        height = 0.6,
+      },
+    },
+  }
+end, { desc = "Find files (git root)" })
 vim.keymap.set('n', '<Leader>ff', function() lg("") end, { desc = "Live grep" })
 vim.keymap.set('n', '<Leader>o', function() Snacks.picker.pick("buffers") end, { desc = "Buffers" })
 vim.keymap.set('n', '<Leader>fh', function() Snacks.picker.pick("help", { layout = "telescope" }) end,
