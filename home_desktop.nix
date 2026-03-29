@@ -45,6 +45,8 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    inputs.plasma-manager.homeModules.plasma-manager
+    ./configs/plasma.nix
     ./configs/firefox.nix
     ./configs/options.nix
     ./configs/common.nix
