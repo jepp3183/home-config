@@ -4,9 +4,6 @@
   ...
 }:
 let
-  toLua = str: "lua << EOF\n${str}\nEOF\n";
-  # toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-
   output-panel = pkgs.vimUtils.buildVimPlugin {
     pname = "output-panel.nvim";
     version = "1.0.1";
@@ -74,78 +71,9 @@ in
       cellular-automaton-nvim
 
       {
-        plugin = output-panel;
-        config = toLua /* lua */ ''require("output_panel").setup({})'';
-      }
-      {
-        plugin = typst-preview-nvim;
-        config = toLua /* lua */ "require('typst-preview').setup()";
-      }
-      {
-        plugin = guess-indent-nvim;
-        config = toLua /* lua */ ''require("guess-indent").setup()'';
-      }
-      {
-        plugin = nvim-colorizer-lua;
-        config = toLua /* lua */ ''require("colorizer").setup()'';
-      }
-      {
-        plugin = gitsigns-nvim;
-        config = toLua /* lua */ ''require("gitsigns").setup()'';
-      }
-      {
-        plugin = neogit;
-        config = toLua /* lua */ ''require("neogit").setup()'';
-      }
-      {
-        plugin = yazi-nvim;
-        config = toLua /* lua */ ''require("yazi").setup()'';
-      }
-      {
-        plugin = harpoon2;
-        config = toLua /* lua */ ''require("harpoon").setup()'';
-      }
-
-      neotest-elixir
-      {
-        plugin = neotest;
-        config = toLua /* lua */ ''
-          vim.api.nvim_create_autocmd("FileType", {
-              pattern = "neotest-*",
-              callback = function()
-                  vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
-              end
-          })
-          require("neotest").setup({
-              adapters = {
-                  require("neotest-elixir")({})
-              },
-          })
-        '';
-      }
-
-      {
-        plugin = which-key-nvim;
-        config = toLua /* lua */ ''
-          require("which-key").setup {
-              preset = "modern",
-              delay = 100,
-          }
-        '';
-      }
-
-      {
-        plugin = auto-session;
-        config = toLua /* lua */ ''
-          require("auto-session").setup {
-            suppressed_dirs = { "~/", "~/proj", "~/Downloads", "/"},
-          }
-        '';
-      }
-
-      {
         plugin = snacks-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("snacks").setup({
             gitbrowse = {enabled = true},
             lazygit = {enabled = true},
@@ -230,15 +158,97 @@ in
       }
 
       {
+        plugin = output-panel;
+        type = "lua";
+        config = /* lua */ ''require("output_panel").setup({})'';
+      }
+      {
+        plugin = typst-preview-nvim;
+        type = "lua";
+        config = /* lua */ "require('typst-preview').setup()";
+      }
+      {
+        plugin = guess-indent-nvim;
+        type = "lua";
+        config = /* lua */ ''require("guess-indent").setup()'';
+      }
+      {
+        plugin = nvim-colorizer-lua;
+        type = "lua";
+        config = /* lua */ ''require("colorizer").setup()'';
+      }
+      {
+        plugin = gitsigns-nvim;
+        type = "lua";
+        config = /* lua */ ''require("gitsigns").setup()'';
+      }
+      {
+        plugin = neogit;
+        type = "lua";
+        config = /* lua */ ''require("neogit").setup()'';
+      }
+      {
+        plugin = yazi-nvim;
+        type = "lua";
+        config = /* lua */ ''require("yazi").setup()'';
+      }
+      {
+        plugin = harpoon2;
+        type = "lua";
+        config = /* lua */ ''require("harpoon").setup()'';
+      }
+
+      neotest-elixir
+      {
+        plugin = neotest;
+        type = "lua";
+        config = /* lua */ ''
+          vim.api.nvim_create_autocmd("FileType", {
+              pattern = "neotest-*",
+              callback = function()
+                  vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+              end
+          })
+          require("neotest").setup({
+              adapters = {
+                  require("neotest-elixir")({})
+              },
+          })
+        '';
+      }
+
+      {
+        plugin = which-key-nvim;
+        type = "lua";
+        config = /* lua */ ''
+          require("which-key").setup {
+              preset = "modern",
+              delay = 100,
+          }
+        '';
+      }
+
+      {
+        plugin = auto-session;
+        type = "lua";
+        config = /* lua */ ''
+          require("auto-session").setup {
+            suppressed_dirs = { "~/", "~/proj", "~/Downloads", "/"},
+          }
+        '';
+      }
+
+      {
         plugin = nvim-autopairs;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           local npairs = require('nvim-autopairs')
           npairs.setup()
 
           local endwise = require('nvim-autopairs.ts-rule').endwise
           npairs.add_rules(
             {
-              endwise('do$', 'end', 'elixir', nil) 
+              endwise('do$', 'end', 'elixir', nil)
             }
           )
         '';
@@ -246,15 +256,18 @@ in
 
       {
         plugin = nvim-dap-ui;
-        config = toLua /* lua */ "require('dapui').setup()";
+        type = "lua";
+        config = /* lua */ "require('dapui').setup()";
       }
       {
         plugin = nvim-dap-virtual-text;
-        config = toLua /* lua */ "require('nvim-dap-virtual-text').setup()";
+        type = "lua";
+        config = /* lua */ "require('nvim-dap-virtual-text').setup()";
       }
       {
         plugin = nvim-dap;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           local dap = require('dap')
           local ui = require('dapui')
 
@@ -326,7 +339,8 @@ in
 
       {
         plugin = noice-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("noice").setup({
             lsp = {
               -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -361,7 +375,8 @@ in
 
       {
         plugin = rustaceanvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           vim.g.rustaceanvim = {
             tools = {
               float_win_config = {
@@ -374,7 +389,8 @@ in
 
       {
         plugin = trouble-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("trouble").setup {
                   modes = {
                       diagnostics = { -- Configure symbols mode
@@ -391,7 +407,8 @@ in
 
       {
         plugin = nvim-treesitter-context;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("treesitter-context").setup{
             line_numbers = false,
             multiwindow = true,
@@ -453,7 +470,8 @@ in
 
       {
         plugin = markview-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("markview").setup({
               preview = {
                 modes = { "n", "i", "no", "c" },
@@ -474,11 +492,12 @@ in
 
       {
         plugin = better-escape-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("better_escape").setup {
               timeout = vim.o.timeoutlen,
               default_mappings = true,
-              mappings = { 
+              mappings = {
                   t = { j = { k = false, j = false}},
                   v = { j = { k = false, j = false}},
                   x = { j = { k = false, j = false}}
@@ -489,7 +508,8 @@ in
 
       {
         plugin = mini-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("mini.bufremove").setup()
           require("mini.comment").setup()
           require("mini.move").setup()
@@ -500,7 +520,8 @@ in
 
       {
         plugin = copilot-lua;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require('copilot').setup({
               suggestion = {
                   auto_trigger = true,
@@ -521,9 +542,10 @@ in
 
       {
         plugin = base16-nvim;
+        type = "lua";
         config =
           with config.colorScheme.palette;
-          toLua /* lua */ ''
+          /* lua */ ''
             require('base16-colorscheme').setup({
                 base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
                 base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
@@ -534,7 +556,8 @@ in
       }
       {
         plugin = flash-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           vim.cmd[[ highlight FlashLabel guibg=#ff0000 guifg=#ffffff ]]
           require("flash").setup({
               modes = {
@@ -546,13 +569,14 @@ in
 
       {
         plugin = bufferline-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("bufferline").setup {
               options = {
                   diagnostics = "nvim_lsp",
                   close_command = function(n) Snacks.bufdelete(n) end,
                   diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                    local icon = level:match("error") and " " or " "
+                    local icon = level:match("error") and " " or " "
                     return " " .. icon .. count
                   end
               }
@@ -562,14 +586,15 @@ in
 
       {
         plugin = tiny-inline-diagnostic-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require("tiny-inline-diagnostic").setup({
               preset = "amongus",
               transparent_bg = false,
               options = {
                 multilines = {
                   enabled = true
-                } 
+                }
               }
           })
           vim.diagnostic.config({
@@ -580,7 +605,8 @@ in
 
       {
         plugin = lualine-nvim;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
           require('lualine').setup {
               options = {
                   component_separators = { left = "|", right = "|" },
@@ -592,10 +618,10 @@ in
                   lualine_b = {'branch', 'diff', 'diagnostics'},
                   lualine_c = {{'filename', path=1}},
                   lualine_x = {
-                      { 
+                      {
                           require("noice").api.statusline.mode.get,
                           cond = require("noice").api.statusline.mode.has,
-                          color = { fg = "#cc0000" }, 
+                          color = { fg = "#cc0000" },
                       },
                       'encoding',
                       'fileformat',
@@ -611,7 +637,8 @@ in
       {
         # plugin = nvim-treesitter;
         plugin = nvim-treesitter.withAllGrammars;
-        config = toLua /* lua */ ''
+        type = "lua";
+        config = /* lua */ ''
            vim.api.nvim_create_autocmd('FileType', {
             pattern = '*',
             callback = function()

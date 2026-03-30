@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>e', function()
   end
   Snacks.explorer()
 end)
-vim.keymap.set('n', '-', MiniFiles.open, { desc = "Open mini.files" })
+vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = "Open mini.files" })
 
 local yazi = require('yazi')
 vim.keymap.set('n', '<C-y>', yazi.yazi, { desc = "Open yazi" })
@@ -30,7 +30,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
-vim.keymap.set('n', '<C-q>', MiniBufremove.delete, { desc = "Close buffer" })
+vim.keymap.set('n', '<C-q>', function() MiniBufremove.delete() end, { desc = "Close buffer" })
 
 vim.keymap.set('n', '<leader>yl', function()
   local path = vim.fn.expand('%:p')
