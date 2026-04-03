@@ -46,4 +46,44 @@
       kxkbrc.Layout.Options = "grp:win_space_toggle,caps:ctrl_modifier";
     };
   };
+
+  xdg.configFile = {
+    "autostart/insync.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Type=Application
+      Name=Insync
+      GenericName=Insync
+      Comment=Launch Insync
+      Icon=insync
+      Categories=Network;
+      Exec=insync start --no-daemon
+      TryExec=insync
+      Terminal=false
+      X-GNOME-Autostart-Delay=3
+    '';
+
+    "autostart/org.kde.kdeconnect.app.desktop".text = ''
+      [Desktop Entry]
+      Categories=Qt;KDE;Network
+      Comment=Make all your devices one
+      Exec=kdeconnectd
+      GenericName=Device Synchronization
+      Icon=kdeconnect
+      Name=KDE Connect
+      Terminal=false
+      Type=Application
+    '';
+
+    "autostart/streamdeck-ui.desktop".text = ''
+      [Desktop Entry]
+      Categories=Utility
+      Comment=UI for the Elgato Stream Deck
+      Exec=streamdeck -n
+      Icon=streamdeck-ui
+      Name=Stream Deck UI
+      Type=Application
+      Version=1.5
+    '';
+  };
 }

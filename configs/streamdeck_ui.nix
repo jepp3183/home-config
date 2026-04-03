@@ -5,6 +5,8 @@
   ...
 }:
 {
+  home.packages = [ pkgs.streamdeck-ui ];
+
   home.file.".streamdeck_ui.json".text = /* json */ ''
      {
         "state": {

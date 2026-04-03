@@ -25,7 +25,6 @@
     zed-editor
     zotero
     multiviewer-for-f1
-    streamdeck-ui
     freecad
 
     # CMD UTILS
