@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   themeFile =
     with config.colorScheme.palette;
@@ -326,7 +326,7 @@ in
 {
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.kitty}/bin/kitty";
+    terminal = lib.getExe pkgs.kitty;
     extraConfig = {
       kb-remove-to-eol = "";
       kb-accept-entry = "Control+m,Return,KP_Enter";

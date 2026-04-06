@@ -1,12 +1,12 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
     # fd flags: -tl=symlinks, -tf=files, -a=absolute paths
     # sed replaces /home/$USER with ~ for display, then back after selection
-    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
+    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
     # file flags: -L=follow symlinks, -b=brief (no filename prefix), --mime-type=output mime type
-    type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
+    type=$(${lib.getExe pkgs.file} -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
         nohup kitty -e nvim "$file" >/dev/null 2>&1  &
@@ -18,7 +18,7 @@ let
   '';
 
   launcher = pkgs.writeShellScriptBin "launcher.sh" ''
-    ${pkgs.fuzzel}/bin/fuzzel
+    ${lib.getExe pkgs.fuzzel}
   '';
 
   power_menu = pkgs.writeShellScriptBin "power_menu.sh" ''

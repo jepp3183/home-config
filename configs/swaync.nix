@@ -11,7 +11,7 @@
     Unit.Description = lib.mkForce "Disabled swaync";
     Service = {
       Type = lib.mkForce "oneshot";
-      ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
+      ExecStart = lib.mkForce (lib.getExe' pkgs.coreutils "true");
       BusName = lib.mkForce "";
     };
     Install.WantedBy = lib.mkForce [];

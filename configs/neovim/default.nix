@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -273,7 +274,7 @@ in
 
           dap.adapters.lldb = {
             type = 'executable',
-            command = '${pkgs.lldb}/bin/lldb-dap', -- adjust as needed, must be absolute path
+            command = '${lib.getExe' pkgs.lldb "lldb-dap"}', -- adjust as needed, must be absolute path
             name = 'lldb'
           }
 
@@ -535,7 +536,7 @@ in
                       position = 'right',
                   },
               },
-              copilot_node_command = '${pkgs.nodejs}/bin/node',
+              copilot_node_command = '${lib.getExe' pkgs.nodejs "node"}',
           })
         '';
       }

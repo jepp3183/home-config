@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   dev_shell = pkgs.writeShellScriptBin "devshell" ''
     if [ -z "$1" ]
     then
-      choice=$(ls ${../files/devshells} | ${pkgs.fzf}/bin/fzf)
+      choice=$(ls ${../files/devshells} | ${lib.getExe pkgs.fzf})
       if [ -z "$choice" ]
       then
         echo "No shell chosen"
@@ -61,10 +61,10 @@ in
       }
     ];
     shellAliases = {
-      gg = "${pkgs.lazygit}/bin/lazygit";
-      cat = "${pkgs.bat}/bin/bat";
-      man = "${pkgs.bat-extras.batman}/bin/batman";
-      ls = "${pkgs.eza}/bin/eza";
+      gg = lib.getExe pkgs.lazygit;
+      cat = lib.getExe pkgs.bat;
+      man = lib.getExe pkgs.bat-extras.batman;
+      ls = lib.getExe pkgs.eza;
       dps = "docker ps --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       dpsa = "docker ps -a --format=\"table {{.Names}}\t{{.Image}}\t{{.Status}}\"";
       y = "yazi";

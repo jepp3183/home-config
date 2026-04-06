@@ -5,7 +5,7 @@
   ...
 }:
 {
-  home.packages = [ pkgs.streamdeck-ui ];
+  # Enable package through OS config (needs udev rules!)
 
   home.file.".streamdeck_ui.json".text = /* json */ ''
      {

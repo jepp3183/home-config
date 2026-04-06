@@ -1,9 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
-    file=$(${pkgs.fd}/bin/fd -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
-    type=$(${pkgs.file}/bin/file -Lb --mime-type "$file")
+    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
+    type=$(${lib.getExe pkgs.file} -Lb --mime-type "$file")
 
     if [[ $type =~ ^text ]]; then
         nohup kitty -e nvim "$file" >/dev/null 2>&1  &
@@ -14,7 +14,7 @@ let
   '';
 
   launcher = pkgs.writeShellScriptBin "launcher.sh" ''
-    ${pkgs.fuzzel}/bin/fuzzel
+    ${lib.getExe pkgs.fuzzel}
   '';
 
   power_menu = pkgs.writeShellScriptBin "power_menu.sh" ''
@@ -173,7 +173,7 @@ with config.colorScheme.palette;
       "$mainMod" = "SUPER";
 
       bind = [
-        "$mainMod+SHIFT, S, exec, ${pkgs.fish}/bin/fish -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${pkgs.grimblast}/bin/grimblast copysave area\""
+        "$mainMod+SHIFT, S, exec, ${lib.getExe pkgs.fish} -c \"XDG_SCREENSHOTS_DIR=/home/jeppe/Pictures/Screenshots ${lib.getExe pkgs.grimblast} copysave area\""
         "ALT, SPACE, exec, ${file_opener}/bin/open.sh"
         "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
         "$mainMod, N, exec, swaync-client -t"
