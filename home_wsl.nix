@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, secrets, ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -34,7 +34,7 @@
       init.defaultBranch = "main";
       user = {
         name = "Jeppe Allerslev";
-        email = "jeppeallerslev@gmail.com";
+        email = secrets.main_email;
       };
     };
   };

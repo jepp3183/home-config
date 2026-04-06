@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, secrets, ... }:
 {
   programs.git = {
     enable = true;
@@ -7,7 +7,7 @@
       init.defaultBranch = "main";
       user = {
         name = "Jeppe Allerslev";
-        email = "jeppeallerslev@gmail.com";
+        email = secrets.main_email;
       };
     };
   };

@@ -1,7 +1,6 @@
-{ ... }:
+{ secrets, ... }:
 let
-  secrets = import ../secrets.nix;
-  inherit (secrets) email1 email2 email3;
+  inherit (secrets) main_email email2 email3;
 in
 {
   programs.thunderbird = {
@@ -13,11 +12,11 @@ in
   };
 
   accounts.email.accounts = {
-    ${email1} = {
+    ${main_email} = {
       primary = true;
-      address = email1;
+      address = main_email;
       realName = "Jeppe Allerslev";
-      userName = email1;
+      userName = main_email;
 
       imap = {
         host = "imap.gmail.com";
