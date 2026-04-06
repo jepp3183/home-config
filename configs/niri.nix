@@ -83,10 +83,16 @@ with config.colorScheme.palette;
         scale 1
     }
 
+    output "Microstep MPG341CX OLED Unknown" {
+        mode "3440x1440@239.999"
+        scale 1
+        position x=0 y=0
+    }
+
     output "Acer Technologies XF270HU T78EE0048521" {
         mode "2560x1440@144.01"
         scale 1
-        position x=1920 y=0
+        position x=440 y=-1440
     }
 
     layout {

@@ -53,7 +53,6 @@
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
-    ./configs/waybar.nix
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
@@ -63,6 +62,7 @@
     ./configs/streamdeck_ui.nix
     ./configs/bambu_studio.nix
     ./configs/thunderbird.nix
+    ./configs/niri.nix
   ];
 
   # https://tinted-theming.github.io/tinted-gallery/
