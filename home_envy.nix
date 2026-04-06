@@ -63,6 +63,7 @@
     ./configs/posting.nix
     ./configs/swaync.nix
     ./configs/bambu_studio.nix
+    ./configs/niri.nix
   ];
 
   wayland.windowManager.hyprland = {
