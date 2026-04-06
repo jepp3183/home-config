@@ -44,6 +44,7 @@
     jnv
     ripgrep-all
     tldr
+    git-crypt
 
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
