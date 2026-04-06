@@ -62,6 +62,7 @@
     ./configs/posting.nix
     ./configs/streamdeck_ui.nix
     ./configs/bambu_studio.nix
+    ./configs/thunderbird.nix
   ];
 
   # https://tinted-theming.github.io/tinted-gallery/
