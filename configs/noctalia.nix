@@ -32,6 +32,9 @@
       mOnError = "#${base00}";
       mShadow = "#000000";
     };
+
+    # Get current settings with `noctalia-shell ipc call state all | jq .settings`
+    # Get diff with `nix shell nixpkgs#json-diff -c bash -c "json-diff <(jq -S . ~/.config/noctalia/settings.json) <(noctalia-shell ipc call state all | jq -S .settings)"`
     settings = /* json */ ''
       {
         "settingsVersion": 59,

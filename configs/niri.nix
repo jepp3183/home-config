@@ -4,7 +4,7 @@ let
     cd ~
     # fd flags: -tl=symlinks, -tf=files, -a=absolute paths
     # sed replaces /home/$USER with ~ for display, then back after selection
-    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=8" --width 100 | sed -e "s#~#/home/$USER#")
+    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=10" --width 100 | sed -e "s#~#/home/$USER#")
     # file flags: -L=follow symlinks, -b=brief (no filename prefix), --mime-type=output mime type
     type=$(${lib.getExe pkgs.file} -Lb --mime-type "$file")
 
@@ -18,35 +18,8 @@ let
   '';
 
   launcher = pkgs.writeShellScriptBin "launcher.sh" ''
-    ${lib.getExe pkgs.fuzzel}
+    ${lib.getExe pkgs.fuzzel} --font="FiraCode Nerd Font Mono:size=12" --match-mode=fzf
   '';
-
-  power_menu = pkgs.writeShellScriptBin "power_menu.sh" ''
-      choice=$(printf ' Shutdown\n󰤄 Suspend\n Reboot\n Lock\n Log out'\
-              | fuzzel --dmenu --width=14 --lines=5\
-              | awk '{print $2$3}'
-            )
-
-    case $choice in
-        Shutdown)
-            systemctl poweroff
-            ;;
-        Suspend)
-            systemctl suspend
-            ;;
-        Reboot)
-            systemctl reboot
-            ;;
-        Lock)
-            swaylock -i ${wallpaper}
-            ;;
-        Logout)
-            niri msg action quit
-            ;;
-    esac
-  '';
-
-  wallpaper = "${config.custom.wallpaper}";
 in
 with config.colorScheme.palette;
 {
@@ -131,12 +104,12 @@ with config.colorScheme.palette;
     }
 
     // spawn-at-startup: exec directly (no shell interpretation)
-    spawn-at-startup "waybar"
+    spawn-at-startup "noctalia-shell"
     spawn-at-startup "nm-applet" "--indicator"
-    spawn-at-startup "swaync"
     spawn-at-startup "blueman-applet"
     spawn-at-startup "kdeconnectd"
     spawn-at-startup "kdeconnect-indicator"
+    spawn-at-startup "streamdeck -n"
     // spawn-sh-at-startup: runs through shell (needed for pipes, env vars, etc.)
     spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
     spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
@@ -190,11 +163,14 @@ with config.colorScheme.palette;
         Mod+Space { spawn "${launcher}/bin/launcher.sh"; }
         Alt+Space { spawn "${file_opener}/bin/open.sh"; }
 
+        Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
+        Mod+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
+        Mod+N { spawn-sh "noctalia-shell ipc call notifications toggleHistory"; }
+        Mod+Shift+P { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+
         // spawn-sh runs through shell, needed for pipes
         Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
         // -t = toggle notification center visibility
-        Mod+N { spawn "swaync-client" "-t"; }
-        Mod+Shift+P { spawn "${power_menu}/bin/power_menu.sh"; }
 
         // screenshot = interactive region selection
         Mod+Shift+S { screenshot; }
@@ -272,8 +248,8 @@ with config.colorScheme.palette;
         Mod+Shift+9 { move-column-to-workspace 9; }
 
         // Navigate between workspaces (up/down in workspace list)
-        Mod+Ctrl+H { focus-workspace-up; }
-        Mod+Ctrl+L { focus-workspace-down; }
+        Mod+Ctrl+K { focus-workspace-up; }
+        Mod+Ctrl+J { focus-workspace-down; }
 
         // Show overview of all windows/workspaces
         Mod+O { toggle-overview; }
@@ -283,10 +259,6 @@ with config.colorScheme.palette;
         // If the window is already in a column, they will expel it out.
         Mod+BracketLeft  { consume-or-expel-window-left; }
         Mod+BracketRight { consume-or-expel-window-right; }
-
-        // Manual versions: always consume or always expel
-        Mod+Comma  { consume-window-into-column; }
-        Mod+Period { expel-window-from-column; }
 
         // Cycle through preset-column-widths defined above (33% -> 50% -> 67% -> ...)
         Mod+R { switch-preset-column-width; }
