@@ -63,6 +63,7 @@
     ./configs/bambu_studio.nix
     ./configs/thunderbird.nix
     ./configs/niri.nix
+    ./configs/noctalia.nix
   ];
 
   # https://tinted-theming.github.io/tinted-gallery/

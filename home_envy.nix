@@ -89,7 +89,7 @@
   colorScheme = inputs.nix-colors.colorSchemes.onedark;
 
   # Wallpaper path that can be used by other modules
-  custom.wallpaper = ./files/lake.jpeg;
+  custom.wallpaper = ./files/wallpapers/astronaut.png;
 
   fonts.fontconfig.enable = true;
 
