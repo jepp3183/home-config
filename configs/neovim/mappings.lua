@@ -20,8 +20,8 @@ vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = "Open mini.fi
 local yazi = require('yazi')
 vim.keymap.set('n', '<C-y>', yazi.yazi, { desc = "Open yazi" })
 
-vim.keymap.set('n', "<leader>.",  function() Snacks.scratch() end, {desc = "Toggle Scratch Buffer"})
-vim.keymap.set('n', "<leader>s",  function() Snacks.scratch.select() end, {desc = "Select scratch buffer"})
+vim.keymap.set('n', "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch Buffer" })
+vim.keymap.set('n', "<leader>s", function() Snacks.scratch.select() end, { desc = "Select scratch buffer" })
 
 vim.keymap.set('n', 'H', vim.cmd.bprev)
 vim.keymap.set('n', 'L', vim.cmd.bnext)
@@ -175,6 +175,12 @@ vim.keymap.set('n', '<Leader>fg', function() Snacks.picker.pick("git_status") en
 vim.keymap.set('n', '<Leader>fS', function() Snacks.picker.pick("lsp_workspace_symbols") end,
   { desc = "Workspace symbols" })
 vim.keymap.set('n', '<Leader>fr', function() Snacks.picker.pick("lsp_references") end, { desc = "References" })
+vim.keymap.set("n", "<leader>df", function()
+  Snacks.picker.lsp_definitions({
+    auto_confirm = false,
+    transform = function(item) item.end_pos = nil end,
+  })
+end, { desc = "Peek definition" })
 vim.keymap.set('n', '<Leader>fd', function() Snacks.picker.pick("diagnostics") end, { desc = "Diagnostics" })
 vim.keymap.set('n', 'z=', function() Snacks.picker.pick("spelling") end, { desc = "Spell suggest" })
 
@@ -231,9 +237,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, mkopts("Go to declaration"))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, mkopts("Go to definition"))
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, mkopts("Hover info"))
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, mkopts("Hover info"))
     vim.keymap.set('n', '<leader>lR', vim.lsp.buf.rename, mkopts("Rename in buffer"))
-    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, mkopts("Signature help"))
+    vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help({ border = 'rounded' }) end,
+      mkopts("Signature help"))
     vim.keymap.set({ 'n', 'v' }, '<leader>la', function() Snacks.picker.pick("lsp_code_actions") end,
       mkopts("Code action"))
     vim.keymap.set('n', '<leader>lf', function()

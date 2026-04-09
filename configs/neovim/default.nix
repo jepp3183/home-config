@@ -70,6 +70,7 @@ in
       nvim-notify
       blink-cmp
       cellular-automaton-nvim
+      nvim-treesitter-textobjects
 
       {
         plugin = snacks-nvim;
@@ -407,69 +408,6 @@ in
       }
 
       {
-        plugin = nvim-treesitter-context;
-        type = "lua";
-        config = /* lua */ ''
-          require("treesitter-context").setup{
-            line_numbers = false,
-            multiwindow = true,
-            mode = 'cursor',
-            separator = nil,
-            multiline_threshold = 1,
-          }
-        '';
-      }
-
-      # {
-      #   plugin = nvim-treesitter-textobjects;
-      #   config = toLua /* lua */ ''
-      #     require'nvim-treesitter-textobjects'.setup {
-      #       incremental_selection = {
-      #         enable = true,
-      #         keymaps = {
-      #           node_incremental = "v",
-      #           node_decremental = "V",
-      #         },
-      #       },
-      #         textobjects = {
-      #             select = {
-      #                     enable = true,
-      #                     lookahead = true,
-      #                     keymaps = {
-      #                         ["af"] = "@function.outer",
-      #                         ["if"] = "@function.inner",
-      #                         ["aa"] = "@parameter.outer",
-      #                         ["ia"] = "@parameter.inner",
-      #                     },
-      #                     selection_modes = {
-      #                         ['@parameter.outer'] = 'v', -- charwise
-      #                         ['@function.outer'] = 'V', -- linewise
-      #                     },
-      #             },
-      #             move = {
-      #                 enable = true,
-      #                 set_jumps = true,
-      #                 goto_next_start = {
-      #                     ["]f"] = "@function.outer",
-      #                 },
-      #                 goto_previous_start = {
-      #                     ["[f"] = "@function.outer",
-      #                 },
-      #             },
-      #             lsp_interop = {
-      #               enable = true,
-      #               border = 'rounded',
-      #               floating_preview_opts = {},
-      #               peek_definition_code = {
-      #                 ["<leader>df"] = "@function.outer",
-      #               },
-      #             },
-      #         }
-      #     }
-      #   '';
-      # }
-
-      {
         plugin = markview-nvim;
         type = "lua";
         config = /* lua */ ''
@@ -636,6 +574,20 @@ in
       }
 
       {
+        plugin = nvim-treesitter-context;
+        type = "lua";
+        config = /* lua */ ''
+          require("treesitter-context").setup{
+            line_numbers = false,
+            multiwindow = true,
+            mode = 'cursor',
+            separator = nil,
+            multiline_threshold = 1,
+          }
+        '';
+      }
+
+      {
         # plugin = nvim-treesitter;
         plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
@@ -646,19 +598,41 @@ in
               pcall(vim.treesitter.start)
             end,
           })
-          require'nvim-treesitter'.setup {
-            autotag = {
-              enable = true,
+
+          require("nvim-treesitter-textobjects").setup {
+            select = {
+              lookahead = true,
+              selection_modes = {
+                ['@parameter.outer'] = 'v',
+                ['@function.outer'] = 'V',
+              },
             },
-            highlight = {
-            enable = true,
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
-            additional_vim_regex_highlighting = false,
-          },
+            move = {
+              set_jumps = true,
+            },
           }
+
+          -- textobject select keymaps
+          vim.keymap.set({ "x", "o" }, "af", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+          end)
+          vim.keymap.set({ "x", "o" }, "if", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+          end)
+          vim.keymap.set({ "x", "o" }, "aa", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")
+          end)
+          vim.keymap.set({ "x", "o" }, "ia", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")
+          end)
+
+          -- textobject move keymaps
+          vim.keymap.set({ "n", "x", "o" }, "]f", function()
+            require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+          end)
+          vim.keymap.set({ "n", "x", "o" }, "[f", function()
+            require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+          end)
         '';
       }
     ];
