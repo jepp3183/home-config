@@ -63,7 +63,7 @@ with config.colorScheme.palette;
     }
 
     output "Acer Technologies XF270HU T78EE0048521" {
-        mode "2560x1440@144.01"
+        mode "2560x1440@143.856"
         scale 1
         position x=440 y=-1440
     }
@@ -109,7 +109,7 @@ with config.colorScheme.palette;
     spawn-at-startup "blueman-applet"
     spawn-at-startup "kdeconnectd"
     spawn-at-startup "kdeconnect-indicator"
-    spawn-at-startup "streamdeck -n"
+    spawn-at-startup "streamdeck" "-n"
     // spawn-sh-at-startup: runs through shell (needed for pipes, env vars, etc.)
     spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
     spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
