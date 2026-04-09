@@ -48,6 +48,13 @@ vim.lsp.config('elixirls', {
 })
 vim.lsp.enable('elixirls')
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.ex", "*.exs" },
+  callback = function()
+    vim.lsp.buf.format({ name = "elixirls", async = false })
+  end,
+})
+
 vim.lsp.config('tinymist', {
   capabilities = lsp_capabilities,
   settings = {
