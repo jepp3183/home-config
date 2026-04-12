@@ -4,7 +4,7 @@ let
     cd ~
     # fd flags: -tl=symlinks, -tf=files, -a=absolute paths
     # sed replaces /home/$USER with ~ for display, then back after selection
-    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=10" -D yes --width 100 | sed -e "s#~#/home/$USER#")
+    file=$(${lib.getExe pkgs.fd} -tl -tf -a . ~ | sed -e "s#/home/$USER#~#" | ${lib.getExe pkgs.fuzzel} --dmenu --match-mode=fzf --font="FiraCode Nerd Font Mono:size=12" -D no --width 100 | sed -e "s#~#/home/$USER#")
     # file flags: -L=follow symlinks, -b=brief (no filename prefix), --mime-type=output mime type
     type=$(${lib.getExe pkgs.file} -Lb --mime-type "$file")
 
@@ -18,7 +18,7 @@ let
   '';
 
   launcher = pkgs.writeShellScriptBin "launcher.sh" ''
-    ${lib.getExe pkgs.fuzzel} --font="FiraCode Nerd Font Mono:size=10" -D yes --match-mode=fzf
+    ${lib.getExe pkgs.fuzzel} --font="FiraCode Nerd Font Mono:size=12" -D no --match-mode=fzf
   '';
 in
 with config.colorScheme.palette;
