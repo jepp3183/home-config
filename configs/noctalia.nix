@@ -75,15 +75,6 @@
                 "useDistroLogo": false
               },
               {
-                "clockColor": "none",
-                "customFont": "",
-                "formatHorizontal": "HH:mm ddd, MMM dd",
-                "formatVertical": "HH mm - dd MM",
-                "id": "Clock",
-                "tooltipFormat": "HH:mm ddd, MMM dd",
-                "useCustomFont": false
-              },
-              {
                 "compactMode": true,
                 "diskPath": "/",
                 "iconColor": "none",
@@ -156,6 +147,15 @@
                 "textColor": "none",
                 "useFixedWidth": false,
                 "visualizerType": "linear"
+              },
+              {
+                "clockColor": "none",
+                "customFont": "",
+                "formatHorizontal": "HH:mm ddd, MMM dd",
+                "formatVertical": "HH mm - dd MM",
+                "id": "Clock",
+                "tooltipFormat": "HH:mm ddd, MMM dd",
+                "useCustomFont": false
               }
             ],
             "right": [
@@ -177,15 +177,6 @@
                 "unreadBadgeColor": "primary"
               },
               {
-                "deviceNativePath": "__default__",
-                "displayMode": "graphic-clean",
-                "hideIfIdle": false,
-                "hideIfNotDetected": true,
-                "id": "Battery",
-                "showNoctaliaPerformance": false,
-                "showPowerProfiles": false
-              },
-              {
                 "displayMode": "onhover",
                 "iconColor": "none",
                 "id": "Volume",
@@ -205,13 +196,22 @@
                 "textColor": "none"
               },
               {
+                "deviceNativePath": "__default__",
+                "displayMode": "graphic-clean",
+                "hideIfIdle": false,
+                "hideIfNotDetected": true,
+                "id": "Battery",
+                "showNoctaliaPerformance": false,
+                "showPowerProfiles": false
+              },
+              {
                 "colorizeDistroLogo": false,
-                "colorizeSystemIcon": "none",
+                "colorizeSystemIcon": "primary",
                 "customIconPath": "",
-                "enableColorization": false,
+                "enableColorization": true,
                 "icon": "noctalia",
                 "id": "ControlCenter",
-                "useDistroLogo": false
+                "useDistroLogo": true
               }
             ]
           },
