@@ -23,11 +23,17 @@ let
 in
 with config.colorScheme.palette;
 {
-  home.packages = [
-    pkgs.cliphist
+  home.packages = with pkgs; [
+    cliphist
+    bibata-cursors
   ];
 
   xdg.configFile."niri/config.kdl".text = /* kdl */ ''
+    cursor {
+      xcursor-theme "Bibata-Modern-Ice"
+      xcursor-size 22
+    }
+
     input {
         keyboard {
             xkb {
