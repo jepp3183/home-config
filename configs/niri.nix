@@ -75,7 +75,11 @@ with config.colorScheme.palette;
     }
 
     layout {
-        gaps 8
+        gaps 4
+
+        struts {
+            top 3
+        }
 
         center-focused-column "never"
 
@@ -89,10 +93,6 @@ with config.colorScheme.palette;
 
         // Disable focus ring (we use border instead)
         focus-ring {
-            off
-        }
-
-        border {
             width 2
             active-gradient from="#${base09}" to="#${base08}" angle=45
             inactive-color "#${base01}"
@@ -132,34 +132,22 @@ with config.colorScheme.palette;
 
     screenshot-path "~/Pictures/Screenshots/%Y-%m-%dT%H:%M:%S.png"
 
-    // Empty block = use default animations
-    animations {
-    }
-
-    window-rule {
-    }
-
     window-rule {
         match app-id=r#"firefox$"# title="^Picture-in-Picture$"
         open-floating true
     }
-
-    // window-rule {
-    //     match app-id=r#"\.blueman-manager"#
-    //     open-floating true
-    // }
 
     window-rule {
         match app-id=r#"^xdg-desktop-portal-gtk$"#
         open-floating true
     }
 
-    // // This rule has no match, so it applies to all windows
-    // window-rule {
-    //     geometry-corner-radius 5
-    //     // Clip window content to the rounded corners (otherwise content bleeds through)
-    //     clip-to-geometry true
-    // }
+    // This rule has no match, so it applies to all windows
+    window-rule {
+        geometry-corner-radius 8
+        // Clip window content to the rounded corners (otherwise content bleeds through)
+        clip-to-geometry true
+    }
 
     binds {
         Mod+Shift+Slash { show-hotkey-overlay; }
@@ -176,7 +164,6 @@ with config.colorScheme.palette;
 
         // spawn-sh runs through shell, needed for pipes
         Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
-        // -t = toggle notification center visibility
 
         // screenshot = interactive region selection
         Mod+Shift+S { screenshot; }

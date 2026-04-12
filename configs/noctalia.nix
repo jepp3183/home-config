@@ -197,7 +197,7 @@
               },
               {
                 "deviceNativePath": "__default__",
-                "displayMode": "graphic-clean",
+                "displayMode": "graphic",
                 "hideIfIdle": false,
                 "hideIfNotDetected": true,
                 "id": "Battery",
