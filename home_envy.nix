@@ -50,20 +50,20 @@
     ./configs/options.nix
     ./configs/common.nix
     ./configs/git.nix
-    ./configs/hypr/hypr.nix
     ./configs/fish.nix
     ./configs/kitty.nix
     ./configs/zathura.nix
-    ./configs/waybar.nix
     ./configs/fuzzel.nix
     ./configs/neovim
     ./configs/vscode.nix
     ./configs/yazi.nix
     ./configs/zellij.nix
     ./configs/posting.nix
-    ./configs/swaync.nix
     ./configs/bambu_studio.nix
     ./configs/niri.nix
+    ./configs/thunderbird.nix
+    ./configs/niri.nix
+    ./configs/noctalia.nix
   ];
 
   wayland.windowManager.hyprland = {
