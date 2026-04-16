@@ -166,7 +166,11 @@
                 "drawerEnabled": true,
                 "hidePassive": false,
                 "id": "Tray",
-                "pinned": []
+                "pinned": [
+                  "steam"
+                  "spotify-client"
+                  "Discord"
+                 ]
               },
               {
                 "hideWhenZero": false,
