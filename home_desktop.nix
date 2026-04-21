@@ -45,6 +45,7 @@
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.plasma-manager.homeModules.plasma-manager
+    inputs.nix-index-database.homeModules.default
     ./configs/plasma.nix
     ./configs/firefox.nix
     ./configs/options.nix
@@ -65,6 +66,8 @@
     ./configs/niri.nix
     ./configs/noctalia.nix
   ];
+
+  programs.nix-index-database.comma.enable = true;
 
   # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.onedark;

@@ -46,6 +46,7 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    inputs.nix-index-database.homeModules.default
     ./configs/firefox.nix
     ./configs/options.nix
     ./configs/common.nix
@@ -65,6 +66,8 @@
     ./configs/niri.nix
     ./configs/noctalia.nix
   ];
+
+  programs.nix-index-database.comma.enable = true;
 
   wayland.windowManager.hyprland = {
     settings = {
