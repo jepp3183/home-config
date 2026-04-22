@@ -18,6 +18,7 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    inputs.nix-index-database.homeModules.default
     ./configs/common.nix
     ./configs/fish.nix
     ./configs/yazi.nix
@@ -27,6 +28,8 @@
     ./configs/zellij.nix
     ./configs/posting.nix
   ];
+
+  programs.nix-index-database.comma.enable = true;
 
   programs.fish.interactiveShellInit = ''
     source ~/.asdf/asdf.fish
