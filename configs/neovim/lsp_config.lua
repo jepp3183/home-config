@@ -55,6 +55,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.nix" },
+  callback = function()
+    vim.lsp.buf.format({ name = "nil_ls", async = false })
+  end,
+})
+
 vim.lsp.config('tinymist', {
   capabilities = lsp_capabilities,
   settings = {
