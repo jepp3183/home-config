@@ -5,6 +5,7 @@
   ...
 }:
 let
+  cfg = config.myModules.neovim;
   output-panel = pkgs.vimUtils.buildVimPlugin {
     pname = "output-panel.nvim";
     version = "1.0.1";
@@ -19,6 +20,13 @@ let
   };
 in
 {
+  options.myModules.neovim = {
+    elixirLsCmd = lib.mkOption {
+      type = lib.types.str;
+      default = "/home/jeppe/.nix-profile/bin/elixir-ls";
+    };
+  };
+
   home.packages = with pkgs; [
     # LSP
     pyright
@@ -51,7 +59,7 @@ in
     vimdiffAlias = true;
     initLua = ''
       ${builtins.readFile ./basics.lua}
-      ${builtins.readFile ./lsp_config.lua}
+      ${builtins.readFile (pkgs.replaceVars ./lsp_config.lua { elixirLsCmd = cfg.elixirLsCmd; })}
       ${builtins.readFile ./mappings.lua}
       ${builtins.readFile ./snippets.lua}
     '';
@@ -483,16 +491,14 @@ in
       {
         plugin = base16-nvim;
         type = "lua";
-        config =
-          with config.colorScheme.palette;
-          /* lua */ ''
-            require('base16-colorscheme').setup({
-                base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
-                base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
-                base08 = '#${base08}', base09 = '#${base09}', base0A = '#${base0A}', base0B = '#${base0B}',
-                base0C = '#${base0C}', base0D = '#${base0D}', base0E = '#${base0E}', base0F = '#${base0F}',
-            })
-          '';
+        config = with config.colorScheme.palette; /* lua */ ''
+          require('base16-colorscheme').setup({
+              base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
+              base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
+              base08 = '#${base08}', base09 = '#${base09}', base0A = '#${base0A}', base0B = '#${base0B}',
+              base0C = '#${base0C}', base0D = '#${base0D}', base0E = '#${base0E}', base0F = '#${base0F}',
+          })
+        '';
       }
       {
         plugin = flash-nvim;

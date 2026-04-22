@@ -41,7 +41,7 @@ vim.lsp.enable('harper_ls')
 
 vim.lsp.config('elixirls', {
   capabilities = lsp_capabilities,
-  cmd = { "/home/jeppe/.nix-profile/bin/elixir-ls" },
+  cmd = { "@elixirLsCmd@" },
   root_dir = function(bufnr, cb)
     cb(vim.fn.getcwd())
   end,

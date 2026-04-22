@@ -52,6 +52,8 @@
 
   fonts.fontconfig.enable = true;
 
+  myModules.neovim.elixirLsCmd = "/home/jeppe/elixir-ls/language_server.sh";
+
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
 }
