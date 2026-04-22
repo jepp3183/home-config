@@ -167,8 +167,8 @@
                 "hidePassive": false,
                 "id": "Tray",
                 "pinned": [
-                  "steam"
-                  "spotify-client"
+                  "steam",
+                  "spotify-client",
                   "Discord"
                  ]
               },
