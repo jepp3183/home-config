@@ -28,16 +28,6 @@
   colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
 
   fonts.fontconfig.enable = true;
-  programs.git = {
-    enable = true;
-    settings = {
-      init.defaultBranch = "main";
-      user = {
-        name = "Jeppe Allerslev";
-        email = secrets.main_email;
-      };
-    };
-  };
 
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;

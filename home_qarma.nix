@@ -37,6 +37,7 @@
 
   programs.git = {
     enable = true;
+    signing.format = null;
     settings = {
       init.defaultBranch = "main";
       user = {
