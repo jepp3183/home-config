@@ -1,6 +1,7 @@
 -- vim.api.nvim_create_autocmd("BufEnter", { command = "TSBufEnable highlight" })
 vim.diagnostic.config({
   signs = true,
+  float = { border = 'rounded' },
 })
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -15,7 +16,6 @@ local standard_servers = {
   "docker_compose_language_service",
   "dockerls",
   "fish_lsp",
-  "tinymist",
 }
 
 for i = 1, #standard_servers do
@@ -68,7 +68,7 @@ vim.lsp.config('lua_ls', {
   capabilities = lsp_capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
-    if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+    if not vim.uv.fs_stat(path .. '/.luarc.json') and not vim.uv.fs_stat(path .. '/.luarc.jsonc') then
       client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
         Lua = {
           runtime = {
@@ -86,8 +86,6 @@ vim.lsp.config('lua_ls', {
   end
 })
 vim.lsp.enable('lua_ls')
-
-require'nvim-treesitter'.install "all"
 
 require('blink.cmp').setup({
   sources = {
@@ -117,7 +115,4 @@ require('blink.cmp').setup({
   },
 })
 
-vim.diagnostic.config({
-  float = { border = 'rounded' },
-})
 

@@ -60,8 +60,7 @@ local opts = { noremap = true, silent = true }
 local function smart_resize(dir)
   local amount = vim.v.count1 * 3 -- default step = 2 cols/rows; use a count to change it
   local cur = vim.api.nvim_get_current_win()
-  local neighbor = vim.fn.winnr(dir)
-  local has_neighbor = neighbor ~= 0
+  local has_neighbor = vim.fn.winnr(dir) ~= vim.fn.winnr()
 
   if has_neighbor then
     -- Shrink the neighbor on that side so the current window grows toward it

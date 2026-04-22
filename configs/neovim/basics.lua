@@ -11,7 +11,6 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
-vim.opt.hidden = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.wrap = false
@@ -27,13 +26,6 @@ vim.opt.timeoutlen = 300
 -- Causes slow startup time!
 vim.g.editorconfig = false
 
-vim.api.nvim_create_autocmd("BufRead", {
-    pattern = "*.c",
-    callback = function()
-        vim.opt_local.cindent = true
-    end
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern ={"typst", "markdown"},
     callback = function ()
@@ -41,7 +33,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.linebreak = true
         vim.opt.spell = true
         vim.opt.spelllang = "en"
-        vim.api.nvim_buf_set_keymap(0, "n", "j", "gj", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "k", "gk", {noremap = true})
+        vim.keymap.set('n', 'j', 'gj', { buffer = 0, noremap = true })
+        vim.keymap.set('n', 'k', 'gk', { buffer = 0, noremap = true })
     end
 })
