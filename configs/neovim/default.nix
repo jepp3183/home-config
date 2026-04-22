@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.myModules.neovim;
+  cfg = config.custom;
   output-panel = pkgs.vimUtils.buildVimPlugin {
     pname = "output-panel.nvim";
     version = "1.0.1";
@@ -20,13 +20,6 @@ let
   };
 in
 {
-  options.myModules.neovim = {
-    elixirLsCmd = lib.mkOption {
-      type = lib.types.str;
-      default = "/home/jeppe/.nix-profile/bin/elixir-ls";
-    };
-  };
-
   home.packages = with pkgs; [
     # LSP
     pyright

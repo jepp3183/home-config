@@ -19,6 +19,7 @@
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.nix-index-database.homeModules.default
+    ./configs/options.nix
     ./configs/common.nix
     ./configs/fish.nix
     ./configs/yazi.nix
@@ -52,7 +53,7 @@
 
   fonts.fontconfig.enable = true;
 
-  myModules.neovim.elixirLsCmd = "/home/jeppe/elixir-ls/language_server.sh";
+  custom.elixirLsCmd = "/home/jeppe/elixir-ls/language_server.sh";
 
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
