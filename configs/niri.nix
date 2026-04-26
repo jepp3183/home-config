@@ -34,6 +34,10 @@ with config.colorScheme.palette;
       xcursor-size 22
     }
 
+    switch-events {
+        lid-close { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
+    }
+
     input {
         keyboard {
             xkb {
