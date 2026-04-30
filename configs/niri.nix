@@ -199,10 +199,10 @@ with config.colorScheme.palette;
 
         // Niri uses columns (vertical stacks) that scroll horizontally
         // H/L move between columns, J/K move between windows within a column
-        Mod+H { focus-column-left; }
-        Mod+J { focus-window-down; }
-        Mod+K { focus-window-up; }
-        Mod+L { focus-column-right; }
+        Mod+H { focus-column-or-monitor-left; }
+        Mod+J { focus-window-or-monitor-down; }
+        Mod+K { focus-window-or-monitor-up; }
+        Mod+L { focus-column-or-monitor-right; }
 
         Mod+Home { focus-column-first; }
         Mod+End  { focus-column-last; }
@@ -211,6 +211,12 @@ with config.colorScheme.palette;
         Mod+Shift+J { move-window-down; }
         Mod+Shift+K { move-window-up; }
         Mod+Shift+L { move-column-right; }
+
+        // Move entire column to adjacent monitor
+        Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+        Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+        Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+        Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
 
         // Resize by fixed pixel amounts
         Mod+Left  { set-column-width "-50"; }
@@ -267,12 +273,6 @@ with config.colorScheme.palette;
 
         // Stack windows in a column as tabs (like browser tabs)
         Mod+T { toggle-column-tabbed-display; }
-
-        // Move entire column to adjacent monitor
-        Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
-        Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
-        Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
-        Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
 
         // Alternatively, there are commands to move just a single window:
         // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
