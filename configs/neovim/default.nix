@@ -119,15 +119,6 @@ in
                 }
               }
             },
-            scroll = {
-              enabled = true,
-              animate = {
-                duration = {
-                  step = 7,
-                  total = 150,
-                }
-              }
-            },
             dashboard = {
                 enabled = true,
                 keys = {
