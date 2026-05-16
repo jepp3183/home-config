@@ -16,6 +16,7 @@ local standard_servers = {
   "docker_compose_language_service",
   "dockerls",
   "fish_lsp",
+  "gopls",
 }
 
 for i = 1, #standard_servers do

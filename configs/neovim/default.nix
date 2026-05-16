@@ -37,6 +37,7 @@ in
     fish-lsp
     tinymist
     harper
+    gopls
 
     tree-sitter
     gcc
