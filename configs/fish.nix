@@ -85,6 +85,7 @@ in
       lzd = "lazydocker";
       mt = "mix test";
       mc = "mix compile";
+      mdg = "mix deps.get";
       stp = "kdeconnect-cli -n 'Galaxy Z Fold5' --share ";
     };
     interactiveShellInit = /* fish */ ''
