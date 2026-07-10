@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   file_opener = pkgs.writeShellScriptBin "open.sh" ''
     cd ~
@@ -57,8 +62,6 @@ with config.colorScheme.palette;
         mouse {
             accel-speed -0.6
         }
-
-        focus-follows-mouse
     }
 
     output "eDP-1" {
