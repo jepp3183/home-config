@@ -17,6 +17,7 @@ local standard_servers = {
   "dockerls",
   "fish_lsp",
   "gopls",
+  "ts_ls",
 }
 
 for i = 1, #standard_servers do

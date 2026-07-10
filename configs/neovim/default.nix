@@ -63,6 +63,7 @@ in
     tinymist
     harper
     gopls
+    typescript-language-server
 
     tree-sitter
     gcc
