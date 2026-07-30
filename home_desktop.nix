@@ -24,8 +24,7 @@
     qpdfview
     zed-editor
     zotero
-    multiviewer-for-f1
-    freecad
+    # freecad  # disabled: pdal 2.9.3 and vtk 9.5.2 fail to build with GCC 15 + gdal 3.13 in nixpkgs unstable
 
     # CMD UTILS
     wl-clipboard

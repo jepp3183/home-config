@@ -25,7 +25,6 @@
     qpdfview
     zed-editor
     zotero
-    multiviewer-for-f1
     gimp
     # freecad
 
