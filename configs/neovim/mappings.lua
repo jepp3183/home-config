@@ -102,6 +102,13 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>",
 vim.keymap.set("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>",
   { noremap = true, silent = true, desc = "Preview hunk" })
 vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", { noremap = true, silent = true, desc = "Reset hunk" })
+vim.keymap.set("n", "<leader>gd", function()
+  if #require('diffview.lib').views > 0 then
+    vim.cmd("DiffviewClose")
+  else
+    vim.cmd("DiffviewOpen")
+  end
+end, { noremap = true, silent = true, desc = "Toggle Diffview" })
 vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>", { noremap = true, silent = true, desc = "Next hunk" })
 vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", { noremap = true, silent = true, desc = "Previous hunk" })
 
