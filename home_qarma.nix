@@ -34,6 +34,31 @@
 
   programs.fish.interactiveShellInit = ''
     source ~/.asdf/asdf.fish
+
+    function jbo --description "Open Jenkins Blue Ocean activity for the current git branch"
+      set -l branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
+      if [ -z "$branch" ]
+        echo "jbo: not in a git repository" >&2
+        return 1
+      end
+      set -l enc (string replace -a / %2F $branch)
+      xdg-open "https://jenkins.aws.qarma.one/blue/organizations/jenkins/qarmainspect/activity?branch=$enc"
+    end
+  '';
+
+  programs.neovim.initLua = /* lua */ ''
+    vim.api.nvim_create_user_command("Jbo", function()
+      local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
+      if vim.v.shell_error ~= 0 or not branch or branch == "" then
+        vim.notify("jbo: not in a git repository", vim.log.levels.ERROR)
+        return
+      end
+      local enc = branch:gsub("/", "%%2F")
+      vim.ui.open("https://jenkins.aws.qarma.one/blue/organizations/jenkins/qarmainspect/activity?branch=" .. enc)
+    end, { desc = "Open Jenkins Blue Ocean activity for the current git branch" })
+
+    -- user commands must be uppercase; let :jbo expand to :Jbo
+    vim.cmd([[cnoreabbrev <expr> jbo (getcmdtype() == ':' && getcmdline() == 'jbo') ? 'Jbo' : 'jbo']])
   '';
 
   programs.git = {
