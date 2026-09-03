@@ -119,24 +119,28 @@ in
         end
 
       function zellij_update_tabname
-          if set -q ZELLIJ
-              set current_dir $PWD
-              if test $current_dir = $HOME
-                  set current_dir "~"
-              else
-                  set current_dir (basename $current_dir)
-              end
-              nohup zellij action rename-tab $current_dir >/dev/null 2>&1
+          set -q ZELLIJ; or return
+          set -l name (path basename $PWD)
+          test $PWD = $HOME; and set name "~"
+
+          # append git branch of the current dir, or short sha when detached
+          set -l branch (git branch --show-current 2>/dev/null)
+          if test -z "$branch"
+              set branch (git rev-parse --short HEAD 2>/dev/null)
+          end
+          test -n "$branch"; and set name "$name  $branch"
+
+          # renaming costs ~14ms, so only do it when the name actually changed
+          test "$name" = "$__zellij_tabname"; and return
+          if zellij action rename-tab $name >/dev/null 2>&1
+              set -g __zellij_tabname $name
           end
       end
 
-      # auto update tab name on directory change
-      function __auto_zellij_update_tabname --on-variable PWD --description "Update zellij tab name on directory change"
+      # covers cd, git switch, and lazygit/neogit inside nvim
+      function __auto_zellij_update_tabname --on-event fish_prompt --description "Update zellij tab name"
           zellij_update_tabname
       end
-
-      # Update on start as well
-      zellij_update_tabname
     '';
   };
 }
