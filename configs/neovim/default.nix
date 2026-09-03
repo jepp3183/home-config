@@ -82,7 +82,18 @@ in
         config = /* lua */ ''
           require("snacks").setup({
             gitbrowse = {enabled = true},
-            lazygit = {enabled = true},
+            lazygit = {
+              enabled = true,
+              config = {
+                os = {
+                  -- like the "nvim-remote" preset, but opens the file in the
+                  -- current window instead of a new tab
+                  edit = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
+                  editAtLine = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")',
+                  editAtLineAndWait = 'nvim +{{line}} -- {{filename}}',
+                },
+              },
+            },
             input = {enabled = true},
             explorer = {enabled = true},
             picker = {
