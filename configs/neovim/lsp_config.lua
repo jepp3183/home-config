@@ -38,7 +38,7 @@ vim.lsp.config('harper_ls', {
     }
   }
 })
-vim.lsp.enable('harper_ls')
+-- NOT enabled automatically on purpose: start manually with `:lsp start harper_ls`
 
 vim.lsp.config('elixirls', {
   capabilities = lsp_capabilities,
