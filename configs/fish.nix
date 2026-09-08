@@ -103,17 +103,50 @@ in
         end
 
         function wt
-          set -l choice (git worktree list | awk '{print $1}' | fzf --with-nth -1 -d /)
-          if [ -n "$choice" ]
+          # jump to a worktree of the current repo; falls back to qarmainspect when not in one
+          set -l repo (git rev-parse --show-toplevel 2>/dev/null)
+          if test -z "$repo"
+            if git rev-parse --git-common-dir >/dev/null 2>&1
+              set repo $PWD # bare repo root: no toplevel, but worktree list still works
+            else
+              set repo ~/proj/qarmainspect
+            end
+          end
+          set -l trees (git -C "$repo" worktree list --porcelain | string replace -rf '^worktree ' ''' | string match -rv '/\.bare$')
+          if test (count $trees) -eq 0
+            echo "wt: no worktrees found in $repo" >&2
+            return 1
+          end
+          set -l choice (printf "%s\n" $trees | fzf --with-nth -1 -d /)
+          if test -n "$choice"
             cd $choice
           end
         end
 
-       function cdl
-          set -l dirs (fd --type directory . ~/proj/qarmainspect/backend-libs/ --exact-depth 1)
-          set -a dirs ~/proj/qarmainspect/backend/
-          set choice (printf "%s\n" $dirs | fzf --with-nth -2 -d /)
-          if [ -n "$choice" ]
+        function cdl
+          set -l root (git rev-parse --show-toplevel 2>/dev/null)
+          if test -z "$root"
+            # not in a worktree (e.g. the bare repo root): pick one first
+            if not git rev-parse --git-common-dir >/dev/null 2>&1
+              echo "cdl: not inside a git repo or worktree" >&2
+              return 1
+            end
+            set -l trees (git worktree list --porcelain | string replace -rf '^worktree ' ''')
+            test (count $trees) -gt 0; and set trees (path dirname (path filter -d $trees/backend-libs))
+            if test (count $trees) -eq 0
+              echo "cdl: no worktree contains backend-libs" >&2
+              return 1
+            end
+            set root (printf "%s\n" $trees | fzf --with-nth -1 -d /)
+            test -z "$root"; and return 0
+          end
+          set -l dirs (path filter -d (path normalize $root/backend-libs/*/ $root/backend))
+          if test (count $dirs) -eq 0
+            echo "cdl: no backend or backend-libs in $root" >&2
+            return 1
+          end
+          set -l choice (printf "%s\n" $dirs | fzf --with-nth -1 -d /)
+          if test -n "$choice"
             cd $choice
           end
         end
