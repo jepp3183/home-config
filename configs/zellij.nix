@@ -42,7 +42,7 @@
       shared {
         bind "Alt f" {ToggleFloatingPanes;}
         bind "Alt n" { NewPane; }
-        bind "Alt t" { NewTab; }
+        bind "Alt t" { NewTab { layout "default"; }; }
         bind "Alt i" { GoToPreviousTab; }
         bind "Alt o" { GoToNextTab; }
         bind "Alt h" "Alt Left" { MoveFocus "Left"; }
@@ -101,7 +101,7 @@
         bind "j" { GoToNextTab; }
         bind "k" { GoToPreviousTab; }
         bind "l" { GoToNextTab; }
-        bind "n" { NewTab; SwitchToMode "locked"; }
+        bind "n" { NewTab { layout "default"; }; SwitchToMode "locked"; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "locked"; }
         bind "t" { SwitchToMode "normal"; }
