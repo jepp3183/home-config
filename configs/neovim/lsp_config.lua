@@ -43,8 +43,20 @@ vim.lsp.config('harper_ls', {
 vim.lsp.config('elixirls', {
   capabilities = lsp_capabilities,
   cmd = { "@elixirLsCmd@" },
-  root_dir = function(bufnr, cb)
-    cb(vim.fn.getcwd())
+  root_dir = function(bufnr, on_dir)
+    -- Nearest mix.exs = the dir you'd cd to before running `mix format`.
+    -- Not lspconfig's default, which takes the *second* mix.exs upward (umbrella
+    -- heuristic) and so lands on the elixir-workspace root in the qarma monorepo,
+    -- whose .formatter.exs covers only config/*.exs. Not calling on_dir skips LSP.
+    local file = vim.api.nvim_buf_get_name(bufnr)
+    local root = not file:find('/deps/', 1, true) and vim.fs.root(file, 'mix.exs')
+    -- Umbrella children live in <umbrella>/apps/<app>. Root at the umbrella: one
+    -- server for the whole graph, and its .formatter.exs subdirectories: ["apps/*"]
+    -- still resolves each app's own formatter.
+    if root and vim.fs.basename(vim.fs.dirname(root)) == 'apps' then
+      root = vim.fs.dirname(vim.fs.dirname(root))
+    end
+    if root then on_dir(root) end
   end,
 })
 vim.lsp.enable('elixirls')
