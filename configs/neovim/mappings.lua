@@ -87,12 +87,10 @@ vim.keymap.set('n', '<C-Up>', function() smart_resize('k') end, opts)
 vim.keymap.set('n', '<C-Down>', function() smart_resize('j') end, opts)
 
 -- Git
-vim.keymap.set("n", "<leader>ng", "<cmd>Neogit<CR>", { noremap = true, silent = true, desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>gg", function() require('snacks').lazygit() end,
   { noremap = true, silent = true, desc = "Lazygit" })
 vim.keymap.set("n", "<leader>go", function() require('snacks').gitbrowse() end,
   { noremap = true, silent = true, desc = "Git Browse" })
-vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<CR>", { noremap = true, silent = true, desc = "Neogit commit" })
 vim.keymap.set("n", "<leader>gb", function() require('gitsigns').blame_line({ full = true }) end, { desc = "Blame line" })
 vim.keymap.set("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", { noremap = true, silent = true, desc = "Gitsigns blame" })
 vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>",

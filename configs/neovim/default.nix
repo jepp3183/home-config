@@ -191,11 +191,6 @@ in
         config = /* lua */ ''require("gitsigns").setup()'';
       }
       {
-        plugin = neogit;
-        type = "lua";
-        config = /* lua */ ''require("neogit").setup()'';
-      }
-      {
         plugin = yazi-nvim;
         type = "lua";
         config = /* lua */ ''require("yazi").setup()'';

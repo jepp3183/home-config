@@ -170,7 +170,7 @@ in
           end
       end
 
-      # covers cd, git switch, and lazygit/neogit inside nvim
+      # covers cd, git switch, and lazygit inside nvim
       function __auto_zellij_update_tabname --on-event fish_prompt --description "Update zellij tab name"
           zellij_update_tabname
       end
