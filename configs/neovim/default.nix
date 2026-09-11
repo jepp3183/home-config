@@ -18,6 +18,23 @@ let
     meta.homepage = "https://github.com/mhanberg/output-panel.nvim";
     meta.hydraPlatforms = [ ];
   };
+  lazygitEdit = pkgs.writeShellScript "lazygit-nvim-edit" ''
+    file="$1"
+    line="''${2:-}"
+
+    if [ -z "''${NVIM:-}" ]; then
+      if [ -n "$line" ]; then
+        exec nvim "+$line" -- "$file"
+      fi
+      exec nvim -- "$file"
+    fi
+
+    nvim --server "$NVIM" --remote-send "q"
+    nvim --server "$NVIM" --remote "$file"
+    if [ -n "$line" ]; then
+      nvim --server "$NVIM" --remote-send ":$line<CR>"
+    fi
+  '';
 in
 {
   home.packages = with pkgs; [
@@ -87,8 +104,8 @@ in
                 os = {
                   -- like the "nvim-remote" preset, but opens the file in the
                   -- current window instead of a new tab
-                  edit = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
-                  editAtLine = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")',
+                  edit = '${lazygitEdit} {{filename}}',
+                  editAtLine = '${lazygitEdit} {{filename}} {{line}}',
                   editAtLineAndWait = 'nvim +{{line}} -- {{filename}}',
                 },
               },
