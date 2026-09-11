@@ -4,8 +4,8 @@ with config.colorScheme.palette;
   home.file.".config/kitty/kitty.conf" = {
     executable = false;
     text = ''
-      font_family CaskaydiaCove Nerd Font Mono
-      font_size 12
+      font_family JetBrainsMono Nerd Font Mono
+      font_size 11
 
       shell fish
       shell_integration no-rc

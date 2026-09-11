@@ -48,6 +48,7 @@
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
     nerd-fonts.caskaydia-cove
+    nerd-fonts.jetbrains-mono
     newcomputermodern # LaTeX font
   ];
   fonts.fontconfig.enable = true;
