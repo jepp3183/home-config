@@ -35,7 +35,7 @@ with config.colorScheme.palette;
     }
 
     switch-events {
-        lid-close { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
+        lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
     }
 
     input {
@@ -114,7 +114,7 @@ with config.colorScheme.palette;
     }
 
     // spawn-at-startup: exec directly (no shell interpretation)
-    spawn-at-startup "noctalia-shell"
+    spawn-at-startup "noctalia"
     spawn-at-startup "nm-applet" "--indicator"
     spawn-at-startup "blueman-applet"
     spawn-at-startup "kdeconnectd"
@@ -161,10 +161,10 @@ with config.colorScheme.palette;
         Mod+Space { spawn "${launcher}/bin/launcher.sh"; }
         Alt+Space { spawn "${file_opener}/bin/open.sh"; }
 
-        Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
-        Mod+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
-        Mod+N { spawn-sh "noctalia-shell ipc call notifications toggleHistory"; }
-        Mod+Shift+P { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+        Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+        Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+        Mod+N { spawn-sh "noctalia msg panel-toggle control-center notifications"; }
+        Mod+Shift+P { spawn-sh "noctalia msg panel-toggle session"; }
 
         // spawn-sh runs through shell, needed for pipes
         Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
