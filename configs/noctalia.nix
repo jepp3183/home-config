@@ -10,7 +10,9 @@ let
     with config.colorScheme.palette;
     {
       mSurface = "#${base00}";
-      mSurfaceVariant = "#${base01}";
+      # base01 equals base00 once colorscheme.nix overrides base00, which would
+      # leave cards, panels and bar capsules invisible - use base02 instead.
+      mSurfaceVariant = "#${base02}";
       mHover = "#${base02}";
       mOutline = "#${base03}";
       mOnSurfaceVariant = "#${base04}";
@@ -187,7 +189,7 @@ in
         radius = 12;
         margin_edge = 4;
         margin_ends = 4;
-        widget_spacing = 6;
+        widget_spacing = 8;
         padding = 8;
         font_scale = 1.0;
         shadow = true;
@@ -195,10 +197,10 @@ in
         reserve_space = true;
         capsule = true;
         capsule_opacity = 1.0;
-        # base00 is overridden to base01's value in colorscheme.nix, so surface
-        # and surface_variant (the default capsule fill) are the same color -
-        # fill capsules with base02 instead so they are actually visible.
-        capsule_fill = "hover";
+        # surface_variant sits only ~1.4:1 against the bar background, so the
+        # pills need an outline to read as separate widgets.
+        capsule_border = "outline";
+        capsule_padding = 8;
 
         start = [
           "launcher"
