@@ -17,17 +17,123 @@
     theme "default"
     themes {
       default {
-        fg "#${base05}"
-        bg "#${base02}"
-        black "#${base00}"
-        red "#${base08}"
-        green "#${base0B}"
-        yellow "#${base0A}"
-        blue "#${base0D}"
-        magenta "#${base0E}"
-        cyan "#${base0C}"
-        white "#${base05}"
-        orange "#${base09}"
+        text_unselected {
+          base "#${base05}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        text_selected {
+          base "#${base05}"
+          background "#${base02}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        // selected tab / active mode: blue accent like nvim's bufferline
+        ribbon_selected {
+          base "#${base00}"
+          background "#${base0D}"
+          emphasis_0 "#${base08}"
+          emphasis_1 "#${base09}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 "#${base0D}"
+        }
+        ribbon_unselected {
+          base "#${base05}"
+          background "#${base02}"
+          emphasis_0 "#${base08}"
+          emphasis_1 "#${base05}"
+          emphasis_2 "#${base0A}"
+          emphasis_3 "#${base0E}"
+        }
+        table_title {
+          base "#${base0D}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        table_cell_selected {
+          base "#${base05}"
+          background "#${base02}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        table_cell_unselected {
+          base "#${base05}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        list_selected {
+          base "#${base05}"
+          background "#${base02}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        list_unselected {
+          base "#${base05}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0B}"
+          emphasis_3 "#${base0E}"
+        }
+        frame_selected {
+          base "#${base0D}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base0C}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 "#${base00}"
+        }
+        frame_highlight {
+          base "#${base09}"
+          background "#${base00}"
+          emphasis_0 "#${base09}"
+          emphasis_1 "#${base09}"
+          emphasis_2 "#${base09}"
+          emphasis_3 "#${base09}"
+        }
+        exit_code_success {
+          base "#${base0B}"
+          background "#${base00}"
+          emphasis_0 "#${base0C}"
+          emphasis_1 "#${base00}"
+          emphasis_2 "#${base0E}"
+          emphasis_3 "#${base0D}"
+        }
+        exit_code_error {
+          base "#${base08}"
+          background "#${base00}"
+          emphasis_0 "#${base0A}"
+          emphasis_1 "#${base00}"
+          emphasis_2 "#${base00}"
+          emphasis_3 "#${base00}"
+        }
+        multiplayer_user_colors {
+          player_1 "#${base0E}"
+          player_2 "#${base0D}"
+          player_3 "#${base00}"
+          player_4 "#${base0A}"
+          player_5 "#${base0C}"
+          player_6 "#${base09}"
+          player_7 "#${base08}"
+          player_8 "#${base0A}"
+          player_9 "#${base0E}"
+          player_10 "#${base0D}"
+        }
       }
     }
 

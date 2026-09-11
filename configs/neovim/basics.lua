@@ -23,6 +23,21 @@ vim.opt.shell = "fish"
 vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 
+-- UI
+vim.opt.showmode = false     -- lualine shows the mode
+vim.opt.laststatus = 3       -- single global statusline
+vim.opt.winborder = "rounded"
+vim.opt.pumblend = 10
+vim.opt.pumheight = 12
+vim.opt.numberwidth = 3
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.fillchars = {
+    eob = " ",  -- no ~ after end of buffer
+    diff = "╱", -- hatched filler lines in diffs
+    fold = " ",
+}
+
 -- Causes slow startup time!
 vim.g.editorconfig = false
 

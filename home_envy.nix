@@ -49,6 +49,7 @@
     inputs.nix-index-database.homeModules.default
     ./configs/firefox.nix
     ./configs/options.nix
+    ./configs/colorscheme.nix
     ./configs/common.nix
     ./configs/git.nix
     ./configs/fish.nix
@@ -88,8 +89,6 @@
     };
   };
 
-  # https://tinted-theming.github.io/tinted-gallery/
-  colorScheme = inputs.nix-colors.colorSchemes.onedark;
 
   # Wallpaper path that can be used by other modules
   custom.wallpaper = ./files/wallpapers/astronaut.png;

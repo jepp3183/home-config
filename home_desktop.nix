@@ -49,6 +49,7 @@
     ./configs/plasma.nix
     ./configs/firefox.nix
     ./configs/options.nix
+    ./configs/colorscheme.nix
     ./configs/common.nix
     ./configs/git.nix
     ./configs/fish.nix
@@ -69,8 +70,6 @@
 
   programs.nix-index-database.comma.enable = true;
 
-  # https://tinted-theming.github.io/tinted-gallery/
-  colorScheme = inputs.nix-colors.colorSchemes.onedark;
 
   fonts.fontconfig.enable = true;
 

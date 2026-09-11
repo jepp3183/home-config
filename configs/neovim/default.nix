@@ -70,7 +70,6 @@ in
       luasnip
       dressing-nvim
       ansible-vim
-      diffview-nvim
       nvim-notify
       blink-cmp
       cellular-automaton-nvim
@@ -166,6 +165,23 @@ in
       }
 
       {
+        plugin = diffview-nvim;
+        type = "lua";
+        config = /* lua */ ''
+          require("diffview").setup({
+            enhanced_diff_hl = true,
+            view = {
+              default = { winbar_info = false },
+              merge_tool = { layout = "diff3_mixed", disable_diagnostics = true },
+              file_history = { winbar_info = false },
+            },
+            file_panel = {
+              win_config = { position = "left", width = 35 },
+            },
+          })
+        '';
+      }
+      {
         plugin = output-panel;
         type = "lua";
         config = /* lua */ ''require("output_panel").setup({})'';
@@ -188,7 +204,25 @@ in
       {
         plugin = gitsigns-nvim;
         type = "lua";
-        config = /* lua */ ''require("gitsigns").setup()'';
+        config = /* lua */ ''
+          require("gitsigns").setup({
+            signs = {
+              add = { text = "▎" },
+              change = { text = "▎" },
+              delete = { text = "\u{2581}" },
+              topdelete = { text = "\u{2594}" },
+              changedelete = { text = "▎" },
+              untracked = { text = "▎" },
+            },
+            signs_staged = {
+              add = { text = "▎" },
+              change = { text = "▎" },
+              delete = { text = "\u{2581}" },
+              topdelete = { text = "\u{2594}" },
+              changedelete = { text = "▎" },
+            },
+          })
+        '';
       }
       {
         plugin = yazi-nvim;
@@ -480,22 +514,36 @@ in
       }
 
       {
-        plugin = base16-nvim;
+        plugin = tokyonight-nvim;
         type = "lua";
-        config = with config.colorScheme.palette; /* lua */ ''
-          require('base16-colorscheme').setup({
-              base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
-              base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
-              base08 = '#${base08}', base09 = '#${base09}', base0A = '#${base0A}', base0B = '#${base0B}',
-              base0C = '#${base0C}', base0D = '#${base0D}', base0E = '#${base0E}', base0F = '#${base0F}',
+        config = /* lua */ ''
+          require("tokyonight").setup({
+            style = "night",
+            styles = {
+              comments = { italic = true },
+              keywords = { italic = true },
+              sidebars = "dark",
+              floats = "dark",
+            },
+            sidebars = { "qf", "help", "trouble", "DiffviewFiles", "DiffviewFileHistory", "neotest-summary" },
+            lualine_bold = true,
+            on_highlights = function(hl, c)
+              -- subtle, borderless splits and a quiet line-number gutter
+              hl.WinSeparator = { fg = c.bg_highlight }
+              hl.LineNr = { fg = c.dark3 }
+              hl.CursorLineNr = { fg = c.orange, bold = true }
+              -- bufferline: thin indicator, italic active tab like the reference
+              hl.BufferLineIndicatorSelected = { fg = c.blue, bg = c.bg }
+              hl.BufferLineBufferSelected = { fg = c.fg, bg = c.bg, bold = true, italic = true }
+            end,
           })
+          vim.cmd.colorscheme("tokyonight")
         '';
       }
       {
         plugin = flash-nvim;
         type = "lua";
         config = /* lua */ ''
-          vim.cmd[[ highlight FlashLabel guibg=#ff0000 guifg=#ffffff ]]
           require("flash").setup({
               modes = {
                 search = {enabled = false},
@@ -510,17 +558,31 @@ in
         config = /* lua */ ''
           require("bufferline").setup {
               options = {
+                  mode = "buffers",
+                  themable = true,
                   diagnostics = "nvim_lsp",
                   close_command = function(n) Snacks.bufdelete(n) end,
+                  right_mouse_command = function(n) Snacks.bufdelete(n) end,
                   diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                    local icon = level:match("error") and " " or " "
+                    local icon = level:match("error") and "\u{f057} " or "\u{f071} "
                     return " " .. icon .. count
-                  end
+                  end,
+                  indicator = { icon = "▎", style = "icon" },
+                  separator_style = { "", "" },
+                  modified_icon = "\u{25cf}",
+                  show_buffer_close_icons = true,
+                  show_close_icon = false,
+                  show_tab_indicators = true,
+                  always_show_bufferline = true,
+                  offsets = {
+                    { filetype = "DiffviewFiles", text = "Source Control", text_align = "center", separator = true },
+                    { filetype = "snacks_layout_box" },
+                    { filetype = "neotest-summary", text = "Tests", text_align = "center", separator = true },
+                  },
               }
           }
         '';
       }
-
       {
         plugin = tiny-inline-diagnostic-nvim;
         type = "lua";
@@ -546,31 +608,38 @@ in
         config = /* lua */ ''
           require('lualine').setup {
               options = {
-                  component_separators = { left = "|", right = "|" },
-                  section_separators = { left = "", right = "" },
+                  theme = "tokyonight",
+                  component_separators = "",
+                  section_separators = "",
                   globalstatus = true,
+                  disabled_filetypes = { statusline = { "snacks_dashboard" } },
               },
               sections = {
-                  lualine_a = {'mode'},
-                  lualine_b = {'branch', 'diff', 'diagnostics'},
-                  lualine_c = {{'filename', path=1}},
+                  lualine_a = { 'mode' },
+                  lualine_b = { 'branch' },
+                  lualine_c = {
+                      { 'filetype', icon_only = true, padding = { left = 1, right = 0 } },
+                      { 'filename', path = 1, symbols = { modified = " \u{25cf}", readonly = " \u{f023}", unnamed = "[No Name]" } },
+                  },
                   lualine_x = {
                       {
                           require("noice").api.statusline.mode.get,
                           cond = require("noice").api.statusline.mode.has,
-                          color = { fg = "#cc0000" },
+                          color = { fg = "#ff9e64" },
                       },
-                      'encoding',
-                      'fileformat',
-                      'filetype'
+                      { 'diagnostics', symbols = { error = "\u{f057} ", warn = "\u{f071} ", info = "\u{f05a} ", hint = "\u{f400} " } },
+                      { 'diff', symbols = { added = "\u{f0fe} ", modified = "\u{f192} ", removed = "\u{f146} " } },
                   },
-                  lualine_y = {'progress'},
-                  lualine_z = {'location'}
-              }
+                  lualine_y = {
+                      { 'encoding', padding = { left = 1, right = 1 } },
+                      { 'progress', padding = { left = 1, right = 1 } },
+                  },
+                  lualine_z = { { 'location', padding = { left = 1, right = 1 } } },
+              },
+              extensions = { 'trouble', 'quickfix', 'nvim-dap-ui' },
           }
         '';
       }
-
       {
         plugin = nvim-treesitter-context;
         type = "lua";

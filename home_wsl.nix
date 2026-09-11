@@ -17,6 +17,7 @@
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./configs/colorscheme.nix
     ./configs/common.nix
     ./configs/fish.nix
     ./configs/neovim
@@ -24,8 +25,6 @@
     ./configs/zellij.nix
   ];
 
-  # https://tinted-theming.github.io/tinted-gallery/
-  colorScheme = inputs.nix-colors.colorSchemes.ayu-mirage;
 
   fonts.fontconfig.enable = true;
 
