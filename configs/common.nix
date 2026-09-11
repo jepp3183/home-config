@@ -44,6 +44,7 @@
     ripgrep-all
     tldr
     git-crypt
+    codex
 
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg

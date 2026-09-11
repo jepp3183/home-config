@@ -1,4 +1,9 @@
-{ inputs, pkgs, secrets, ... }:
+{
+  inputs,
+  pkgs,
+  secrets,
+  ...
+}:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -12,7 +17,6 @@
     wl-clipboard
     wireguard-tools
     ansible
-    claude-code
   ];
 
   imports = [
@@ -24,7 +28,6 @@
     ./configs/yazi.nix
     ./configs/zellij.nix
   ];
-
 
   fonts.fontconfig.enable = true;
 

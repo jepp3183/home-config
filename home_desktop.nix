@@ -29,7 +29,6 @@
     # CMD UTILS
     wl-clipboard
     ansible
-    claude-code
     cliphist
 
     # PYTHON
@@ -66,7 +65,6 @@
   ];
 
   programs.nix-index-database.comma.enable = true;
-
 
   fonts.fontconfig.enable = true;
 

@@ -31,7 +31,6 @@
     # CMD UTILS
     wl-clipboard
     ansible
-    claude-code
 
     # PYTHON
     (python3.withPackages (
@@ -87,7 +86,6 @@
       };
     };
   };
-
 
   # Wallpaper path that can be used by other modules
   custom.wallpaper = ./files/wallpapers/astronaut.png;
