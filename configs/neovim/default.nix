@@ -120,7 +120,7 @@ in
               },
             },
             input = {enabled = true},
-            explorer = {enabled = true},
+            explorer = {enabled = false},
             picker = {
               enabled = true,
               matcher = {
@@ -185,6 +185,87 @@ in
                       indent = 3,
                     },
                   },
+            },
+          })
+        '';
+      }
+
+      {
+        plugin = neo-tree-nvim;
+        type = "lua";
+        config = /* lua */ ''
+          require("neo-tree").setup({
+            close_if_last_window = true,
+            popup_border_style = "rounded",
+            enable_git_status = true,
+            enable_diagnostics = true,
+            sources = { "filesystem", "buffers", "git_status" },
+            source_selector = { winbar = true },
+            event_handlers = {
+              {
+                -- neo-tree runs `git status --ignored=traditional`, which with
+                -- --untracked-files=all lists every file inside ignored dirs
+                -- (node_modules, _build, ...). "matching" lists only the ignored
+                -- dir itself, which is all neo-tree needs to dim/hide it.
+                -- git rejects "matching" together with --untracked-files=no
+                -- (neo-tree's fast pre-scan), so leave that invocation alone.
+                event = "before_git_status",
+                handler = function(args)
+                  if vim.tbl_contains(args.status_args, "--untracked-files=no") then
+                    return
+                  end
+                  for i, arg in ipairs(args.status_args) do
+                    if arg == "--ignored=traditional" then
+                      args.status_args[i] = "--ignored=matching"
+                    end
+                  end
+                end,
+              },
+            },
+            commands = {
+              system_open = function(state)
+                vim.ui.open(state.tree:get_node():get_id())
+              end,
+            },
+            default_component_configs = {
+              indent = { with_expanders = true },
+              git_status = {
+                symbols = {
+                  added = "",
+                  modified = "",
+                  deleted = "✖",
+                  renamed = "",
+                  untracked = "",
+                  ignored = "",
+                  unstaged = "",
+                  staged = "",
+                  conflict = "",
+                },
+              },
+            },
+            window = {
+              position = "left",
+              width = 35,
+              mappings = {
+                ["l"] = "open",
+                ["h"] = "close_node",
+                ["P"] = { "toggle_preview", config = { use_float = true } },
+                ["Z"] = "close_all_nodes",
+                ["o"] = "system_open",
+              },
+            },
+            filesystem = {
+              follow_current_file = { enabled = true, leave_dirs_open = true },
+              use_libuv_file_watcher = true,
+              group_empty_dirs = false,
+              hijack_netrw_behavior = "open_default",
+              filtered_items = {
+                hide_dotfiles = true,
+                hide_gitignored = true,
+              },
+            },
+            git_status = {
+              window = { position = "left" },
             },
           })
         '';
@@ -602,7 +683,7 @@ in
                   always_show_bufferline = true,
                   offsets = {
                     { filetype = "DiffviewFiles", text = "Source Control", text_align = "center", separator = true },
-                    { filetype = "snacks_layout_box" },
+                    { filetype = "neo-tree", text = "Explorer", text_align = "center", separator = true },
                     { filetype = "neotest-summary", text = "Tests", text_align = "center", separator = true },
                   },
               }
