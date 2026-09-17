@@ -45,13 +45,16 @@ with config.colorScheme.palette;
       color6 #${base0C}
       color7 #${base05}
 
+      # Bright variants: standard base16 ANSI mapping (same hues as 0-7).
+      # The "extra shades" mapping (base01/base02/base04...) makes bright
+      # green/yellow near-invisible, e.g. difftastic additions.
       color8 #${base03}
-      color9 #${base09}
-      color10 #${base01}
-      color11 #${base02}
-      color12 #${base04}
-      color13 #${base06}
-      color14 #${base0F}
+      color9 #${base08}
+      color10 #${base0B}
+      color11 #${base0A}
+      color12 #${base0D}
+      color13 #${base0E}
+      color14 #${base0C}
       color15 #${base07}
     '';
   };

@@ -8,6 +8,7 @@
     palette = {
       base00 = "1A1B26"; # editor background of tokyonight "night" (upstream uses the darker sidebar bg)
       base05 = "C0CAF5"; # tokyonight fg (upstream reuses the dim base04 here)
+      base0B = "9ECE6A"; # tokyonight green (upstream uses the muted teal green2 41A6B5)
     };
   };
 }
