@@ -229,19 +229,6 @@ in
             },
             default_component_configs = {
               indent = { with_expanders = true },
-              git_status = {
-                symbols = {
-                  added = "",
-                  modified = "",
-                  deleted = "✖",
-                  renamed = "",
-                  untracked = "",
-                  ignored = "",
-                  unstaged = "",
-                  staged = "",
-                  conflict = "",
-                },
-              },
             },
             window = {
               position = "left",
