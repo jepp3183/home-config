@@ -14,6 +14,8 @@
     # CMD UTILS
     wl-clipboard
     awscli2
+    # per-worktree qarma backend/DB env, see ~/.claude/skills/qarma-worktree-env
+    (writeShellScriptBin "qwt" (builtins.readFile ./files/qwt.sh))
   ];
 
   imports = [
@@ -33,8 +35,20 @@
 
   programs.nix-index-database.comma.enable = true;
 
+  programs.fish.shellAliases.cdl = "qwt cd";
+
   programs.fish.interactiveShellInit = ''
     source ~/.asdf/asdf.fish
+
+    function qwt --wraps qwt --description "Per-worktree qarma env; 'qwt cd' changes directory"
+      if test "$argv[1]" = cd
+        set -l dir (command qwt $argv)
+        or return
+        test -n "$dir"; and cd $dir
+      else
+        command qwt $argv
+      end
+    end
 
     function jbo --description "Open Jenkins Blue Ocean activity for the current git branch"
       set -l branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
