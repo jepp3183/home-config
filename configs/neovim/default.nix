@@ -300,6 +300,7 @@ in
         type = "lua";
         config = /* lua */ ''
           require("gitsigns").setup({
+            current_line_blame = true,
             signs = {
               add = { text = "▎" },
               change = { text = "▎" },
