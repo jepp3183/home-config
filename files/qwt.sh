@@ -11,7 +11,7 @@
 #   qwt init --share WORKTREE        use WORKTREE's setup instead of an own one
 #   qwt show [PATH]                  print the environment of the worktree containing PATH (default: cwd) + status
 #   qwt list                         all worktrees with their slot, ports and what is running
-#   qwt start                        start the backend of the current worktree (iex -S mix phx.server)
+#   qwt start                        start the backend of the current worktree (iex -S mix phx.server, PORT=QARMA_HTTP_PORT)
 #   qwt psql [psql args...]          psql against the current worktree's Postgres
 #   qwt cd                           pick backend or a backend-libs project of the current worktree (fzf); the fish
 #                                    qwt function cds there, the bare command prints the path. At the bare repo root
@@ -35,7 +35,7 @@ read_env() {
     set +u
     # shellcheck disable=SC1091
     source "$root/.envrc" >/dev/null 2>&1
-    for v in QARMA_WORKTREE QARMA_SHARED_FROM QARMA_SLOT QARMA_SNAME QARMA_COOKIE QARMA_DB_CONTAINER PORT DB_PORT PGHOST PGPORT PGUSER; do
+    for v in QARMA_WORKTREE QARMA_SHARED_FROM QARMA_SLOT QARMA_SNAME QARMA_COOKIE QARMA_DB_CONTAINER QARMA_HTTP_PORT DB_PORT PGHOST PGPORT PGUSER; do
       echo "$v=${!v-}"
     done
   )
@@ -166,7 +166,7 @@ init_shared() {
   local k v; local -A e
   while IFS='=' read -r k v; do e[$k]=$v; done < <(read_env "$owner_root")
   write_envrc "$root" "$name" "$owner" "${e[QARMA_SLOT]}" "${e[QARMA_SNAME]}" "${e[QARMA_COOKIE]}" \
-    "${e[QARMA_DB_CONTAINER]}" "${e[PORT]}" "${e[DB_PORT]}"
+    "${e[QARMA_DB_CONTAINER]}" "${e[QARMA_HTTP_PORT]}" "${e[DB_PORT]}"
   ensure_container "${e[QARMA_DB_CONTAINER]}" "${e[DB_PORT]}" 0
 
   echo
@@ -184,7 +184,8 @@ export QARMA_SNAME=$sname
 export QARMA_COOKIE=$cookie
 export QARMA_DB_CONTAINER=$container
 
-export PORT=$http_port
+# not PORT: that would leak into the frontend and override its .env; qwt start sets PORT for the backend
+export QARMA_HTTP_PORT=$http_port
 
 export DB_PORT=$db_port
 export JOB_HAVEN_DB_PORT=$db_port
@@ -211,7 +212,7 @@ running_worktree() {
 print_status() {
   local root=$1
   local sname port db_port container
-  sname=$(env_value "$root" QARMA_SNAME); port=$(env_value "$root" PORT)
+  sname=$(env_value "$root" QARMA_SNAME); port=$(env_value "$root" QARMA_HTTP_PORT)
   db_port=$(env_value "$root" DB_PORT); container=$(env_value "$root" QARMA_DB_CONTAINER)
   local db node http
   db=$(container_state "$container")
@@ -257,7 +258,7 @@ cmd_start() {
   local root; root=$(initialised_root)
   source "$root/.envrc"
   cd "$root/backend"
-  LOG_LEVEL=${LOG_LEVEL:-debug} exec iex --name "$QARMA_SNAME@$NODE_HOST" --cookie "$QARMA_COOKIE" -S mix phx.server
+  PORT=$QARMA_HTTP_PORT LOG_LEVEL=${LOG_LEVEL:-debug} exec iex --name "$QARMA_SNAME@$NODE_HOST" --cookie "$QARMA_COOKIE" -S mix phx.server
 }
 
 cmd_psql() {
