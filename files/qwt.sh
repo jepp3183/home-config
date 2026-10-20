@@ -199,6 +199,10 @@ export PGPORT=$db_port
 export PGUSER=postgres
 export PGPASSWORD=postgres
 EOF
+  # only for 'yarn vite:local' (mode localdev); a BACKEND_URL in .envrc would override every mode
+  echo "BACKEND_URL=localhost:$http_port" > "$root/frontend/.env.localdev.local"
+  # the frontend needs a .env; the sample works as is
+  [[ -f $root/frontend/.env ]] || cp "$root/frontend/.env-sample" "$root/frontend/.env"
   echo "wrote $root/.envrc (slot $slot: http $http_port, db $db_port, node $sname${shared_from:+, shared from $shared_from})"
 }
 
