@@ -18,14 +18,6 @@ let
     meta.homepage = "https://github.com/mhanberg/output-panel.nvim";
     meta.hydraPlatforms = [ ];
   };
-  copilot-lua = pkgs.vimPlugins.copilot-lua.overrideAttrs (_: {
-    src = pkgs.fetchFromGitHub {
-      owner = "zbirenbaum";
-      repo = "copilot.lua";
-      rev = "9d391a02dc0281713cbb7c3bc87cdd38287b92eb"; # v3.0.4
-      hash = "sha256-kDQOm7/N6T7wOw1JlkcxNMnQrDE4oTRyGCZkvT8HZQw=";
-    };
-  });
   lazygitEdit = pkgs.writeShellScript "lazygit-nvim-edit" ''
     file="$1"
     line="''${2:-}"
@@ -583,28 +575,6 @@ in
           require("mini.move").setup()
           require("mini.splitjoin").setup()
           require('mini.files').setup()
-        '';
-      }
-
-      {
-        plugin = copilot-lua;
-        type = "lua";
-        config = /* lua */ ''
-          require('copilot').setup({
-              suggestion = {
-                  auto_trigger = true,
-                  keymap = {
-                      accept = '<C-l>',
-                  },
-              },
-              panel = {
-                  auto_refresh = true,
-                  layout = {
-                      position = 'right',
-                  },
-              },
-              copilot_node_command = '${lib.getExe' pkgs.nodejs "node"}',
-          })
         '';
       }
 
