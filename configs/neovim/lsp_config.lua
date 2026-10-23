@@ -39,7 +39,7 @@ vim.lsp.config('harper_ls', {
     }
   }
 })
--- NOT enabled automatically on purpose: start manually with `:lsp start harper_ls`
+-- NOT enabled automatically on purpose: start manually with `:lsp enable harper_ls`
 
 vim.lsp.config('elixirls', {
   capabilities = lsp_capabilities,
@@ -61,6 +61,16 @@ vim.lsp.config('elixirls', {
   end,
 })
 vim.lsp.enable('elixirls')
+
+-- Alternative Elixir LSP (parses source, no compilation) for when elixirls fails.
+-- Rooted at .git so the monorepo gets one index (in <root>/.dexter, self-ignored).
+-- lspconfig's default markers start with '.dexter/dexter.db', which nvim resolves
+-- to <root>/.dexter itself once the index exists.
+vim.lsp.config('dexter', {
+  capabilities = lsp_capabilities,
+  root_markers = { '.git', 'mix.exs' },
+})
+-- NOT enabled automatically on purpose: start manually with `:lsp enable dexter` (`:lsp disable dexter` to stop)
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.ex", "*.exs" },

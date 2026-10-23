@@ -50,6 +50,7 @@ in
     dockerfile-language-server
     ccls
     elixir-ls
+    dexter
     lldb
     fish-lsp
     tinymist
