@@ -24,7 +24,6 @@
     parsec-bin
     qpdfview
     zed-editor
-    zotero
     gimp
     # freecad
 
