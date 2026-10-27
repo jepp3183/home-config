@@ -25,6 +25,7 @@
     qpdfview
     zed-editor
     gimp
+    inputs.solidcraft.packages.${pkgs.stdenv.hostPlatform.system}.default
     # freecad
 
     # CMD UTILS

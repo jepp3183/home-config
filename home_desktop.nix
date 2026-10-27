@@ -23,6 +23,7 @@
     parsec-bin
     qpdfview
     zed-editor
+    inputs.solidcraft.packages.${pkgs.stdenv.hostPlatform.system}.default
     freecad # disabled: pdal 2.9.3 and vtk 9.5.2 fail to build with GCC 15 + gdal 3.13 in nixpkgs unstable
 
     # CMD UTILS

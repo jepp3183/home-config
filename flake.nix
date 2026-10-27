@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Currently locked to a specific nixpkgs version
+    # see nixpkgs_2 in flake.lock
+    solidcraft.url = "github:tangency-labs/solidcraft";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
